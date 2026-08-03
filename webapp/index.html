@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Crucian Heritage | The Complete Archive</title>
+<meta name="description" content="An interactive dictionary, grammar guide, and proverb archive for the Crucian dialect of St. Croix, U.S. Virgin Islands.">
+
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#1c1917">
+<link rel="icon" href="./icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+<link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Crucian Archive">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400;1,9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./css/styles.css">
+</head>
+<body class="antialiased">
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<header class="fixed top-0 left-0 w-full z-50 glass-header">
+    <nav class="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between" aria-label="Primary">
+        <div class="flex items-center gap-3">
+            <div class="w-9 h-9 bg-stone-900 rounded-xl flex items-center justify-center text-white font-black text-lg" aria-hidden="true">C</div>
+            <span class="font-extrabold text-lg tracking-tight">Crucian Archive</span>
+        </div>
+
+        <div class="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em] text-stone-500">
+            <button onclick="navTo('home')" class="nav-btn hover:text-stone-900 transition-colors" id="btn-home">Home</button>
+            <button onclick="navTo('grammar')" class="nav-btn hover:text-stone-900 transition-colors" id="btn-grammar">Grammar</button>
+            <button onclick="navTo('proverbs')" class="nav-btn hover:text-stone-900 transition-colors" id="btn-proverbs">Proverbs</button>
+            <button onclick="navTo('dictionary')" class="nav-btn hover:text-stone-900 transition-colors" id="btn-dictionary">Glossary</button>
+            <button onclick="navTo('roots')" class="nav-btn hover:text-stone-900 transition-colors" id="btn-roots">Heritage</button>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <button id="install-btn"><span aria-hidden="true">+</span> Install</button>
+            <button id="theme-toggle" class="icon-btn" aria-label="Switch to dark mode">
+                <svg id="icon-moon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+                <svg id="icon-sun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+            </button>
+            <button onclick="mobileToggle()" class="md:hidden text-stone-900" aria-label="Menu" aria-controls="mobile-menu" aria-expanded="false">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+    </nav>
+    <div id="mobile-menu" class="hidden glass-header flex flex-col p-8 gap-6 text-center text-xs font-black uppercase tracking-widest border-t border-stone-100">
+        <button onclick="navTo('home'); mobileToggle()">Home</button>
+        <button onclick="navTo('grammar'); mobileToggle()">Grammar</button>
+        <button onclick="navTo('proverbs'); mobileToggle()">Proverbs</button>
+        <button onclick="navTo('dictionary'); mobileToggle()">Glossary</button>
+        <button onclick="navTo('roots'); mobileToggle()">Heritage</button>
+    </div>
+</header>
+
+<main id="main-content" class="pt-32 pb-24 px-6 max-w-6xl mx-auto">
+
+    <section id="home" class="section-content animate-in">
+        <div id="hero-scene-wrap">
+            <div id="hero-scene" style="width:100%;height:100%;"></div>
+            <div id="hero-scene-fallback"><span>Crucian Heritage Archive</span></div>
+            <span id="hero-scene-caption">216 words · 8 traced language roots · one dialect</span>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
+            <div>
+                <span class="text-teal-700 font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">Dialect Discovery</span>
+                <h1 class="serif text-6xl md:text-8xl font-bold text-stone-900 leading-[0.9] mb-8">The Living <br><span class="italic text-teal-600">Spirit</span> of St. Croix</h1>
+                <p class="text-xl text-stone-600 font-medium leading-relaxed max-w-lg">
+                    Explore the rich linguistic tapestry of the Virgin Islands, where African syntax meets colonial history.
+                </p>
+            </div>
+            <div id="word-of-the-day" class="modern-card p-10 bg-gradient-to-br from-stone-900 to-stone-800 text-white relative overflow-hidden">
+                <div class="relative z-10">
+                    <span class="text-[10px] font-black uppercase tracking-[0.3em] opacity-60 block mb-6 text-stone-100">Word of the Day</span>
+                    <h2 id="wotd-word" class="serif text-5xl font-bold mb-4 italic transition-opacity duration-300">Loading...</h2>
+                    <p id="wotd-def" class="text-stone-200 text-lg leading-relaxed mb-10 transition-opacity duration-300">Searching the archive...</p>
+                    <button onclick="randomizeWotd()" class="text-[10px] font-black uppercase tracking-widest px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full transition-all">New Random Word</button>
+                </div>
+                <div class="absolute -bottom-10 -right-10 text-white/5 serif italic text-9xl font-black select-none pointer-events-none" aria-hidden="true">CRUCIAN</div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+            <button onclick="navTo('grammar')" class="modern-card p-12 bg-white text-left">
+                <h3 class="text-teal-700 font-black text-[10px] uppercase tracking-widest mb-6">Syntax</h3>
+                <h4 class="text-2xl font-bold mb-4 tracking-tight">The "Deh" Pivot</h4>
+                <p class="text-stone-600 leading-relaxed text-sm font-medium">In Crucian, "deh" is a semantic anchor, functioning as an article, a marker of location, and an existential indicator.</p>
+            </button>
+            <button onclick="navTo('grammar')" class="modern-card p-12 bg-white text-left">
+                <h3 class="text-orange-800 font-black text-[10px] uppercase tracking-widest mb-6">Etymology</h3>
+                <h4 class="text-2xl font-bold mb-4 tracking-tight">African Calques</h4>
+                <p class="text-stone-600 leading-relaxed text-sm font-medium">Phrases like "door mout" and "sweet eye" are literal translations from Yoruba and Twi, mapping African meanings onto English words.</p>
+            </button>
+            <button onclick="navTo('grammar')" class="modern-card p-12 bg-white text-left">
+                <h3 class="text-stone-500 font-black text-[10px] uppercase tracking-widest mb-6">Morphology</h3>
+                <h4 class="text-2xl font-bold mb-4 tracking-tight">Reduplication</h4>
+                <p class="text-stone-600 leading-relaxed text-sm font-medium">Emphasis is achieved through doubling: "True true" denotes authenticity, a common feature in West African linguistic substrates.</p>
+            </button>
+        </div>
+
+        <div class="p-10 md:p-16 rounded-[3rem] bg-stone-100/40">
+            <div class="mb-10">
+                <h3 class="serif text-4xl font-bold mb-4 tracking-tight">The Pronoun Matrix</h3>
+                <p class="text-stone-600 text-sm font-medium">A comparison of standard forms versus the distinct Crucian dialectical structure.</p>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <caption class="sr-only">Crucian pronouns compared across subject, object, possessive, and reflexive forms</caption>
+                    <thead>
+                        <tr class="text-[10px] uppercase tracking-[0.3em] text-stone-500 font-black border-b border-stone-200">
+                            <th scope="col" class="pb-6">Person</th>
+                            <th scope="col" class="pb-6">Subject</th>
+                            <th scope="col" class="pb-6">Object</th>
+                            <th scope="col" class="pb-6">Possessive</th>
+                            <th scope="col" class="pb-6">Reflexive</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pronoun-body" class="text-stone-800 font-bold text-sm"></tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="grammar" class="section-content hidden animate-in">
+        <div class="mb-16">
+            <span class="text-teal-700 font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">Structure & Sound</span>
+            <h2 class="serif text-6xl font-bold text-stone-900 mb-4 italic">Grammar & Phonetics</h2>
+            <p class="text-stone-600 font-medium text-lg max-w-2xl">How Crucian's sounds shifted from Standard English, and the multilingual roots underneath its vocabulary.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-20" id="grammar-notes"></div>
+
+        <div class="mb-10">
+            <h3 class="serif text-4xl font-bold mb-4 tracking-tight">Pronouns in Sentences</h3>
+            <p class="text-stone-600 text-sm font-medium">Crucian vs. Standard English, side by side, by pronoun group.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8" id="grammar-examples"></div>
+    </section>
+
+    <section id="proverbs" class="section-content hidden animate-in">
+        <div class="flex flex-col md:flex-row justify-between items-end gap-10 mb-16">
+            <div>
+                <span class="text-orange-800 font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">Ancestral Wisdom</span>
+                <h2 class="serif text-6xl font-bold text-stone-900 mb-4 italic">Oral History</h2>
+                <p class="text-stone-600 font-medium text-lg italic">Proverbs, warnings, and social expressions passed down by ear.</p>
+            </div>
+            <div class="flex gap-2 p-1.5 bg-stone-200/40 rounded-2xl" role="group" aria-label="Filter proverbs by category">
+                <button onclick="filterProverbs('all')" class="prov-filter active px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all" data-type="all" aria-pressed="true">All</button>
+                <button onclick="filterProverbs('Advice')" class="prov-filter px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all" data-type="Advice" aria-pressed="false">Advice</button>
+                <button onclick="filterProverbs('Warnings')" class="prov-filter px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all" data-type="Warnings" aria-pressed="false">Warnings</button>
+                <button onclick="filterProverbs('Social')" class="prov-filter px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all" data-type="Social" aria-pressed="false">Social</button>
+            </div>
+        </div>
+        <div id="proverb-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+    </section>
+
+    <section id="dictionary" class="section-content hidden animate-in">
+        <div class="mb-16">
+            <span class="text-stone-500 font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">The Complete Lexicon</span>
+            <h2 class="serif text-7xl font-bold text-stone-900 mb-4 italic">Interactive Glossary</h2>
+            <p id="result-count" class="text-stone-500 text-sm font-bold mb-8">216 of 216 terms</p>
+
+            <label for="main-search" class="sr-only">Search terms, definitions, or roots</label>
+            <div class="bg-white p-4 rounded-[2.5rem] shadow-sm flex items-center group search-focus transition-all duration-500 border border-transparent">
+                <div class="w-14 h-14 flex items-center justify-center text-stone-400 text-2xl group-focus-within:text-teal-700 transition-colors" aria-hidden="true">&#128269;</div>
+                <input type="text" id="main-search" oninput="handleSearch()" placeholder="Search terms, definitions, or roots..." class="bg-transparent w-full py-4 pr-8 outline-none font-bold text-2xl text-stone-800 placeholder:text-stone-300">
+            </div>
+
+            <div class="mt-10 flex flex-wrap justify-center gap-1.5" id="alpha-nav" role="group" aria-label="Filter glossary by first letter"></div>
+        </div>
+
+        <div id="dictionary-results" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+        <div id="empty-state" class="hidden text-center py-40">
+            <p class="text-stone-300 text-6xl serif italic mb-6">"It ayn deh deh..."</p>
+            <p class="text-stone-500 font-bold uppercase tracking-widest text-xs">Term not found in the current archive</p>
+        </div>
+    </section>
+
+    <section id="roots" class="section-content hidden animate-in">
+        <div class="text-center mb-20">
+            <span class="text-teal-700 font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">Linguistic DNA</span>
+            <h2 class="serif text-7xl font-bold text-stone-900 mb-8 italic">The Etymological Map</h2>
+            <p class="text-stone-600 font-medium max-w-2xl mx-auto leading-relaxed text-lg">
+                The Crucian dialect is a repository of history, blending West African resilience with Northern European vocabulary, Spanish and French trade influences, and its own locally evolved forms.
+            </p>
+        </div>
+
+        <div class="modern-card p-12 md:p-20 mb-16 bg-white">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                <div class="chart-container">
+                    <canvas id="originsChart" role="img" aria-label="Doughnut chart of glossary word origins by language of influence"></canvas>
+                </div>
+                <div>
+                    <h3 class="text-4xl font-bold mb-10 tracking-tight">Cultural Proportions</h3>
+                    <div class="space-y-6" id="chart-legend"></div>
+                    <div class="mt-12 p-8 bg-stone-50 rounded-3xl">
+                        <h4 class="text-[10px] font-black uppercase tracking-widest text-stone-500 mb-4">Reading This Chart</h4>
+                        <p class="text-sm text-stone-700 leading-relaxed font-medium">
+                            Origins are tagged from etymology notes explicit in the source dictionary. Most everyday Crucian words are locally evolved English forms without one traceable root &mdash; that's "Local / Undetermined," not "no history."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="py-24 border-t border-stone-100 mt-20">
+    <div class="max-w-6xl mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-12">
+        <div class="flex items-center gap-3 opacity-60">
+            <div class="w-8 h-8 bg-stone-900 rounded-lg flex items-center justify-center text-white font-bold text-xs" aria-hidden="true">C</div>
+            <span class="font-black text-stone-900 tracking-tighter text-xl">Crucian Archive</span>
+        </div>
+        <div class="text-center md:text-right">
+            <p class="text-stone-500 text-[10px] uppercase tracking-[0.3em] font-black mb-2">Made with care, <a href="http://www.designlady.com">designlady.com</a></p>
+            <p class="text-stone-400 text-sm font-medium italic">"Ah crab nebba forget 'e hole."</p>
+        </div>
+    </div>
+</footer>
+
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="./js/three-scene.js"></script>
+<script src="./js/app.js"></script>
+</body>
+</html>

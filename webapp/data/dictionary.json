@@ -1,0 +1,2448 @@
+{
+  "meta": {
+    "title": "Crucian Heritage Archive",
+    "wordCount": 216,
+    "proverbCount": 78
+  },
+  "grammarNotes": [
+    "Irish Overseer Influence (cy- / ky- sound): Words starting with c or k before certain vowels often take a cy- or ky- sound (e.g., car → cyar, can't → cy'an, cart → cyart, look here → look-kyea).",
+    "Alveolar Stops (th → d or t): The th sound in Standard English is consistently replaced with d or t (e.g., the → deh / de, them → dem, that → dat, thing → ting, Thursday → Taws-Deh).",
+    "Vowel Shifts & Pronunciations (down → dung): Words ending in standard -own often take a -ung sound (e.g., down → dung).",
+    "West African Languages (Twi, Yoruba, Igbo, Kongo, Tshiluba, Fon): Heavy influence on vocabulary (Anansi, kalaloo, jumbie, nyam, gongolo) and semantic calques/loan-translations (door mout, sweet eye, strong eye, foot meaning entire leg).",
+    "Danish Rule Influences: Vestiges of Danish colonial history preserved in everyday dialect (gade = street from Danish gade; potekari = pharmacy from Danish apotek; frickadella = meatballs from frikadeller; skaal = drinking toast from skål; pascalam = Easter party from Fastelavn).",
+    "Negerhollands (Dutch Creole): Substrate roots found in terms like pistarckle, jumbie, fungee, and zamba.",
+    "Spanish & Puerto Rican Cross-Pollination: Terms absorbed from Spanish-speaking neighbors (bacalao, chabos, adobo, coki, crapo, fraco, barato → brata).",
+    "Acts as the article \"the\" (\"deh dawg\" = \"the dog\").",
+    "Doubled (\"deh deh\") to indicate location \"there\" (\"Deh dawg dem deh deh\" = \"The dogs are there\").",
+    "In negative location sentences, one deh is dropped (\"Me'en deh yah\" = \"I'm not here\").",
+    "Aspect & Habitual Marker (\"Does\"): Used to mark habitual action, present continuous, or past habitual actions depending on context (\"We does sing as we walk\" = \"We sang as we walked\" / \"We usually sing when we walk\").",
+    "Reduplication for Emphasis: Doubling words to heighten intensity (\"true true\" = genuinely true; \"far far\" = extremely distant; \"big big\" = overly boastful; \"talk talk\" = constant gossip).",
+    "Informal Register: Crucian has no formal vs. informal register distinction; the dialect as a whole is expressive and personal."
+  ],
+  "grammarExamples": [
+    {
+      "group": "1st Person Singular (I, Me, Me'en, I'n)",
+      "pairs": [
+        {
+          "crucian": "Affirmative: \"I home\" / \"I deh home\"",
+          "standard": "\"I am home.\""
+        },
+        {
+          "crucian": "Negative: \"Me'en home\" / \"Me'en deh home\" / \"I'n home\"",
+          "standard": "\"I am not home.\""
+        },
+        {
+          "crucian": "Negative Location: \"Me'en ova deh\" / \"Me'en deh yah\"",
+          "standard": "\"I am not over there\" / \"I am not here.\""
+        }
+      ]
+    },
+    {
+      "group": "2nd Person (Yu, Yo, Yo's, Yoself)",
+      "pairs": [
+        {
+          "crucian": "\"Yu a student.\"",
+          "standard": "\"You are a student.\""
+        },
+        {
+          "crucian": "\"Wash yo hand dem.\"",
+          "standard": "\"Wash your hands.\""
+        },
+        {
+          "crucian": "\"Das yo's?\"",
+          "standard": "\"Is that yours?\""
+        },
+        {
+          "crucian": "\"Yu do it by yoself?\"",
+          "standard": "\"Did you do it by yourself?\""
+        }
+      ]
+    },
+    {
+      "group": "3rd Person Male & Female (He, She, Hiz, Ha, Heself, Sheself)",
+      "pairs": [
+        {
+          "crucian": "\"He'n gon like dis one.\"",
+          "standard": "\"He is not going to like this one.\""
+        },
+        {
+          "crucian": "\"She'n a fan of dis cula.\"",
+          "standard": "\"She is not a fan of this color.\""
+        },
+        {
+          "crucian": "\"Das he ova deh?\"",
+          "standard": "\"Is that him over there?\""
+        },
+        {
+          "crucian": "\"Das she dancing in deh corna?\"",
+          "standard": "\"Is that her dancing in the corner?\""
+        },
+        {
+          "crucian": "\"Da cyar is he own.\"",
+          "standard": "\"That car is his.\""
+        },
+        {
+          "crucian": "\"Da chile is she own.\"",
+          "standard": "\"That child is hers.\""
+        },
+        {
+          "crucian": "\"You see all ah dat deh? He did it all by heself.\"",
+          "standard": "\"You see all of that? He did it all by himself.\""
+        }
+      ]
+    },
+    {
+      "group": "3rd Person Inanimate (Ih, Itz, Ihself)",
+      "pairs": [
+        {
+          "crucian": "\"Ih wuz jus on deh floor ova deh.\"",
+          "standard": "\"It was just on the floor over there.\""
+        },
+        {
+          "crucian": "\"Yu co dig a hole an cova ih?\"",
+          "standard": "\"Can you dig a hole and cover it?\""
+        },
+        {
+          "crucian": "\"Iz dah itz tail?\"",
+          "standard": "\"Is that its tail?\""
+        },
+        {
+          "crucian": "\"Ain gah nuttin tuh do wid me.\"",
+          "standard": "\"It doesn't have anything to do with me.\""
+        }
+      ]
+    },
+    {
+      "group": "1st Person Plural (We, Allawe, Ow-a, Weself)",
+      "pairs": [
+        {
+          "crucian": "\"We does sing as we walk.\"",
+          "standard": "\"We sang as we walked.\""
+        },
+        {
+          "crucian": "\"We dohn wahn a new carpet.\"",
+          "standard": "\"We don't want a new carpet.\""
+        },
+        {
+          "crucian": "\"I hope he like allawe.\"",
+          "standard": "\"I hope he likes us.\""
+        },
+        {
+          "crucian": "\"We deh on ow-a way.\"",
+          "standard": "\"We are on our way.\""
+        },
+        {
+          "crucian": "\"Yo house ain betta dan ow-a's.\"",
+          "standard": "\"Your house isn't better than ours.\""
+        },
+        {
+          "crucian": "\"We do it by weself.\"",
+          "standard": "\"We did it ourselves.\""
+        }
+      ]
+    },
+    {
+      "group": "3rd Person Plural (Dey, Dem, Dey's, Deyself)",
+      "pairs": [
+        {
+          "crucian": "\"Dey dohn belong ya.\"",
+          "standard": "\"They don't belong here.\""
+        },
+        {
+          "crucian": "\"You goin tuh deh jam wih dem?\"",
+          "standard": "\"Are you going to the party with them?\""
+        },
+        {
+          "crucian": "\"Deh red one is dey house.\"",
+          "standard": "\"The red one is their house.\""
+        },
+        {
+          "crucian": "\"He parents dem goin blame deyself.\"",
+          "standard": "\"His parents are going to blame themselves.\""
+        }
+      ]
+    }
+  ],
+  "pronouns": [
+    {
+      "person": "1st Singular",
+      "subject": "I",
+      "object": "Me",
+      "possessive": "My",
+      "reflexive": "Myself"
+    },
+    {
+      "person": "2nd Singular",
+      "subject": "Yu",
+      "object": "Yu",
+      "possessive": "Yo",
+      "reflexive": "Yoself"
+    },
+    {
+      "person": "3rd Male",
+      "subject": "He",
+      "object": "He",
+      "possessive": "He/Hiz",
+      "reflexive": "Heself"
+    },
+    {
+      "person": "3rd Female",
+      "subject": "She",
+      "object": "She",
+      "possessive": "She/Ha",
+      "reflexive": "Sheself"
+    },
+    {
+      "person": "3rd Inanimate",
+      "subject": "Ih / Ain",
+      "object": "Ih",
+      "possessive": "Itz",
+      "reflexive": "Ihself"
+    },
+    {
+      "person": "1st Plural",
+      "subject": "We",
+      "object": "Allawe",
+      "possessive": "Ow-a",
+      "reflexive": "Weself"
+    },
+    {
+      "person": "2nd Plural",
+      "subject": "Ayo",
+      "object": "Ayo",
+      "possessive": "Yo",
+      "reflexive": "Yoself"
+    },
+    {
+      "person": "3rd Plural",
+      "subject": "Dey",
+      "object": "Dem",
+      "possessive": "Dey",
+      "reflexive": "Deyself"
+    }
+  ],
+  "proverbs": [
+    {
+      "text": "Ah crab nebba forget 'e hole.",
+      "translation": "A crab never forgets its hole.",
+      "meaning": "There is no place like home; also, people will always reveal their true nature/origins.",
+      "category": "Advice"
+    },
+    {
+      "text": "Ah eyeful ain' ah bellyful.",
+      "translation": "An eyeful is not a bellyful.",
+      "meaning": "Looking at something is not the same as having it; solving one small issue doesn't solve all problems.",
+      "category": "Advice"
+    },
+    {
+      "text": "Ah have a lil rat in eb'ry hole.",
+      "translation": "I have a little rat in every hole.",
+      "meaning": "I have connections and friends in all the right places.",
+      "category": "Advice"
+    },
+    {
+      "text": "All wood is wood, bu' mampoo ain' mahogany.",
+      "translation": "All wood is wood, but softwood (mampoo) isn't mahogany.",
+      "meaning": "Don't judge by superficial appearances; true value and quality matter.",
+      "category": "Advice"
+    },
+    {
+      "text": "Dag ga' four foot but 'e caan tek four road.",
+      "translation": "A dog has four feet, but it can't take four roads.",
+      "meaning": "One person cannot be in multiple places at once or pursue conflicting paths simultaneously.",
+      "category": "Advice"
+    },
+    {
+      "text": "Do for do ain' no obeah.",
+      "translation": "Doing in return isn't witchcraft.",
+      "meaning": "Tit-for-tat or returning a favor/action is fair play, not malice or bad magic.",
+      "category": "Advice"
+    },
+    {
+      "text": "Donkey years",
+      "translation": "",
+      "meaning": "A very long time.",
+      "category": "Advice"
+    },
+    {
+      "text": "Door mout'",
+      "translation": "",
+      "meaning": "Doorway or entrance (calque from West African Yoruba iloro enu / Igbo onu uzo).",
+      "category": "Advice"
+    },
+    {
+      "text": "Every skin teeth ain' a grin.",
+      "translation": "Every smile isn't a genuine grin.",
+      "meaning": "Not everyone who smiles in your face is your friend; beware of fake friendliness.",
+      "category": "Advice"
+    },
+    {
+      "text": "Ev'ry donkey bray in 'e own pasture.",
+      "translation": "Every donkey brays in its own pasture.",
+      "meaning": "Everyone has their own unique tastes, preferences, and personal style.",
+      "category": "Advice"
+    },
+    {
+      "text": "Ev'ry house ga' a dutty corner.",
+      "translation": "Every house has a dirty corner.",
+      "meaning": "Everyone has a secret flaw, personal issue, or skeleton in their closet.",
+      "category": "Advice"
+    },
+    {
+      "text": "Ev'ry tub mus' sit on its own bottom.",
+      "translation": "Every tub must sit on its own bottom.",
+      "meaning": "Practice self-reliance, independence, and personal responsibility.",
+      "category": "Advice"
+    },
+    {
+      "text": "Head no mek fo' hat alone!",
+      "translation": "Your head wasn't made just to wear a hat!",
+      "meaning": "Use your brain and think clearly before acting.",
+      "category": "Advice"
+    },
+    {
+      "text": "Knead the flour, now cut the bread.",
+      "translation": "Knead the flour, now cut the bread.",
+      "meaning": "Action time has arrived; put your plans into practice.",
+      "category": "Advice"
+    },
+    {
+      "text": "Monkey know wha' tree to clime.",
+      "translation": "A monkey knows which tree to climb.",
+      "meaning": "People know who they can fool or push around, and who they shouldn't mess with.",
+      "category": "Advice"
+    },
+    {
+      "text": "Nebba grease a fat pig.",
+      "translation": "Never grease a fat pig.",
+      "meaning": "Don't waste gifts or favors on people who already have more than enough.",
+      "category": "Advice"
+    },
+    {
+      "text": "New broom sweep clean, Old broom know de corners.",
+      "translation": "A new broom sweeps clean, but an old broom knows the corners.",
+      "meaning": "New people bring fresh energy, but experienced people understand how things work.",
+      "category": "Advice"
+    },
+    {
+      "text": "Old fowl mek good soup.",
+      "translation": "An old chicken makes good soup.",
+      "meaning": "Older, experienced people hold great value, wisdom, and resourcefulness.",
+      "category": "Advice"
+    },
+    {
+      "text": "One bite caan' eat mango.",
+      "translation": "One bite can't finish a mango.",
+      "meaning": "Complex or large tasks require patience, time, and step-by-step effort.",
+      "category": "Advice"
+    },
+    {
+      "text": "One penny caan jingle.",
+      "translation": "One single penny cannot jingle by itself.",
+      "meaning": "It takes two to tango; conflict or cooperation requires two participating parties.",
+      "category": "Advice"
+    },
+    {
+      "text": "Study your head",
+      "translation": "",
+      "meaning": "Think carefully before taking action (calque, compare Yoruba).",
+      "category": "Advice"
+    },
+    {
+      "text": "Time longer dan twine.",
+      "translation": "Time is longer than string/twine.",
+      "meaning": "Patience is necessary; outcomes and consequences take time, but time outlasts everything.",
+      "category": "Advice"
+    },
+    {
+      "text": "True true",
+      "translation": "",
+      "meaning": "Genuinely true, authentic (reduplication).",
+      "category": "Advice"
+    },
+    {
+      "text": "Wha' gone bad in de mornin' caan' come good in de evening.",
+      "translation": "What goes wrong in the morning won't fix itself by evening.",
+      "meaning": "Issues that start off poorly will not rectify themselves without deliberate effort.",
+      "category": "Advice"
+    },
+    {
+      "text": "Wha' sweet 'e mout' does sour 'e bottom.",
+      "translation": "What tastes sweet in the mouth sours the bottom.",
+      "meaning": "Short-term, foolish pleasures often lead to long-term pain.",
+      "category": "Advice"
+    },
+    {
+      "text": "What yoh do in de dark does come to light.",
+      "translation": "What you do in the dark comes to light.",
+      "meaning": "Secrets and hidden misdeeds will eventually be exposed.",
+      "category": "Advice"
+    },
+    {
+      "text": "When de wind blow foul, batty does show.",
+      "translation": "When the wind blows hard, the chicken's rear end shows.",
+      "meaning": "When unexpected hardship or pressure occurs, a person's true character and hidden flaws are revealed.",
+      "category": "Advice"
+    },
+    {
+      "text": "Ah gon...\" (e.g., \"Ah gon buss yo lip\" / \"Ah gon pong yo behind\")",
+      "translation": "I am going to... (hit/punish you).",
+      "meaning": "Standard opening phrase of a stern warning or threat of physical discipline.",
+      "category": "Warnings"
+    },
+    {
+      "text": "After sweet meat come sour sauce.",
+      "translation": "After sweet meat comes sour sauce.",
+      "meaning": "Reckless living or indulgence carries a steep price eventually.",
+      "category": "Warnings"
+    },
+    {
+      "text": "All fish does bite, but shark does get de blame.",
+      "translation": "All fish bite, but the shark gets the blame.",
+      "meaning": "People with bad reputations are automatically blamed whenever trouble occurs.",
+      "category": "Warnings"
+    },
+    {
+      "text": "Chupse / Chuupse",
+      "translation": "",
+      "meaning": "Sucking teeth to express annoyance, anger, or contempt (African cultural origin).",
+      "category": "Warnings"
+    },
+    {
+      "text": "Dag don need bone once.",
+      "translation": "A dog doesn't need a bone only once.",
+      "meaning": "Help others when they ask a favor; you will likely need assistance from them in the future.",
+      "category": "Warnings"
+    },
+    {
+      "text": "Dutty up",
+      "translation": "",
+      "meaning": "To soil or make dirty (compare Twi dote).",
+      "category": "Warnings"
+    },
+    {
+      "text": "Goat mout'",
+      "translation": "",
+      "meaning": "A jinx; a person who utters bad predictions that end up coming true.",
+      "category": "Warnings"
+    },
+    {
+      "text": "If you cyan dance, don't blame de floor!",
+      "translation": "If you can't dance, don't blame the dance floor!",
+      "meaning": "Accept responsibility for your own shortcomings instead of making excuses.",
+      "category": "Warnings"
+    },
+    {
+      "text": "If you dig up old grave, do it smell stink?",
+      "translation": "If you dig up an old grave, does it smell foul?",
+      "meaning": "Don't reopen old arguments or dwell on past grievances.",
+      "category": "Warnings"
+    },
+    {
+      "text": "If yo'u no hear 'e bell, yo'll live and hear 'e big bell.",
+      "translation": "If you don't hear the small bell, you'll live to hear the big bell.",
+      "meaning": "Ignore minor warnings now, and you will face severe consequences later.",
+      "category": "Warnings"
+    },
+    {
+      "text": "Jackass ga' no business in hoss race.",
+      "translation": "A donkey has no business in a horse race.",
+      "meaning": "Stay in your lane; do not interfere in matters beyond your standing.",
+      "category": "Warnings"
+    },
+    {
+      "text": "Kettle callin' pot bottom black.",
+      "translation": "The kettle is calling the bottom of the pot black.",
+      "meaning": "Criticizing someone hypocritically for a fault you possess yourself.",
+      "category": "Warnings"
+    },
+    {
+      "text": "Nevah laugh when yoh bruddah get wet.",
+      "translation": "Never laugh when your brother gets rained on.",
+      "meaning": "Do not mock someone else's misfortune.",
+      "category": "Warnings"
+    },
+    {
+      "text": "Nonsense man use fork feh eat soup.",
+      "translation": "A foolish man uses a fork to eat soup.",
+      "meaning": "Fools always choose the hardest or most illogical way to do a simple task.",
+      "category": "Warnings"
+    },
+    {
+      "text": "Nutin tel go re.",
+      "translation": "Nothing stays hidden forever.",
+      "meaning": "Secrets eventually come out into the light.",
+      "category": "Warnings"
+    },
+    {
+      "text": "Rat trap don't sleep.",
+      "translation": "A rat trap never sleeps.",
+      "meaning": "Danger is constant and always lurking; stay alert.",
+      "category": "Warnings"
+    },
+    {
+      "text": "Strong eye",
+      "translation": "",
+      "meaning": "Covetous, greedy, or envious behavior (calque, compare Twi).",
+      "category": "Warnings"
+    },
+    {
+      "text": "Talk talk",
+      "translation": "",
+      "meaning": "Constant gossiping or blabbering (reduplication).",
+      "category": "Warnings"
+    },
+    {
+      "text": "Tek 'e feet in 'e hand",
+      "translation": "Take one's feet in one's hand.",
+      "meaning": "Run away as fast as possible to escape danger.",
+      "category": "Warnings"
+    },
+    {
+      "text": "Who don't hear does feel.",
+      "translation": "He who doesn't listen will feel.",
+      "meaning": "Those who ignore good advice or warnings will suffer the painful consequences.",
+      "category": "Warnings"
+    },
+    {
+      "text": "Ah good!",
+      "translation": "Oh good!",
+      "meaning": "Serves you right! (Expressing satisfaction at someone's self-inflicted bad luck).",
+      "category": "Social"
+    },
+    {
+      "text": "Ah man",
+      "translation": "",
+      "meaning": "Personable address / 1st person singular address.",
+      "category": "Social"
+    },
+    {
+      "text": "Alright\" / \"Alright, alright",
+      "translation": "All right.",
+      "meaning": "Standard polite greeting exchanged when passing someone.",
+      "category": "Social"
+    },
+    {
+      "text": "As man\" / \"Azman",
+      "translation": "As one man to another.",
+      "meaning": "\"I agree completely!\", \"Without a doubt!\", or expression of solidarity/surprise.",
+      "category": "Social"
+    },
+    {
+      "text": "Ayo could lie!",
+      "translation": "All of you can lie!",
+      "meaning": "You've got to be kidding! / You're joking!",
+      "category": "Social"
+    },
+    {
+      "text": "Ayo ears long",
+      "translation": "All of your ears are long.",
+      "meaning": "You all are being extremely nosy.",
+      "category": "Social"
+    },
+    {
+      "text": "Bigman\" / \"Bossman",
+      "translation": "Big man / Boss man.",
+      "meaning": "Term of respect when addressing an esteemed male.",
+      "category": "Social"
+    },
+    {
+      "text": "Cheese and bread!\" / \"Jeezum bread!",
+      "translation": "Cheese and bread!",
+      "meaning": "Goodness gracious! / Exclamation of shock or frustration.",
+      "category": "Social"
+    },
+    {
+      "text": "Das/dat's you??",
+      "translation": "Is that you?",
+      "meaning": "Warm exclamation when running into a friend after a long time.",
+      "category": "Social"
+    },
+    {
+      "text": "Das-a-ting!",
+      "translation": "That is a thing!",
+      "meaning": "Isn't that something! / How surprising!",
+      "category": "Social"
+    },
+    {
+      "text": "Dehman!",
+      "translation": "The man!",
+      "meaning": "Hey! / Common interjection of surprise or annoyance.",
+      "category": "Social"
+    },
+    {
+      "text": "Eh eh",
+      "translation": "Eh eh.",
+      "meaning": "Exclamation of surprise or disbelief (compare Twi ei eei).",
+      "category": "Social"
+    },
+    {
+      "text": "Happy as a fly under a dry cow tail, me son!",
+      "translation": "Happy as a fly under a dry cow's tail.",
+      "meaning": "Feeling extremely comfortable and content.",
+      "category": "Social"
+    },
+    {
+      "text": "How you/yah mean??",
+      "translation": "How do you mean?",
+      "meaning": "Rhetorical agreement: \"Of course!\", \"You know it!\".",
+      "category": "Social"
+    },
+    {
+      "text": "I gone",
+      "translation": "",
+      "meaning": "Goodbye / I am leaving.",
+      "category": "Social"
+    },
+    {
+      "text": "I tellin yo!",
+      "translation": "I am telling you!",
+      "meaning": "Believe me! / Absolute truth.",
+      "category": "Social"
+    },
+    {
+      "text": "I was born at night, but not last night!",
+      "translation": "",
+      "meaning": "You can't fool me!",
+      "category": "Social"
+    },
+    {
+      "text": "I's you dad?",
+      "translation": "",
+      "meaning": "Rhetorical question: \"You don't control me!\"",
+      "category": "Social"
+    },
+    {
+      "text": "Irie",
+      "translation": "",
+      "meaning": "Cool, peaceful, good vibes (Rastafarian).",
+      "category": "Social"
+    },
+    {
+      "text": "Look-kyea!\" / \"Look-kya!",
+      "translation": "Look here!",
+      "meaning": "Exclamation to draw someone's direct attention (\"Look-kyea, see wha' happen deh!\").",
+      "category": "Social"
+    },
+    {
+      "text": "Long years\" / \"Happy new years",
+      "translation": "",
+      "meaning": "Traditional Crucian New Year greeting spoken in January.",
+      "category": "Social"
+    },
+    {
+      "text": "Mehson",
+      "translation": "",
+      "meaning": "Signature Crucian interjection used for emphasis or surprise.",
+      "category": "Social"
+    },
+    {
+      "text": "Not as good as you!",
+      "translation": "",
+      "meaning": "Standard humble, friendly response when asked how you are doing.",
+      "category": "Social"
+    },
+    {
+      "text": "Not dis guava crop!",
+      "translation": "",
+      "meaning": "Not this time! / Definitely not happening.",
+      "category": "Social"
+    },
+    {
+      "text": "Roas-a-time",
+      "translation": "",
+      "meaning": "Festive imperative: Enjoy yourself! Have a great time!",
+      "category": "Social"
+    },
+    {
+      "text": "Skaal",
+      "translation": "",
+      "meaning": "Drinking toast (from Danish skål).",
+      "category": "Social"
+    },
+    {
+      "text": "Sweet eye",
+      "translation": "",
+      "meaning": "A sensual wink or romantic glance (calque, compare Twi).",
+      "category": "Social"
+    },
+    {
+      "text": "Sweet mout'",
+      "translation": "",
+      "meaning": "Sweet talk, charm, or flirtatious speech (calque, compare Twi).",
+      "category": "Social"
+    },
+    {
+      "text": "Wha' ya say?\" / \"Wha' happen?",
+      "translation": "",
+      "meaning": "Informal greeting (\"What's up?\").",
+      "category": "Social"
+    },
+    {
+      "text": "When mi reach, mi reach",
+      "translation": "When I arrive, I arrive.",
+      "meaning": "Expressing relaxed, unhurried island time (\"I'll get there when I get there\").",
+      "category": "Social"
+    },
+    {
+      "text": "Yo baxide dohn listen",
+      "translation": "",
+      "meaning": "You are being stubborn (said in frustration).",
+      "category": "Social"
+    }
+  ],
+  "dictionary": [
+    {
+      "word": "abroad",
+      "definition": "Used to describe anywhere that is not the U.S. Virgin Islands, including the U.S. mainland.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "'ad, ad",
+      "definition": "See had.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "adobo",
+      "definition": "Salt condiment mixed with pepper, garlic, oregano, etc. (from Spanish).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Spanish"
+    },
+    {
+      "word": "ah",
+      "definition": "\"Of.\"",
+      "pronunciation": "",
+      "altSpellings": "uh",
+      "example": "\"I geh two ah dem\" (\"I have two of them.\")",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "ah nex, a next",
+      "definition": "Used where a Standard English speaker would say \"another.\"",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "\"Geh she a nex one\" (\"Get her another one.\")",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "ahyoh, ahyuh",
+      "definition": "See ayo.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "aiight",
+      "definition": "From urban slang, a hipper way of saying \"all right.\"",
+      "pronunciation": "\\awITE",
+      "altSpellings": "aight",
+      "example": "",
+      "origin": "English/Irish"
+    },
+    {
+      "word": "ain",
+      "definition": "Literally \"ain't,\" used to indicate negatives (\"am not,\" \"are not,\" \"is not,\" \"do not,\" \"does not\").",
+      "pronunciation": "",
+      "altSpellings": "aiin, ayn, aint, ain't",
+      "example": "\"I ain do dat\", \"Me ain know\", \"Ayn my book.\"",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "ain't had",
+      "definition": "Used where Standard English would use \"didn't have\" to indicate past tense.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "aks",
+      "definition": "Ask. (Consonant reversal / metathesis; very common).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "English/Irish"
+    },
+    {
+      "word": "alien talk",
+      "definition": "Dialect spoken by off-islanders or non-natives.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "allawe",
+      "definition": "\"All of us.\"",
+      "pronunciation": "",
+      "altSpellings": "all a we, ahwe, awe, a'we",
+      "example": "\"Leh allawe go\" (\"Let's all go.\")",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "all mouth down de road",
+      "definition": "Shouting or making a lot of noise.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "all up in my sauce",
+      "definition": "Idiomatic expression meaning \"mind your own business.\"",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "al'you",
+      "definition": "See ayo.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "Anansi, Anancy",
+      "definition": "The cunning spider, hero and trickster of West African (Akan/Ashanti) and Caribbean folklore stories.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "an so,\" \"an ting",
+      "definition": "Phrase extenders used like \"and so on\", \"et cetera\", or \"and other good things.\"",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "anti-man",
+      "definition": "An effeminate or gay man.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "ants",
+      "definition": "Invariant plural noun for an ant or ants (\"It had a ants in de suga\").",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "anyt'ing to",
+      "definition": "Adjectival phrase meaning related to or in the family of someone (\"Yoh is anyt'ing to she?\").",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "apelsina",
+      "definition": "Orange fruit (from Dutch sinaasappel, compare Puerto Rican Spanish china).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Dutch Creole"
+    },
+    {
+      "word": "Arawak",
+      "definition": "A peaceable Amerindian people originating in South America who inhabited Caribbean islands prior to European arrival.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Amerindian"
+    },
+    {
+      "word": "ariculcha",
+      "definition": "Pronunciation for \"agriculture\"; also nickname for the V.I. Department of Agriculture.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "asha",
+      "definition": "Lime preserves (compare Trinidadian mango preserves achar, from Hindi/Persian achār).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "ass pipe",
+      "definition": "Old car tailpipe used as a bass musical instrument in a scratch band.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "ass-up",
+      "definition": "Drunk.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "awe, a'we",
+      "definition": "See allawe.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "ayo",
+      "definition": "\"All of you\" / \"You guys\" (second-person plural pronoun).",
+      "pronunciation": "",
+      "altSpellings": "ayoh, ahyuh, ahyoh, al'you",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "ayo doan leave?",
+      "definition": "Expression meaning \"none of you ever leaves?\" (referring to people who rarely travel off-island).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "azick",
+      "definition": "Crazy, wild (\"Leh we go azick tonight!\").",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "b",
+      "definition": "Slang shortening for \"brother,\" referring to a close friend.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "baan ya",
+      "definition": "\"Born here\" (native / belonger). Historical V.I. usage dating back to 1868 Avis print.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "baba",
+      "definition": "Child or grandchild (compare Twi ba, English/Dutch baby).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Dutch Creole"
+    },
+    {
+      "word": "babydaddy",
+      "definition": "The father of someone's baby.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "Babylon",
+      "definition": "From Rastafarian thought, used to refer to America, local government, or police.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Rastafarian"
+    },
+    {
+      "word": "bacalao",
+      "definition": "Dried salted codfish / saltfish (from Spanish/Portuguese bacalhau).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Spanish"
+    },
+    {
+      "word": "bacchanal",
+      "definition": "A really great, wild party (especially during Festival or Carnival).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "bachoom",
+      "definition": "Pronunciation for \"bathroom.\"",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "back",
+      "definition": "Refers to a man's back in relation to his sexual strength.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "back back",
+      "definition": "To go in reverse or move backwards.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "backhand",
+      "definition": "A slap across the face.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "backside",
+      "definition": "Buttocks or rear end.",
+      "pronunciation": "",
+      "altSpellings": "baxide, backs, bamsie, bana, bum",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "bad hair",
+      "definition": "Kinky or knotty hair.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "bad marine",
+      "definition": "Unruly person (historical reference to US Marines during 1917–1931 naval administration).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "bad minded",
+      "definition": "Stingy, begrudging, or always thinking the worst of people.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "bad talk",
+      "definition": "To speak ill of someone behind their back.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "bag-up",
+      "definition": "Grounded; put in punishment.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "Bajan",
+      "definition": "A native of Barbados (historically derived from 1860s Barbadian laborers brought to VI).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "bal, ballin",
+      "definition": "(1) To cry loudly or complain. (2) To flaunt wealth or spend freely.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "ballin up",
+      "definition": "To roll marijuana into a cigar or joint.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "Bam!",
+      "definition": "Response to a stale joke in St. Croix; in St. Thomas, refers to gossip/melleh.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "bamacoo",
+      "definition": "A hernia or hydrocele in the groin area (babancoo).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "bamboo",
+      "definition": "Slang for penis.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "bamboula",
+      "definition": "Traditional, revolutionary dance of African origin preserved in the Virgin Islands (from West African bambola).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "bamboushay",
+      "definition": "Festive dance or imperative meaning \"enjoy yourself!\" (from French bambocheur).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "French"
+    },
+    {
+      "word": "bana",
+      "definition": "Polite term for \"rear end\" or \"backside.\"",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "bananaquit",
+      "definition": "Official territorial bird of the U.S. Virgin Islands (Coereba flaveola).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "bangin",
+      "definition": "Exciting, wild, or fun.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "bashment",
+      "definition": "A big party or celebration.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "bassidy, bazzidy",
+      "definition": "Confused, lightheaded, or acting foolishly (from French abasourdir).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "French"
+    },
+    {
+      "word": "berg",
+      "definition": "Hill or mountain (from Dutch berg, Danish bjerg).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Danish"
+    },
+    {
+      "word": "bes",
+      "definition": "Had better (\"Yo bes behave!\").",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "big big",
+      "definition": "Boastful, pompous, or arrogant person (reduplication).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "big wordsin'",
+      "definition": "Using pompous, overly academic speech.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "black cake",
+      "definition": "Rich caramelized rum and fruit wedding/holiday cake.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "bomba, bumba",
+      "definition": "Plantation overseer (compare Negerhollands bomba, Fon bumba).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Dutch Creole"
+    },
+    {
+      "word": "bombaklaat, BOM!",
+      "definition": "Exclamation of extreme shock, annoyance, or intense surprise (borrowed from wider West Indian/Jamaican usage into modern youth dialect).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "boogeyman",
+      "definition": "Evil spirit (compare Negerhollands jumbi, Bantu njambe, Kongo).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Dutch Creole"
+    },
+    {
+      "word": "bragadam, prookootoom",
+      "definition": "Onomatopoeia for a loud crashing sound or fall.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "brata",
+      "definition": "Something extra added to a purchase for free (from Spanish barato = cheap).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Spanish"
+    },
+    {
+      "word": "buckra",
+      "definition": "White person (from Igbo mbakara).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "cacabeck, cocobay, cocobe",
+      "definition": "Skin disease or severe rash (from Twi kokobe).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "cack",
+      "definition": "Pronunciation of \"cock\"; dancing (\"cack up\") or slang for penis.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "cafoon, cafooning",
+      "definition": "To knock down, capsize, or play music vigorously (kafoon).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "cah, cuh",
+      "definition": "Pronunciation for \"because.\"",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "calabash",
+      "definition": "Large gourd growing on trees, used as a bowl or flask. (See also \"gobi\").",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "calypso, calypsonian",
+      "definition": "Topical, satirical Caribbean music; performers are calypsonians.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "canky, conkie",
+      "definition": "Sweet potato, coconut, and cornmeal boiled in a banana leaf (ducana).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "caraf",
+      "definition": "Pitcher or jug (from French carafe, Spanish garrafa).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Spanish"
+    },
+    {
+      "word": "card, cyard",
+      "definition": "To get played or cheated on (\"hard kyard\").",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "cariso",
+      "definition": "Traditional Crucian folk music precursor to calypso (from West African Kai-so).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "carry",
+      "definition": "To lead, escort, or accompany someone.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "carto, ca'to",
+      "definition": "Cardboard.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "casha",
+      "definition": "Sharp thorn tree (Acacia farnesiana, from Akan Kase = thorn).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "catch an' keep",
+      "definition": "Thorny vine (Acacia riparia) that catches clothing (\"hug-me-close\").",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "ca'tlik",
+      "definition": "Pronunciation for \"Catholic\"; used in the negative (\"not too cat'lik\") to mean suspicious or unfit.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "catta, cotta, kata",
+      "definition": "Cloth roll placed on top of the head for carrying heavy loads (from Tshiluba nkata).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "chabo, chabos",
+      "definition": "Slang for money (from Spanish chavos).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Spanish"
+    },
+    {
+      "word": "Cha Cha",
+      "definition": "Historic local term for French immigrants from St. Barts (now preferred: Frenchie).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "French"
+    },
+    {
+      "word": "cheney",
+      "definition": "Historic ceramic shards smoothed into traditional Virgin Islands jewelry.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "chook",
+      "definition": "To poke, stab, jab, or give/receive an injection (from Fula jukka / Spanish chocar).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Spanish"
+    },
+    {
+      "word": "chune",
+      "definition": "Song or tune.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "chupse, chuupse",
+      "definition": "Sucking teeth to express annoyance (African origin).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "coki, koki",
+      "definition": "Small frog (from Puerto Rican Spanish coquí).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Spanish"
+    },
+    {
+      "word": "cora, copasetic",
+      "definition": "Cool, fine, in order.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "crapo, crappo, krapo",
+      "definition": "Large toad / bullfrog (from French crapaud).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "French"
+    },
+    {
+      "word": "cru·cian",
+      "definition": "Of or from St. Croix, U.S. Virgin Islands. (Cruzan).",
+      "pronunciation": "\\ˈkrü-zhən-",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "cyar",
+      "definition": "Pronunciation for \"car.\"",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "da, dah, dat",
+      "definition": "Pronunciation for \"that.\"",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "dag, dahg",
+      "definition": "Pronunciation for \"dog.\"",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "dan, dan dan",
+      "definition": "Fine clothing, party outfit (from Yoruba dada).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "dankey",
+      "definition": "Pronunciation for \"donkey.\"",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "dasheen",
+      "definition": "Starchy root vegetable (Colocasia esculenta, from French de Chine).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "French"
+    },
+    {
+      "word": "day clean",
+      "definition": "Sunrise / dawn.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "dealin",
+      "definition": "Pre-dating stage of romantic connection.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "deh, deh deh",
+      "definition": "\"The\", \"there\", or \"their.\"",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "dem",
+      "definition": "Pluralizer placed before or after a noun (\"de man dem\").",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "donkey years",
+      "definition": "A very long time.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "door mout'",
+      "definition": "Doorway / house entrance (calque, compare Yoruba iloro enu, Igbo onu uzo).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "draf, draft",
+      "definition": "A cold, sickness, or chill from wind.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "dung",
+      "definition": "Pronunciation for \"down\" (\"Go dung de road\").",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "dutty up",
+      "definition": "To soil, make filthy (compare Twi dote).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "eas",
+      "definition": "East; on St. Croix, specifically anywhere east of Sunny Isles.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "eediot",
+      "definition": "Pronunciation for \"idiot.\"",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "eel, bile",
+      "definition": "Automobile / car.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "eida",
+      "definition": "Pronunciation for \"either.\"",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "enup",
+      "definition": "Pronunciation for \"end up.\"",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "fa, foh",
+      "definition": "For, modal of purpose or belonging.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "far far",
+      "definition": "Extremely distant (reduplication).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "fas', fast",
+      "definition": "Meddlesome, impudent, intrusive, or nosy.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "fetch",
+      "definition": "Atmospheric condition or emotional mood.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "fever grass",
+      "definition": "Lemongrass (Cymbopogon citratus).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "fig",
+      "definition": "Small sweet banana variety (manatosa).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "floupe",
+      "definition": "Portmanteau of carnival float and troupe.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "flummox",
+      "definition": "Confuse (19th-century English).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "foot",
+      "definition": "Leg or foot; any part of the lower extremity (calque, compare African languages).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "fraco, fraico",
+      "definition": "Shaved ice treat / snow cone (from Spanish refresco).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Spanish"
+    },
+    {
+      "word": "fret",
+      "definition": "Scold or quarrel.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "frickadella",
+      "definition": "Spiced meatballs (from Danish frikadeller).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Danish"
+    },
+    {
+      "word": "fungee, fungi",
+      "definition": "Cornmeal dish cooked with okra (from Negerhollands funtji).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Dutch Creole"
+    },
+    {
+      "word": "gade",
+      "definition": "Street (from Danish gade).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Danish"
+    },
+    {
+      "word": "ga', gah, ga",
+      "definition": "Have, has, or got.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "gahrot, garrat, garrote",
+      "definition": "Alien, off-islander (derogatory).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "ganja",
+      "definition": "Marijuana / cannabis.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "gaut, ghut",
+      "definition": "Natural ravine or stream bed (from Dutch goot, Hindi ghaut).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Dutch Creole"
+    },
+    {
+      "word": "gingambo",
+      "definition": "Okra (from Tshiluba tshingambo, Spanish quingombo).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Spanish"
+    },
+    {
+      "word": "gobi",
+      "definition": "Flask made from a dried calabash gourd.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "gongolo, gungalo",
+      "definition": "Millipede (from Yoruba gongoluto).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "good ting",
+      "definition": "Luckily, fortunately.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "gundi, gundy",
+      "definition": "Large crab claw; also traditional Good Friday dish of herring, saltfish, and potatoes.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "harrol, Harold",
+      "definition": "Reference to severe hurricane weather or death (Ole Harrol).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "hatchi-seka",
+      "definition": "Dried saltfish.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "head",
+      "definition": "Mind or mental capacity.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "heap, heaps",
+      "definition": "A large quantity.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "Hugo make me a dan!",
+      "definition": "Historical phrase referring to surviving Hurricane Hugo (1989), meaning toughened by hardship.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "ignorant",
+      "definition": "Quick-tempered, easily angered.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "irie",
+      "definition": "Peaceful, cool, good vibes (Rastafarian).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Rastafarian"
+    },
+    {
+      "word": "it had",
+      "definition": "There was / there were (\"It had a big crowd\").",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "jack spania",
+      "definition": "Ill-tempered yellow wasp.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "Jah",
+      "definition": "Rastafarian term for God.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Rastafarian"
+    },
+    {
+      "word": "jalousie",
+      "definition": "Louvered window slats.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "jam",
+      "definition": "Party or music jam session.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "johnny cake",
+      "definition": "Deep-fried dense bread made with flour, baking powder, and butter.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "Jou'vert",
+      "definition": "Pre-dawn street carnival parade (from French jour ouvert).",
+      "pronunciation": "\\ZHOO-vay",
+      "altSpellings": "",
+      "example": "",
+      "origin": "French"
+    },
+    {
+      "word": "jumbie, jumbee, jumbi",
+      "definition": "Supernatural ghost or spirit (from Negerhollands jumbi, Bantu njambe, Kongo).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Dutch Creole"
+    },
+    {
+      "word": "jump up",
+      "definition": "Energetic street party or tramp.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "kalaloo, kallaloo",
+      "definition": "Savory green soup made with okra, greens, meat, and seafood (from Negerhollands kallalloo, Twi kalalu).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Dutch Creole"
+    },
+    {
+      "word": "ketip, kenep",
+      "definition": "Tart tropical fruit (Melicoccus bijugatus).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "kill devil",
+      "definition": "Old Caribbean term for rum.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "kin teeth, skin teeth",
+      "definition": "Grin or smile insincerely.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "kunumunu",
+      "definition": "Gullible or easily manipulated person.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "learn",
+      "definition": "Used interchangeably with teach (\"I goin learn you\").",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "lime, limin",
+      "definition": "Socialize or hang out with friends.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "look-kyea, look-kya",
+      "definition": "Pronunciation for \"look here.\"",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "Love City",
+      "definition": "Nickname for St. John, USVI.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "manganeel",
+      "definition": "Highly poisonous beach tree (Manchineel).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "mash",
+      "definition": "Step on, crash, or crush sugar cane trash.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "maubi, mauby",
+      "definition": "Fermented bark drink (from Puerto Rican Spanish mabi, Carib origin).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Spanish"
+    },
+    {
+      "word": "mele, melee, melleh",
+      "definition": "Gossip or commotion (from French Creole mêlée).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "French"
+    },
+    {
+      "word": "moko jumbee, moko jumbie",
+      "definition": "Traditional stilt walker dancer at Carnival (from West African Moko god/spirit).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "muddahscunt, mudda-scunt",
+      "definition": "Crude expletive (from \"mother's cunt\").",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "ngam-nyam, ninyam, nyam",
+      "definition": "To eat hungrily; or food (from Twi enam and West African languages).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "nyampi, nyampe",
+      "definition": "Eye crust upon waking (from Twi aniwampe).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "Obeah",
+      "definition": "African-derived folk spiritual practice (from Ashanti obeye).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "Old Year's Night",
+      "definition": "New Year's Eve (December 31st).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "pascalam",
+      "definition": "Rowdy Easter party (from Danish Fastelavn).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Danish"
+    },
+    {
+      "word": "pate",
+      "definition": "Deep-fried meat-filled turnover pastry.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "patois",
+      "definition": "French Creole language.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "French"
+    },
+    {
+      "word": "pear",
+      "definition": "Avocado.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "peas an rice / rice an peas",
+      "definition": "Staple dish of rice and legumes.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "pickin' wilks",
+      "definition": "Wearing very short pants (resembling clothing worn when gathering sea snails on rocks).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "picknee, pickney",
+      "definition": "Child or small child (from Portuguese pequenino).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Spanish"
+    },
+    {
+      "word": "pistarckle, pistacle",
+      "definition": "Boisterous performance, confusion, or big commotion (from Negerhollands pistarkle / English spectacle).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Dutch Creole"
+    },
+    {
+      "word": "plat",
+      "definition": "Braid hair (from British English).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "pote-kari",
+      "definition": "Pharmacy / drugstore (from Danish apotek, Dutch apotheek).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Danish"
+    },
+    {
+      "word": "pumpkin",
+      "definition": "Squash in general.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "Quadrille",
+      "definition": "Official native square dance of the VI, performed in madras attire.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "Quelbe",
+      "definition": "Official traditional music of the USVI (\"scratch music\").",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "rass",
+      "definition": "Arse / buttocks.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "Rock City / the Rock",
+      "definition": "Nickname for St. Thomas.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "roogoodoo",
+      "definition": "Noisy disturbance (onomatopoeia).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "roti",
+      "definition": "Flatbread wrapped around spiced curry meat (from Hindi roti).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "shack shak, shek shek",
+      "definition": "Flamboyant tree seed pod used as a rattle instrument.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "skaal",
+      "definition": "Drinking toast (from Danish skål).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Danish"
+    },
+    {
+      "word": "stan'",
+      "definition": "Stay, behave, or look like.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "strong eye",
+      "definition": "Covetous or envious (calque, compare Twi).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "strumoo",
+      "definition": "Scandal or gossip.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "sweet eye",
+      "definition": "Sensual wink (calque, compare Twi).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "sweet mout'",
+      "definition": "Sweet talk or charm (calque, compare Twi).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "talk talk",
+      "definition": "Gossip (reduplication).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "taman, tambran",
+      "definition": "Tamarind tree.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "taws-deh",
+      "definition": "Pronunciation for \"Thursday\".",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "t'ief, thief",
+      "definition": "To steal; or a robber.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "tree foot",
+      "definition": "Three-legged iron frame for cooking over open fire.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "true true",
+      "definition": "Genuine, real, or completely true (reduplication).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "tutu",
+      "definition": "Conch shell horn used for signaling.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "Twin City",
+      "definition": "Nickname for St. Croix.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "vex, vexed",
+      "definition": "Angry, annoyed, or irritated (Irish English usage).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "English/Irish"
+    },
+    {
+      "word": "wa mek",
+      "definition": "Why / what makes.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "wari, warri",
+      "definition": "Traditional West African mancala board game.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "win', wine",
+      "definition": "Dance with circular hip movements.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "work up, wuk up",
+      "definition": "Energetic hip dance movements.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "yam",
+      "definition": "Starchy root vegetable (from Twi oyam kaude).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "West African"
+    },
+    {
+      "word": "yank",
+      "definition": "To speak in American Stateside English.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Local / Undetermined"
+    },
+    {
+      "word": "zamba",
+      "definition": "Simple low wooden cot or bed (from Negerhollands zamba).",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Dutch Creole"
+    },
+    {
+      "word": "zimi",
+      "definition": "Amerindian (Taíno/Arawak) sculptured stone spirit artifact found in the VI.",
+      "pronunciation": "",
+      "altSpellings": "",
+      "example": "",
+      "origin": "Amerindian"
+    }
+  ],
+  "origins": {
+    "labels": [
+      "Local / Undetermined",
+      "Spanish",
+      "English/Irish",
+      "West African",
+      "Dutch Creole",
+      "Amerindian",
+      "Rastafarian",
+      "French",
+      "Danish"
+    ],
+    "values": [
+      148,
+      11,
+      3,
+      25,
+      10,
+      2,
+      3,
+      8,
+      6
+    ]
+  }
+}

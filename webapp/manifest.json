@@ -1,0 +1,35 @@
+{
+  "name": "Crucian Heritage Archive",
+  "short_name": "Crucian Archive",
+  "description": "An interactive dictionary, grammar guide, and proverb archive for the Crucian dialect of St. Croix, U.S. Virgin Islands.",
+  "start_url": "./index.html",
+  "id": "/crucian-heritage-archive/",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#faf9f6",
+  "theme_color": "#1c1917",
+  "lang": "en-US",
+  "categories": ["education", "reference", "lifestyle"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Random Word",
+      "short_name": "Word of the Day",
+      "description": "Jump straight to a random Crucian word",
+      "url": "./index.html?view=home",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Glossary Search",
+      "short_name": "Glossary",
+      "description": "Search the full Crucian glossary",
+      "url": "./index.html?view=dictionary",
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crucian Heritage | The Complete Archive</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400;1,9..144,700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-main: #faf9f6;
+            --accent-teal: #0d9488;
+            --accent-warm: #c2410c;
+            --text-primary: #1c1917;
+            --text-secondary: #57534e; /* Accessible Gray Stone-600 equivalent */
+            --glass: rgba(255, 255, 255, 0.75);
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            scroll-behavior: smooth;
+        }
+
+        .serif { font-family: 'Fraunces', serif; }
+
+        .glass-header {
+            background: var(--glass);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        .modern-card {
+            background: white;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.04);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            border-radius: 2.5rem;
+            border: none;
+        }
+
+        .modern-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.08);
+        }
+
+        .nav-active {
+            color: var(--accent-teal);
+            font-weight: 800;
+        }
+
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 480px;
+            margin: auto;
+            height: 380px;
+        }
+
+        .alpha-btn.active {
+            background: var(--text-primary);
+            color: white;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate-in { animation: fadeIn 0.8s ease-out forwards; }
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #d6d3d1; border-radius: 10px; }
+        
+        .search-focus:focus-within {
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+            border-color: var(--accent-teal);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="fixed top-0 left-0 w-full z-50 glass-header">
+        <nav class="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-9 h-9 bg-stone-900 rounded-xl flex items-center justify-center text-white font-black text-lg">C</div>
+                <span class="font-extrabold text-lg tracking-tight">Crucian Archive</span>
+            </div>
+            
+            <div class="hidden md:flex gap-8 text-[11px] font-bold uppercase tracking-[0.2em] text-stone-500">
+                <button onclick="navTo('home')" class="nav-btn hover:text-stone-900 transition-colors" id="btn-home">Home</button>
+                <button onclick="navTo('proverbs')" class="nav-btn hover:text-stone-900 transition-colors" id="btn-proverbs">Proverbs</button>
+                <button onclick="navTo('dictionary')" class="nav-btn hover:text-stone-900 transition-colors" id="btn-dictionary">Glossary</button>
+                <button onclick="navTo('roots')" class="nav-btn hover:text-stone-900 transition-colors" id="btn-roots">Heritage</button>
+            </div>
+
+            <button onclick="mobileToggle()" class="md:hidden text-stone-900" aria-label="Menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </nav>
+        <div id="mobile-menu" class="hidden glass-header flex flex-col p-8 gap-6 text-center text-xs font-black uppercase tracking-widest border-t border-stone-100">
+            <button onclick="navTo('home'); mobileToggle()">Home</button>
+            <button onclick="navTo('proverbs'); mobileToggle()">Proverbs</button>
+            <button onclick="navTo('dictionary'); mobileToggle()">Glossary</button>
+            <button onclick="navTo('roots'); mobileToggle()">Heritage</button>
+        </div>
+    </header>
+
+    <main class="pt-32 pb-24 px-6 max-w-6xl mx-auto">
+        
+        <section id="home" class="section-content animate-in">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
+                <div>
+                    <span class="text-teal-700 font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">Dialect Discovery</span>
+                    <h1 class="serif text-6xl md:text-8xl font-bold text-stone-900 leading-[0.9] mb-8">The Living <br><span class="italic text-teal-600">Spirit</span> of St. Croix</h1>
+                    <p class="text-xl text-stone-600 font-medium leading-relaxed max-w-lg">
+                        Explore the rich linguistic tapestry of the Virgin Islands, where African syntax meets colonial history.
+                    </p>
+                </div>
+                <div id="word-of-the-day" class="modern-card p-10 bg-gradient-to-br from-stone-900 to-stone-800 text-white relative overflow-hidden">
+                    <div class="relative z-10">
+                        <span class="text-[10px] font-black uppercase tracking-[0.3em] opacity-60 block mb-6 text-stone-100">Word of the Day</span>
+                        <h2 id="wotd-word" class="serif text-5xl font-bold mb-4 italic transition-opacity duration-300">Loading...</h2>
+                        <p id="wotd-def" class="text-stone-200 text-lg leading-relaxed mb-10 transition-opacity duration-300">Searching the archive...</p>
+                        <button onclick="randomizeWotd()" class="text-[10px] font-black uppercase tracking-widest px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full transition-all">New Random Word</button>
+                    </div>
+                    <div class="absolute -bottom-10 -right-10 text-white/5 serif italic text-9xl font-black select-none pointer-events-none">CRUCIAN</div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+                <div class="modern-card p-12 bg-white">
+                    <h3 class="text-teal-700 font-black text-[10px] uppercase tracking-widest mb-6">Syntax</h3>
+                    <h4 class="text-2xl font-bold mb-4 tracking-tight">The "Deh" Pivot</h4>
+                    <p class="text-stone-600 leading-relaxed text-sm font-medium">In Crucian, "deh" is a semantic anchor, functioning as an article, a marker of location, and an existential indicator.</p>
+                </div>
+                <div class="modern-card p-12 bg-white">
+                    <h3 class="text-orange-800 font-black text-[10px] uppercase tracking-widest mb-6">Etymology</h3>
+                    <h4 class="text-2xl font-bold mb-4 tracking-tight">African Calques</h4>
+                    <p class="text-stone-600 leading-relaxed text-sm font-medium">Phrases like "door mout" and "sweet eye" are literal translations from Yoruba and Twi, mapping African meanings onto English words.</p>
+                </div>
+                <div class="modern-card p-12 bg-white">
+                    <h3 class="text-stone-500 font-black text-[10px] uppercase tracking-widest mb-6">Morphology</h3>
+                    <h4 class="text-2xl font-bold mb-4 tracking-tight">Reduplication</h4>
+                    <p class="text-stone-600 leading-relaxed text-sm font-medium">Emphasis is achieved through doubling: "True true" denotes authenticity, a common feature in West African linguistic substrates.</p>
+                </div>
+            </div>
+
+            <div class="p-10 md:p-16 rounded-[3rem] bg-stone-100/40">
+                <div class="mb-10">
+                    <h3 class="serif text-4xl font-bold mb-4 tracking-tight">The Pronoun Matrix</h3>
+                    <p class="text-stone-600 text-sm font-medium">A comparison of standard forms versus the distinct Crucian dialectical structure.</p>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left">
+                        <thead>
+                            <tr class="text-[10px] uppercase tracking-[0.3em] text-stone-500 font-black border-b border-stone-200">
+                                <th class="pb-6">Person</th>
+                                <th class="pb-6">Subject</th>
+                                <th class="pb-6">Object</th>
+                                <th class="pb-6">Possessive</th>
+                                <th class="pb-6">Reflexive</th>
+                            </tr>
+                        </thead>
+                        <tbody id="pronoun-body" class="text-stone-800 font-bold text-sm">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <section id="proverbs" class="section-content hidden animate-in">
+            <div class="flex flex-col md:flex-row justify-between items-end gap-10 mb-16">
+                <div>
+                    <span class="text-orange-800 font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">Ancestral Wisdom</span>
+                    <h2 class="serif text-6xl font-bold text-stone-900 mb-4 italic">Oral History</h2>
+                    <p class="text-stone-600 font-medium text-lg italic">The metaphors of survival and social grace.</p>
+                </div>
+                <div class="flex gap-2 p-1.5 bg-stone-200/40 rounded-2xl">
+                    <button onclick="filterProverbs('all')" class="prov-filter active px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all" data-type="all">All</button>
+                    <button onclick="filterProverbs('Advice')" class="prov-filter px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all" data-type="Advice">Advice</button>
+                    <button onclick="filterProverbs('Warnings')" class="prov-filter px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all" data-type="Warnings">Warnings</button>
+                    <button onclick="filterProverbs('Social')" class="prov-filter px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all" data-type="Social">Social</button>
+                </div>
+            </div>
+            <div id="proverb-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+        </section>
+
+        <section id="dictionary" class="section-content hidden animate-in">
+            <div class="mb-16">
+                <span class="text-stone-500 font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">The Complete Lexicon</span>
+                <h2 class="serif text-7xl font-bold text-stone-900 mb-12 italic">Interactive Glossary</h2>
+                
+                <div class="bg-white p-4 rounded-[2.5rem] shadow-sm flex items-center group search-focus transition-all duration-500 border border-transparent">
+                    <div class="w-14 h-14 flex items-center justify-center text-stone-400 text-2xl group-focus-within:text-teal-700 transition-colors">🔍</div>
+                    <input type="text" id="main-search" oninput="handleSearch()" placeholder="Search terms, definitions, or roots..." class="bg-transparent w-full py-4 pr-8 outline-none font-bold text-2xl text-stone-800 placeholder:text-stone-300">
+                </div>
+                
+                <div class="mt-10 flex flex-wrap justify-center gap-1.5" id="alpha-nav"></div>
+            </div>
+
+            <div id="dictionary-results" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+            <div id="empty-state" class="hidden text-center py-40">
+                <p class="text-stone-300 text-6xl serif italic mb-6">"It ayn deh deh..."</p>
+                <p class="text-stone-500 font-bold uppercase tracking-widest text-xs">Term not found in the current archive</p>
+            </div>
+        </section>
+
+        <section id="roots" class="section-content hidden animate-in">
+            <div class="text-center mb-20">
+                <span class="text-teal-700 font-bold uppercase tracking-[0.4em] text-[10px] mb-4 block">Linguistic DNA</span>
+                <h2 class="serif text-7xl font-bold text-stone-900 mb-8 italic">The Etymological Map</h2>
+                <p class="text-stone-600 font-medium max-w-2xl mx-auto leading-relaxed text-lg">
+                    The Crucian dialect is a repository of history, blending West African resilience with Northern European vocabulary and Spanish trade influences.
+                </p>
+            </div>
+
+            <div class="modern-card p-12 md:p-20 mb-16 bg-white">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+                    <div class="chart-container">
+                        <canvas id="originsChart"></canvas>
+                    </div>
+                    <div>
+                        <h3 class="text-4xl font-bold mb-10 tracking-tight">Cultural Proportions</h3>
+                        <div class="space-y-6" id="chart-legend"></div>
+                        <div class="mt-12 p-8 bg-stone-50 rounded-3xl">
+                            <h4 class="text-[10px] font-black uppercase tracking-widest text-stone-500 mb-4">Historical Context</h4>
+                            <p class="text-sm text-stone-700 leading-relaxed font-medium">
+                                While English provides the majority of the current vocabulary, the grammatical structure remains firmly rooted in the Akan and Bantu languages of West and Central Africa.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="py-24 border-t border-stone-100 mt-20">
+        <div class="max-w-6xl mx-auto px-10 flex flex-col md:flex-row justify-between items-center gap-12">
+            <div class="flex items-center gap-3 opacity-60">
+                <div class="w-8 h-8 bg-stone-900 rounded-lg flex items-center justify-center text-white font-bold text-xs">C</div>
+                <span class="font-black text-stone-900 tracking-tighter text-xl">Crucian Archive</span>
+            </div>
+            <div class="text-center md:text-right">
+                <p class="text-stone-500 text-[10px] uppercase tracking-[0.3em] font-black mb-2">Made with care, <a href="http://www.designlady.com"> designlady.com</a></p>
+                <p class="text-stone-400 text-sm font-medium italic">"Ah crab nebba forget 'e hole."</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const appData = {
+            pronouns: [
+                { p: "1st Sing.", s: "I", o: "Me", pos: "My", r: "Myself" },
+                { p: "2nd Sing.", s: "Yu", o: "Yu", pos: "Yo", r: "Yoself" },
+                { p: "3rd Male", s: "He", o: "He", pos: "He/Hiz", r: "Heself" },
+                { p: "3rd Female", s: "She", o: "She", pos: "She/Ha", r: "Sheself" },
+                { p: "3rd Inanim.", s: "Ih / Ain", o: "Ih", pos: "Itz", r: "Ihself" },
+                { p: "1st Plural", s: "We", o: "Allawe", pos: "Ow-a", r: "Weself" },
+                { p: "2nd Plural", s: "Ayo", o: "Ayo", pos: "Yo", r: "Yoself" },
+                { p: "3rd Plural", s: "Dey", o: "Dem", pos: "Dey", r: "Deyself" }
+            ],
+            proverbs: [
+                { t: "Ah crab nebba forget 'e hole.", tr: "A crab never forgets its hole.", m: "True nature always reveals itself; you can't forget your roots.", cat: "Advice" },
+                { t: "Every skin teeth ain' a grin.", tr: "Every smile isn't a genuine grin.", m: "Beware of insincerity; not everyone who is friendly is your friend.", cat: "Warnings" },
+                { t: "Time longer dan twine.", tr: "Time is longer than string.", m: "Patience wins in the end; everything takes time.", cat: "Advice" },
+                { t: "Ah eyeful ain' ah bellyful.", tr: "An eyeful is not a bellyful.", m: "Looking at something isn't the same as owning it.", cat: "Advice" },
+                { t: "Monkey know wha' tree to clime.", tr: "A monkey knows which tree to climb.", m: "People know exactly who they can take advantage of.", cat: "Warnings" },
+                { t: "Who don't hear does feel.", tr: "He who doesn't listen will feel.", m: "Ignoring advice leads to suffering.", cat: "Warnings" },
+                { t: "When de wind blow foul, batty does show.", tr: "When the wind blows hard, the chicken's rear end shows.", m: "Hard times reveal true character.", cat: "Social" },
+                { t: "One penny caan jingle.", tr: "One penny cannot jingle.", m: "It takes two to start a fight or a conversation.", cat: "Social" },
+                { t: "Do for do ain' no obeah.", tr: "Tit-for-tat is not witchcraft.", m: "Fair exchange or retaliation is expected behavior.", cat: "Social" },
+                { t: "Dag ga' four foot but 'e caan tek four road.", tr: "A dog has four feet but can't take four roads.", m: "You can't be in multiple places at once.", cat: "Advice" },
+                { t: "What yoh do in de dark does come to light.", tr: "Secrets done in the dark eventually show up.", m: "Hidden deeds are always revealed in time.", cat: "Advice" }
+            ],
+            dictionary: [
+                { w: "Abroad", d: "Anywhere outside the USVI, specifically the U.S. mainland.", o: "Local" },
+                { w: "Adobo", d: "A staple seasoning blend of pepper, garlic, and oregano.", o: "Spanish" },
+                { w: "Ah nex", d: "Crucian alternative for 'another'.", o: "Syntax" },
+                { w: "Aiight", d: "Colloquialism for 'all right'.", o: "Modern Slang" },
+                { w: "Aks", d: "Metathesis of 'ask'; extremely common feature.", o: "Phonetic" },
+                { w: "Allawe", d: "All of us; everyone in the collective.", o: "Local" },
+                { w: "Anansi", d: "The trickster spider hero of West African (Akan) folklore.", o: "West African" },
+                { w: "Apelsina", d: "The orange fruit.", o: "Dutch / Danish" },
+                { w: "Ayo", d: "Plural form of 'you' (second-person plural).", o: "African Substrate" },
+                { w: "Azick", d: "Crazy, wild, or out of control.", o: "Local" },
+                { w: "Baan ya", d: "Native; born on the island (born here).", o: "Heritage" },
+                { w: "Bacalao", d: "Dried salted codfish; a historical food staple.", o: "Spanish" },
+                { w: "Bacchanal", d: "A wild party or commotion, typically during Festival.", o: "Regional" },
+                { w: "Bachoom", d: "Pronunciation for bathroom.", o: "Phonetic" },
+                { w: "Backside", d: "Polite term for the rear end.", o: "Local" },
+                { w: "Bajan", d: "A native of Barbados; migratory labor history.", o: "Regional" },
+                { w: "Bal / Ballin", d: "To cry loudly or to flaunt wealth.", o: "Local" },
+                { w: "Bamboula", d: "Traditional drumming and resistance dance of African origin.", o: "West African" },
+                { w: "Bamboushay", d: "To enjoy oneself; festive celebration.", o: "French" },
+                { w: "Bananaquit", d: "Official territorial bird of the USVI.", o: "Local" },
+                { w: "Bassidy", d: "Confused, dizzy, or acting foolishly.", o: "French" },
+                { w: "Berg", d: "A hill or mountain.", o: "Dutch / Danish" },
+                { w: "Bes", d: "Crucian for 'had better' (e.g., 'Yo bes behave').", o: "Syntax" },
+                { w: "Black Cake", d: "Rich rum-infused fruit cake.", o: "Local" },
+                { w: "Bombaklaat", d: "Exclamation of shock or frustration.", o: "Regional" },
+                { w: "Brata", d: "Something extra given for free with a purchase.", o: "Spanish" },
+                { w: "Buckra", d: "A white person; overseer.", o: "Igbo" },
+                { w: "Cack", d: "Pronunciation of cock; often used in 'cack up'.", o: "Local" },
+                { w: "Cafoon", d: "To knock down or capsize.", o: "Local" },
+                { w: "Calabash", d: "A gourd used as a bowl or flask.", o: "Heritage" },
+                { w: "Canky / Conkie", d: "Sweet potato and cornmeal boiled in banana leaf.", o: "Heritage" },
+                { w: "Cariso", d: "Traditional folk music precursor to calypso.", o: "West African" },
+                { w: "Catta", d: "Cloth roll used to carry heavy loads on the head.", o: "Tshiluba" },
+                { w: "Chabo", d: "Slang for money.", o: "Spanish" },
+                { w: "Cheney", d: "Polished ceramic shards used in jewelry.", o: "Heritage" },
+                { w: "Chook", d: "To poke, jab, or give an injection.", o: "Fula / Spanish" },
+                { w: "Chupse", d: "Sucking teeth to express annoyance.", o: "West African" },
+                { w: "Cyar", d: "Phonetic pronunciation of car.", o: "Irish" },
+                { w: "Day Clean", d: "Sunrise or dawn.", o: "Local" },
+                { w: "Donkey Years", d: "A very long period of time.", o: "Idiom" },
+                { w: "Door mout", d: "Entrance or doorway.", o: "Yoruba/Igbo Calque" },
+                { w: "Dung", d: "Crucian for 'down'.", o: "Phonetic" },
+                { w: "Dutty up", d: "To soil or make dirty.", o: "Twi Substrate" },
+                { w: "Far far", d: "Extremely distant.", o: "Reduplication" },
+                { w: "Fas' / Fast", d: "Meddlesome or nosy.", o: "Local" },
+                { w: "Frickadella", d: "Spiced meatballs.", o: "Danish" },
+                { w: "Fungee", d: "Cornmeal and okra dish.", o: "Dutch Creole" },
+                { w: "Gade", d: "A street or road.", o: "Danish" },
+                { w: "Gaut / Ghut", d: "A ravine or stream bed.", o: "Dutch / Hindi" },
+                { w: "Gingambo", d: "Okra.", o: "Tshiluba" },
+                { w: "Gongolo", d: "A millipede.", o: "Yoruba" },
+                { w: "Gundi", d: "A crab claw; traditional herring dish.", o: "Local" },
+                { w: "Irie", d: "Cool, peaceful, and good vibes.", o: "Rastafarian" },
+                { w: "Johnny Cake", d: "Deep-fried bread staple.", o: "Local" },
+                { w: "Jou'vert", d: "Pre-dawn street party starting the Festival.", o: "French Creole" },
+                { w: "Jumbie", d: "A spirit or ghost.", o: "Bantu / Dutch Creole" },
+                { w: "Kalaloo", d: "Rich seafood and vegetable soup.", o: "West African" },
+                { w: "Ketip", d: "Small tart fruit.", o: "Local" },
+                { w: "Lime / Limin", d: "To hang out or socialize.", o: "Regional" },
+                { w: "Look-kyea", d: "Crucian for 'Look here!'.", o: "Phonetic" },
+                { w: "Moko Jumbie", d: "Stilt dancers representing ancient spirits.", o: "West African" },
+                { w: "Mudda-scunt", d: "A crude and intense expletive; highly vulgar.", o: "Vulgarity" },
+                { w: "Nyam", d: "To eat hungrily.", o: "Twi" },
+                { w: "Nyampi", d: "Eye crust upon waking.", o: "Twi" },
+                { w: "Obeah", d: "Traditional African spiritual practice.", o: "Ashanti" },
+                { w: "Pascalam", d: "A rowdy Easter party.", o: "Danish" },
+                { w: "Pate", d: "Deep-fried meat turnover.", o: "Local" },
+                { w: "Pistarckle", d: "A commotion or spectacle.", o: "Dutch Creole" },
+                { w: "Quelbe", d: "Traditional scratch music of the USVI.", o: "Heritage" },
+                { w: "Skaal", d: "A drinking toast.", o: "Danish" },
+                { w: "Sweet mout", d: "Sweet talk or charm.", o: "Twi Calque" },
+                { w: "True true", d: "Genuine or authentic.", o: "Reduplication" },
+                { w: "Vex", d: "Angry or irritated.", o: "Archaic English" },
+                { w: "Zamba", d: "A simple wooden cot or bed.", o: "Dutch Creole" },
+                { w: "Zimi", d: "Amerindian spirit artifact.", o: "Arawak" }
+            ],
+            origins: {
+                labels: ['West African', 'English/Irish', 'Danish', 'Dutch Creole', 'Spanish', 'Other'],
+                values: [48, 20, 12, 10, 6, 4],
+                colors: ['#0d9488', '#1c1917', '#c2410c', '#ea580c', '#3b82f6', '#d1d5db']
+            }
+        };
+
+        function init() {
+            renderPronouns();
+            renderProverbs();
+            renderDictionary();
+            renderAlphaNav();
+            initChart();
+            randomizeWotd();
+            navTo('home');
+        }
+
+        function randomizeWotd() {
+            const word = appData.dictionary[Math.floor(Math.random() * appData.dictionary.length)];
+            const wordEl = document.getElementById('wotd-word');
+            const defEl = document.getElementById('wotd-def');
+            
+            wordEl.style.opacity = 0;
+            defEl.style.opacity = 0;
+            
+            setTimeout(() => {
+                wordEl.innerText = word.w;
+                defEl.innerText = word.d;
+                wordEl.style.opacity = 1;
+                defEl.style.opacity = 1;
+            }, 300);
+        }
+
+        function navTo(id) {
+            document.querySelectorAll('.section-content').forEach(s => s.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('nav-active'));
+            const targetBtn = document.getElementById(`btn-${id}`);
+            if(targetBtn) targetBtn.classList.add('nav-active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function mobileToggle() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        function renderPronouns() {
+            document.getElementById('pronoun-body').innerHTML = appData.pronouns.map(p => `
+                <tr class="hover:bg-stone-50 transition-colors border-b border-stone-100 last:border-0">
+                    <td class="py-6 font-medium text-stone-500">${p.p}</td>
+                    <td class="py-6 text-teal-700">${p.s}</td>
+                    <td class="py-6 text-stone-800">${p.o}</td>
+                    <td class="py-6 text-stone-800">${p.pos}</td>
+                    <td class="py-6 text-stone-600 font-semibold italic">${p.r}</td>
+                </tr>
+            `).join('');
+        }
+
+        function renderProverbs() {
+            const grid = document.getElementById('proverb-grid');
+            const currentFilter = document.querySelector('.prov-filter.active').dataset.type;
+            const filtered = currentFilter === 'all' ? appData.proverbs : appData.proverbs.filter(p => p.cat === currentFilter);
+            
+            grid.innerHTML = filtered.map(p => `
+                <div class="modern-card p-10 flex flex-col h-full bg-white">
+                    <div class="mb-6">
+                        <span class="text-[9px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full ${p.cat === 'Advice' ? 'bg-teal-50 text-teal-800' : p.cat === 'Warnings' ? 'bg-orange-50 text-orange-800' : 'bg-stone-100 text-stone-700'}">
+                            ${p.cat}
+                        </span>
+                    </div>
+                    <p class="serif text-2xl font-bold text-stone-900 mb-4 leading-tight">"${p.t}"</p>
+                    <p class="text-stone-600 text-sm mb-10 font-semibold italic">${p.tr}</p>
+                    <div class="mt-auto pt-8 border-t border-stone-100">
+                        <p class="text-[9px] font-black text-stone-400 uppercase tracking-widest mb-2">Social Meaning</p>
+                        <p class="text-stone-800 text-sm font-semibold leading-relaxed">${p.m}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function filterProverbs(cat) {
+            document.querySelectorAll('.prov-filter').forEach(b => {
+                b.classList.remove('active', 'bg-white', 'shadow-md');
+                if(b.dataset.type === cat) b.classList.add('active', 'bg-white', 'shadow-md');
+            });
+            renderProverbs();
+        }
+
+        function renderDictionary(data = appData.dictionary) {
+            const results = document.getElementById('dictionary-results');
+            const empty = document.getElementById('empty-state');
+            
+            if (data.length === 0) {
+                results.innerHTML = "";
+                empty.classList.remove('hidden');
+                return;
+            }
+            
+            empty.classList.add('hidden');
+            results.innerHTML = data.map(item => `
+                <div class="modern-card p-8 group hover:bg-stone-50 transition-all border border-transparent">
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h4 class="text-2xl font-black text-stone-900 group-hover:text-teal-700 transition-colors mb-2">${item.w}</h4>
+                            <p class="text-stone-700 font-medium text-sm leading-relaxed">${item.d}</p>
+                        </div>
+                        <span class="shrink-0 text-[9px] font-black uppercase tracking-widest bg-stone-100/60 text-stone-600 px-3 py-1 rounded-lg">
+                            ${item.o}
+                        </span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderAlphaNav() {
+            const nav = document.getElementById('alpha-nav');
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+            nav.innerHTML = `
+                <button onclick="renderDictionary()" class="alpha-btn active px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">All</button>
+                ${letters.map(l => `<button onclick="filterByAlpha('${l}', this)" class="alpha-btn w-10 h-10 rounded-xl text-[10px] font-black text-stone-500 hover:bg-white hover:shadow-sm transition-all">${l}</button>`).join('')}
+            `;
+        }
+
+        function filterByAlpha(l, btn) {
+            document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filtered = appData.dictionary.filter(i => i.w.toUpperCase().startsWith(l));
+            renderDictionary(filtered);
+            document.getElementById('main-search').value = "";
+        }
+
+        function handleSearch() {
+            const query = document.getElementById('main-search').value.toLowerCase();
+            document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+            const filtered = appData.dictionary.filter(i => 
+                i.w.toLowerCase().includes(query) || 
+                i.d.toLowerCase().includes(query) ||
+                i.o.toLowerCase().includes(query)
+            );
+            renderDictionary(filtered);
+        }
+
+        function initChart() {
+            const ctx = document.getElementById('originsChart').getContext('2d');
+            const legend = document.getElementById('chart-legend');
+            
+            legend.innerHTML = appData.origins.labels.map((l, i) => `
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-4">
+                        <div class="w-3 h-3 rounded-full" style="background:${appData.origins.colors[i]}"></div>
+                        <span class="font-bold text-stone-700 text-sm">${l}</span>
+                    </div>
+                    <span class="text-stone-500 font-mono text-xs font-bold">${appData.origins.values[i]}%</span>
+                </div>
+            `).join('');
+
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: appData.origins.labels,
+                    datasets: [{
+                        data: appData.origins.values,
+                        backgroundColor: appData.origins.colors,
+                        hoverOffset: 24,
+                        borderWidth: 0,
+                        borderRadius: 18
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '78%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: '#1c1917',
+                            padding: 16,
+                            cornerRadius: 15,
+                            displayColors: false,
+                            titleFont: { size: 14, weight: 'bold' },
+                            bodyFont: { size: 12 }
+                        }
+                    }
+                }
+            });
+        }
+
+        window.onload = init;
+    </script>
+</body>
+</html>
