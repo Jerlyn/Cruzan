@@ -146,6 +146,35 @@ body {
   box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.15);
 }
 
+/* --- Mobile nav: full-screen takeover with large tap targets, for touch
+   and motor-accessibility (WCAG 2.5.5 target size, 44px+). Replaces the old
+   cramped dropdown. --- */
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  top: 0;
+  z-index: 40;
+  background: var(--bg-main);
+  overflow-y: auto;
+}
+
+.mobile-nav-btn {
+  display: block;
+  width: 100%;
+  padding: 1.35rem 1.5rem;
+  border-radius: 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+  text-transform: none;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: var(--text-primary);
+}
+.mobile-nav-btn:hover,
+.mobile-nav-btn:focus-visible {
+  background: var(--bg-subtle);
+}
+
 .chart-container {
   position: relative;
   width: 100%;
@@ -237,8 +266,8 @@ body {
 
 /* --- Header controls: theme toggle + install button --- */
 .icon-btn {
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   display: flex;
   align-items: center;
   justify-content: center;

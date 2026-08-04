@@ -112,19 +112,44 @@ function navTo(id) {
     b.classList.remove("nav-active");
     b.removeAttribute("aria-current");
   });
-  const targetBtn = document.getElementById(`btn-${id}`);
-  if (targetBtn) {
-    targetBtn.classList.add("nav-active");
-    targetBtn.setAttribute("aria-current", "page");
-  }
+  [`btn-${id}`, `mobile-btn-${id}`].forEach((elId) => {
+    const targetBtn = document.getElementById(elId);
+    if (targetBtn) {
+      targetBtn.classList.add("nav-active");
+      targetBtn.setAttribute("aria-current", "page");
+    }
+  });
   window.scrollTo({ top: 0, behavior: "smooth" });
   history.replaceState(null, "", `?view=${id}`);
   trackPageview(id);
 }
 
 function mobileToggle() {
-  document.getElementById("mobile-menu").classList.toggle("hidden");
+  const menu = document.getElementById("mobile-menu");
+  const btn = document.getElementById("mobile-menu-btn");
+  const openIcon = document.getElementById("icon-menu-open");
+  const closeIcon = document.getElementById("icon-menu-close");
+  const willOpen = menu.classList.contains("hidden");
+
+  menu.classList.toggle("hidden", !willOpen);
+  document.body.classList.toggle("overflow-hidden", willOpen);
+  btn.setAttribute("aria-expanded", String(willOpen));
+  btn.setAttribute("aria-label", willOpen ? "Close menu" : "Open menu");
+  openIcon.classList.toggle("hidden", willOpen);
+  closeIcon.classList.toggle("hidden", !willOpen);
+
+  if (willOpen) {
+    menu.querySelector(".mobile-nav-btn")?.focus();
+  } else {
+    btn.focus();
+  }
 }
+
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Escape") return;
+  const menu = document.getElementById("mobile-menu");
+  if (menu && !menu.classList.contains("hidden")) mobileToggle();
+});
 
 /* ---------------- Suggest a word (accordion + form) ---------------- */
 

@@ -56,17 +56,20 @@
                 <svg id="icon-moon" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
                 <svg id="icon-sun" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
             </button>
-            <button onclick="mobileToggle()" class="md:hidden text-stone-900" aria-label="Menu" aria-controls="mobile-menu" aria-expanded="false">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            <button type="button" onclick="mobileToggle()" id="mobile-menu-btn" class="md:hidden icon-btn" aria-label="Open menu" aria-controls="mobile-menu" aria-expanded="false">
+                <svg id="icon-menu-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                <svg id="icon-menu-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
         </div>
     </nav>
-    <div id="mobile-menu" class="hidden glass-header flex flex-col p-8 gap-6 text-center text-xs font-black uppercase tracking-widest border-t border-stone-100">
-        <button onclick="navTo('home'); mobileToggle()">Home</button>
-        <button onclick="navTo('grammar'); mobileToggle()">Grammar</button>
-        <button onclick="navTo('proverbs'); mobileToggle()">Proverbs</button>
-        <button onclick="navTo('dictionary'); mobileToggle()">Glossary</button>
-        <button onclick="navTo('roots'); mobileToggle()">Heritage</button>
+    <div id="mobile-menu" class="hidden mobile-nav-overlay md:hidden" role="dialog" aria-modal="true" aria-label="Primary navigation">
+        <div class="pt-32 px-6 pb-10 flex flex-col gap-3 max-w-md mx-auto">
+            <button onclick="navTo('home'); mobileToggle()" id="mobile-btn-home" class="nav-btn mobile-nav-btn">Home</button>
+            <button onclick="navTo('grammar'); mobileToggle()" id="mobile-btn-grammar" class="nav-btn mobile-nav-btn">Grammar</button>
+            <button onclick="navTo('proverbs'); mobileToggle()" id="mobile-btn-proverbs" class="nav-btn mobile-nav-btn">Proverbs</button>
+            <button onclick="navTo('dictionary'); mobileToggle()" id="mobile-btn-dictionary" class="nav-btn mobile-nav-btn">Glossary</button>
+            <button onclick="navTo('roots'); mobileToggle()" id="mobile-btn-roots" class="nav-btn mobile-nav-btn">Heritage</button>
+        </div>
     </div>
 </header>
 
