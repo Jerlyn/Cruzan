@@ -2424,25 +2424,25 @@
   "origins": {
     "labels": [
       "Local / Undetermined",
-      "Spanish",
-      "English/Irish",
       "West African",
+      "Spanish",
       "Dutch Creole",
-      "Amerindian",
-      "Rastafarian",
       "French",
-      "Danish"
+      "Danish",
+      "English/Irish",
+      "Rastafarian",
+      "Amerindian"
     ],
     "values": [
       148,
-      11,
-      3,
       25,
+      11,
       10,
-      2,
-      3,
       8,
-      6
+      6,
+      3,
+      3,
+      2
     ]
   }
 }

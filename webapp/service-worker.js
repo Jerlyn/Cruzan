@@ -1,7 +1,7 @@
 // Crucian Heritage Archive — service worker
 // Cache-first app shell, network-first data, stale-while-revalidate for CDN libs.
 
-const VERSION = "v1.6.0";
+const VERSION = "v1.6.1";
 const SHELL_CACHE = `crucian-shell-${VERSION}`;
 const DATA_CACHE = `crucian-data-${VERSION}`;
 const CDN_CACHE = `crucian-cdn-${VERSION}`;

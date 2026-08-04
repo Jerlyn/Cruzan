@@ -1,6 +1,6 @@
 import docx, json, re
 
-d = docx.Document('/sessions/bold-gallant-maxwell/mnt/Cruzan/Crucian Dictionary, Grammar & Glossary.docx')
+d = docx.Document('../Crucian Dictionary, Grammar & Glossary.docx')
 paras = [(p.style.name, p.text.strip()) for p in d.paragraphs if p.text.strip()]
 
 # --- Split into top-level sections by Heading 2 ---
@@ -174,8 +174,8 @@ data = {
     'proverbs': proverbs,
     'dictionary': clean_dict,
     'origins': {
-        'labels': list(dist.keys()),
-        'values': list(dist.values())
+        'labels': [label for label, count in dist.most_common()],
+        'values': [count for label, count in dist.most_common()]
     }
 }
 
@@ -193,7 +193,7 @@ def fix_arrows(obj):
 
 data = fix_arrows(data)
 
-with open('/sessions/bold-gallant-maxwell/mnt/outputs/build/data/dictionary.json', 'w') as f:
+with open('data/dictionary.json', 'w') as f:
     json.dump(data, f, indent=2, ensure_ascii=False)
 
 print('dictionary entries:', len(clean_dict))
