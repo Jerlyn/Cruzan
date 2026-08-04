@@ -272,6 +272,18 @@ body {
   padding: 2rem;
   box-shadow: var(--shadow-card);
 }
+
+/* Single-letter sound references (c/k, d/t) get set apart in a monospace
+   chip so they don't visually fuse into a word on a quick read. */
+.letter-chip {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-weight: 700;
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+  padding: 0.05rem 0.4rem;
+  border-radius: 0.35rem;
+  font-style: normal;
+}
 .example-pair {
   border-left: 3px solid var(--accent-teal);
   padding-left: 1rem;

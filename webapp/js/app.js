@@ -211,12 +211,16 @@ function renderGrammar() {
         const hasTitle = idx > -1 && idx < 70;
         const title = hasTitle ? n.slice(0, idx).trim() : null;
         const body = hasTitle ? n.slice(idx + 1).trim() : n;
+        // Single-letter sound refs ("c or k", "d or t") read as one word at a
+        // glance — set each letter off in a monospace chip so they can't fuse.
+        const bodyHtml = escapeHtml(body).replace(
+          /\b([A-Za-z]) or ([A-Za-z])\b/g,
+          '<code class="letter-chip">$1</code> or <code class="letter-chip">$2</code>'
+        );
         return `
       <div class="grammar-note-card">
-        <div class="border-l-2 border-teal-600 pl-4">
-          ${title ? `<h4 class="serif text-lg font-bold text-stone-900 mb-2">${escapeHtml(title)}</h4>` : ""}
-          <p class="text-sm leading-relaxed font-medium text-stone-600">${escapeHtml(body)}</p>
-        </div>
+        ${title ? `<h4 class="serif text-lg font-bold text-stone-900 mb-2">${escapeHtml(title)}</h4>` : ""}
+        <p class="text-sm leading-relaxed font-medium text-stone-600">${bodyHtml}</p>
       </div>`;
       })
       .join("");
