@@ -66,16 +66,22 @@
             </button>
         </div>
     </nav>
-    <div id="mobile-menu" class="hidden mobile-nav-overlay md:hidden" role="dialog" aria-modal="true" aria-label="Primary navigation">
-        <div class="pt-32 px-6 pb-10 flex flex-col gap-3 max-w-md mx-auto">
-            <button onclick="navTo('home'); mobileToggle()" id="mobile-btn-home" class="nav-btn mobile-nav-btn">Home</button>
-            <button onclick="navTo('grammar'); mobileToggle()" id="mobile-btn-grammar" class="nav-btn mobile-nav-btn">Grammar</button>
-            <button onclick="navTo('proverbs'); mobileToggle()" id="mobile-btn-proverbs" class="nav-btn mobile-nav-btn">Proverbs</button>
-            <button onclick="navTo('dictionary'); mobileToggle()" id="mobile-btn-dictionary" class="nav-btn mobile-nav-btn">Glossary</button>
-            <button onclick="navTo('roots'); mobileToggle()" id="mobile-btn-roots" class="nav-btn mobile-nav-btn">Heritage</button>
-        </div>
-    </div>
 </header>
+
+<!-- Sibling of <header>, not a child — position:fixed descendants get
+     re-anchored to the nearest ancestor with a backdrop-filter/filter/
+     transform (here, header's glass-header blur), which silently turns
+     "fixed, full-viewport" into "fixed, sized to that ancestor's box".
+     Keeping this outside <header> avoids that trap. -->
+<div id="mobile-menu" class="hidden mobile-nav-overlay md:hidden" role="dialog" aria-modal="true" aria-label="Primary navigation">
+    <div class="pt-32 px-6 pb-10 flex flex-col gap-3 max-w-md mx-auto">
+        <button onclick="navTo('home'); mobileToggle()" id="mobile-btn-home" class="nav-btn mobile-nav-btn">Home</button>
+        <button onclick="navTo('grammar'); mobileToggle()" id="mobile-btn-grammar" class="nav-btn mobile-nav-btn">Grammar</button>
+        <button onclick="navTo('proverbs'); mobileToggle()" id="mobile-btn-proverbs" class="nav-btn mobile-nav-btn">Proverbs</button>
+        <button onclick="navTo('dictionary'); mobileToggle()" id="mobile-btn-dictionary" class="nav-btn mobile-nav-btn">Glossary</button>
+        <button onclick="navTo('roots'); mobileToggle()" id="mobile-btn-roots" class="nav-btn mobile-nav-btn">Heritage</button>
+    </div>
+</div>
 
 <main id="main-content" class="pt-32 pb-12 px-6 max-w-6xl mx-auto">
 
