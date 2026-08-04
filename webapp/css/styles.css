@@ -181,6 +181,31 @@ body {
 .copy-btn.copied .icon-copy { display: none; }
 .copy-btn.copied .icon-check { display: block; }
 
+/* Variant for use on the always-dark Word of the Day card, independent of
+   light/dark theme (that card stays dark in both). */
+.copy-btn.on-dark {
+  border-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.7);
+}
+.copy-btn.on-dark:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+.copy-btn.on-dark.copied {
+  color: #5eead4;
+  border-color: #2dd4bf;
+}
+
+/* --- Horizontally-scrolling alphabet strip: no visible scrollbar, a soft
+   right-edge fade hints there's more instead. --- */
+#alpha-nav {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-mask-image: linear-gradient(to right, black calc(100% - 40px), transparent 100%);
+  mask-image: linear-gradient(to right, black calc(100% - 40px), transparent 100%);
+}
+#alpha-nav::-webkit-scrollbar { display: none; }
+
 /* --- Header controls: theme toggle + install button --- */
 .icon-btn {
   width: 2.5rem;

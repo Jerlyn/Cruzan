@@ -72,7 +72,14 @@
             </div>
             <div id="word-of-the-day" class="modern-card p-10 bg-gradient-to-br from-stone-900 to-stone-800 text-white relative overflow-hidden">
                 <div class="relative z-10">
-                    <span class="text-[10px] font-black uppercase tracking-[0.3em] opacity-60 block mb-6 text-stone-100">Word of the Day</span>
+                    <div class="flex items-start justify-between gap-4 mb-6">
+                        <span class="text-[10px] font-black uppercase tracking-[0.3em] opacity-60 text-stone-100">Word of the Day</span>
+                        <button type="button" id="wotd-copy" class="copy-btn on-dark" data-copy-text=""
+                            aria-label="Copy to clipboard" onclick="handleCopyClick(this)">
+                            <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 012-2h10"></path></svg>
+                            <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+                        </button>
+                    </div>
                     <h2 id="wotd-word" class="serif text-5xl font-bold mb-4 italic transition-opacity duration-300">Loading...</h2>
                     <p id="wotd-def" class="text-stone-200 text-lg leading-relaxed mb-10 transition-opacity duration-300">Searching the archive...</p>
                     <button onclick="randomizeWotd()" class="text-[10px] font-black uppercase tracking-widest px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full transition-all">New Random Word</button>
@@ -167,7 +174,7 @@
                 <input type="text" id="main-search" oninput="handleSearch()" placeholder="Search terms, definitions, or roots..." class="bg-transparent w-full py-4 pr-8 outline-none font-bold text-2xl text-stone-800">
             </div>
 
-            <div class="mt-10 flex flex-nowrap overflow-x-auto justify-start gap-1 -mx-6 px-6 pb-2" id="alpha-nav" role="group" aria-label="Filter glossary by first letter"></div>
+            <div class="mt-10 flex flex-nowrap overflow-x-auto justify-start gap-1 -mx-6 pl-6 pr-16" id="alpha-nav" role="group" aria-label="Filter glossary by first letter"></div>
         </div>
 
         <div id="dictionary-results" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>

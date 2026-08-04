@@ -68,6 +68,8 @@ function randomizeWotd() {
     defEl.innerText = word.definition;
     wordEl.style.opacity = 1;
     defEl.style.opacity = 1;
+    const copyBtn = document.getElementById("wotd-copy");
+    if (copyBtn) copyBtn.dataset.copyText = `${word.word} — ${word.definition}`;
   }, 300);
 }
 
