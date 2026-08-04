@@ -388,8 +388,10 @@ function initChart() {
         {
           data: appData.origins.values,
           backgroundColor: colors,
+          borderColor: colors,
+          borderWidth: 2,
+          borderAlign: "inner",
           hoverOffset: 10,
-          borderWidth: 0,
           borderRadius: 0
         }
       ]
