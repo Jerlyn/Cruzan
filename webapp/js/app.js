@@ -70,6 +70,8 @@ async function init() {
   renderGrammar();
   initChart();
   randomizeWotd();
+  renderSavedDrawer();
+  preloadShareFonts();
 
   const params = new URLSearchParams(location.search);
   navTo(params.get("view") || "home");
@@ -96,6 +98,20 @@ function randomizeWotd(userInitiated = false) {
     defEl.style.opacity = 1;
     const copyBtn = document.getElementById("wotd-copy");
     if (copyBtn) copyBtn.dataset.copyText = `${word.word} — ${word.definition}`;
+    const saveBtn = document.getElementById("wotd-save");
+    if (saveBtn) {
+      saveBtn.dataset.saveId = word.word;
+      saveBtn.dataset.saveLabel = word.word;
+      const saved = isSaved("dictionary", word.word);
+      saveBtn.classList.toggle("saved", saved);
+      saveBtn.setAttribute("aria-pressed", String(saved));
+      saveBtn.setAttribute("aria-label", saved ? "Remove from saved" : "Save this word");
+    }
+    const shareBtn = document.getElementById("wotd-share");
+    if (shareBtn) {
+      shareBtn.dataset.word = word.word;
+      shareBtn.dataset.def = word.definition;
+    }
   }, 300);
 
   if (userInitiated) track("wotd_shuffle", { word: word.word });
@@ -148,7 +164,12 @@ function mobileToggle() {
 document.addEventListener("keydown", (e) => {
   if (e.key !== "Escape") return;
   const menu = document.getElementById("mobile-menu");
-  if (menu && !menu.classList.contains("hidden")) mobileToggle();
+  if (menu && !menu.classList.contains("hidden")) {
+    mobileToggle();
+    return;
+  }
+  const drawer = document.getElementById("saved-drawer");
+  if (drawer && !drawer.classList.contains("hidden")) closeSavedDrawer();
 });
 
 /* ---------------- Suggest a word (accordion + form) ---------------- */
@@ -333,6 +354,341 @@ async function copyToClipboard(text, btn, contentType = "unknown") {
   }
 }
 
+/* ---------------- Saved / bookmarks (localStorage) ---------------- */
+
+const SAVED_KEY = "crucianSaved";
+
+function getSaved() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(SAVED_KEY) || "[]");
+    return Array.isArray(parsed) ? parsed : [];
+  } catch {
+    return [];
+  }
+}
+
+function setSaved(list) {
+  try {
+    localStorage.setItem(SAVED_KEY, JSON.stringify(list));
+  } catch (err) {
+    console.warn("Couldn't persist saved list:", err);
+  }
+}
+
+function isSaved(type, id) {
+  return getSaved().some((s) => s.type === type && s.id === id);
+}
+
+function saveButtonHtml(type, id, label, extraClass = "") {
+  const saved = isSaved(type, id);
+  return `
+    <button type="button" class="copy-btn save-btn ${extraClass} ${saved ? "saved" : ""}"
+      data-save-type="${type}" data-save-id="${attrEscape(id)}" data-save-label="${attrEscape(label)}"
+      aria-pressed="${saved}" aria-label="${saved ? "Remove from saved" : "Save this"}"
+      onclick="event.stopPropagation(); handleSaveClick(this)">
+      <svg class="icon-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 000-7.8z"></path></svg>
+    </button>`;
+}
+
+function handleSaveClick(btn) {
+  const { saveType, saveId, saveLabel } = btn.dataset;
+  if (!saveType || !saveId) return;
+  toggleSaved(saveType, saveId, saveLabel || saveId);
+}
+
+function toggleSaved(type, id, label) {
+  const list = getSaved();
+  const idx = list.findIndex((s) => s.type === type && s.id === id);
+  const nowSaved = idx === -1;
+  if (nowSaved) {
+    list.push({ type, id, label });
+  } else {
+    list.splice(idx, 1);
+  }
+  setSaved(list);
+  syncSaveButtons(type, id, nowSaved);
+  renderSavedDrawer();
+  showToast(nowSaved ? "Saved." : "Removed from saved.");
+  track(nowSaved ? "bookmark_add" : "bookmark_remove", { content_type: type, item: label.slice(0, 80) });
+}
+
+function syncSaveButtons(type, id, saved) {
+  document.querySelectorAll(".save-btn").forEach((btn) => {
+    if (btn.dataset.saveType !== type || btn.dataset.saveId !== id) return;
+    btn.classList.toggle("saved", saved);
+    btn.setAttribute("aria-pressed", String(saved));
+    btn.setAttribute("aria-label", saved ? "Remove from saved" : "Save this");
+  });
+}
+
+function renderSavedDrawer() {
+  const saved = getSaved();
+  const badge = document.getElementById("saved-badge");
+  if (badge) {
+    badge.textContent = String(saved.length);
+    badge.classList.toggle("hidden", saved.length === 0);
+  }
+
+  const list = document.getElementById("saved-list");
+  const empty = document.getElementById("saved-empty");
+  if (!list) return;
+
+  if (saved.length === 0) {
+    list.innerHTML = "";
+    if (empty) empty.classList.remove("hidden");
+    return;
+  }
+  if (empty) empty.classList.add("hidden");
+
+  list.innerHTML = saved
+    .map(
+      (s) => `
+    <li class="saved-item">
+      <button type="button" class="saved-item-main" data-save-type="${s.type}" data-save-id="${attrEscape(s.id)}" onclick="jumpToSavedFromBtn(this)">
+        <span class="saved-item-kind">${s.type === "dictionary" ? "Word" : "Proverb"}</span>
+        <span class="saved-item-label">${escapeHtml(s.label)}</span>
+      </button>
+      <button type="button" class="saved-item-remove" data-save-type="${s.type}" data-save-id="${attrEscape(s.id)}" data-save-label="${attrEscape(s.label)}"
+        aria-label="Remove ${escapeHtml(s.label)} from saved" onclick="handleSaveClick(this)">&times;</button>
+    </li>`
+    )
+    .join("");
+}
+
+function toggleSavedDrawer() {
+  const drawer = document.getElementById("saved-drawer");
+  if (!drawer) return;
+  if (drawer.classList.contains("hidden")) {
+    renderSavedDrawer();
+    drawer.classList.remove("hidden");
+    document.body.classList.add("overflow-hidden");
+    track("saved_drawer_open");
+    drawer.querySelector(".icon-btn")?.focus();
+  } else {
+    closeSavedDrawer();
+  }
+}
+
+function closeSavedDrawer() {
+  const drawer = document.getElementById("saved-drawer");
+  if (!drawer) return;
+  drawer.classList.add("hidden");
+  document.body.classList.remove("overflow-hidden");
+  document.getElementById("saved-toggle-btn")?.focus();
+}
+
+function jumpToSavedFromBtn(btn) {
+  jumpToSaved(btn.dataset.saveType, btn.dataset.saveId);
+}
+
+function jumpToSaved(type, id) {
+  closeSavedDrawer();
+  if (type === "dictionary") {
+    const searchEl = document.getElementById("main-search");
+    if (searchEl) searchEl.value = "";
+    const allAlpha = document.querySelector(".alpha-btn");
+    if (allAlpha) setActiveAlpha(allAlpha);
+    renderDictionary();
+    navTo("dictionary");
+    highlightCard(".dictionary-card", id);
+  } else {
+    document.querySelectorAll(".prov-filter").forEach((b) => {
+      b.classList.remove("active", "bg-white", "shadow-md");
+      b.setAttribute("aria-pressed", "false");
+    });
+    const allFilter = document.querySelector('.prov-filter[data-type="all"]');
+    if (allFilter) {
+      allFilter.classList.add("active", "bg-white", "shadow-md");
+      allFilter.setAttribute("aria-pressed", "true");
+    }
+    renderProverbs();
+    navTo("proverbs");
+    highlightCard(".proverb-card", id);
+  }
+}
+
+function highlightCard(cardSelector, id) {
+  setTimeout(() => {
+    const el = [...document.querySelectorAll(cardSelector)].find((c) => c.dataset.itemId === id);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+    el.classList.add("card-flash");
+    setTimeout(() => el.classList.remove("card-flash"), 1800);
+  }, 60);
+}
+
+/* ---------------- Share cards (Canvas-generated PNG) ---------------- */
+
+let shareFontsPreloaded = false;
+
+function preloadShareFonts() {
+  if (shareFontsPreloaded || !("fonts" in document)) return;
+  shareFontsPreloaded = true;
+  ["italic 700 76px Fraunces", "800 26px 'Plus Jakarta Sans'", "500 34px 'Plus Jakarta Sans'", "700 24px 'Plus Jakarta Sans'"].forEach(
+    (f) => document.fonts.load(f).catch(() => {})
+  );
+}
+
+function wrapCanvasText(ctx, text, maxWidth) {
+  const words = text.split(/\s+/);
+  const lines = [];
+  let line = "";
+  words.forEach((w) => {
+    const test = line ? `${line} ${w}` : w;
+    if (line && ctx.measureText(test).width > maxWidth) {
+      lines.push(line);
+      line = w;
+    } else {
+      line = test;
+    }
+  });
+  if (line) lines.push(line);
+  return lines;
+}
+
+function drawTracked(ctx, text, x, y, spacing) {
+  let cx = x;
+  for (const ch of text) {
+    ctx.fillText(ch, cx, y);
+    cx += ctx.measureText(ch).width + spacing;
+  }
+}
+
+async function buildShareCard({ kicker, headline, body }) {
+  const W = 1080;
+  const H = 1080;
+  const marginX = 96;
+  const canvas = document.createElement("canvas");
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext("2d");
+
+  if ("fonts" in document) {
+    await Promise.all(
+      ["italic 700 76px Fraunces", "800 26px 'Plus Jakarta Sans'", "500 34px 'Plus Jakarta Sans'", "700 24px 'Plus Jakarta Sans'"].map((f) =>
+        document.fonts.load(f).catch(() => {})
+      )
+    );
+    await document.fonts.ready;
+  }
+
+  const grad = ctx.createLinearGradient(0, 0, W, H);
+  grad.addColorStop(0, "#1c1917");
+  grad.addColorStop(1, "#292524");
+  ctx.fillStyle = grad;
+  ctx.fillRect(0, 0, W, H);
+
+  // Wordmark
+  ctx.fillStyle = "#ffffff";
+  ctx.beginPath();
+  ctx.roundRect(marginX, 88, 56, 56, 16);
+  ctx.fill();
+  ctx.fillStyle = "#1c1917";
+  ctx.font = "800 28px 'Plus Jakarta Sans'";
+  ctx.textAlign = "center";
+  ctx.textBaseline = "middle";
+  ctx.fillText("C", marginX + 28, 88 + 30);
+
+  // Kicker
+  ctx.fillStyle = "#2dd4bf";
+  ctx.font = "800 26px 'Plus Jakarta Sans'";
+  ctx.textAlign = "left";
+  ctx.textBaseline = "alphabetic";
+  drawTracked(ctx, kicker.toUpperCase(), marginX, 250, 4);
+
+  // Headline (word or proverb), wrapped
+  ctx.fillStyle = "#ffffff";
+  ctx.font = "italic 700 76px Fraunces";
+  const headLines = wrapCanvasText(ctx, headline, W - marginX * 2);
+  let y = 340;
+  headLines.forEach((line) => {
+    ctx.fillText(line, marginX, y);
+    y += 84;
+  });
+
+  // Body (definition / meaning)
+  ctx.fillStyle = "rgba(255,255,255,0.75)";
+  ctx.font = "500 34px 'Plus Jakarta Sans'";
+  const bodyLines = wrapCanvasText(ctx, body, W - marginX * 2);
+  y += 24;
+  bodyLines.forEach((line) => {
+    ctx.fillText(line, marginX, y);
+    y += 46;
+  });
+
+  // Footer
+  ctx.fillStyle = "rgba(255,255,255,0.5)";
+  ctx.font = "700 22px 'Plus Jakarta Sans'";
+  const host = location.host && !/^(localhost|127\.0\.0\.1)/.test(location.host) ? `  ·  ${location.host.toUpperCase()}` : "";
+  drawTracked(ctx, `CRUCIAN HERITAGE ARCHIVE${host}`, marginX, H - 80, 3);
+
+  return canvas;
+}
+
+function slugify(text) {
+  return (
+    text
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/(^-|-$)/g, "")
+      .slice(0, 40) || "crucian"
+  );
+}
+
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+async function handleShareClick(btn) {
+  const isWord = btn.id === "wotd-share";
+  const kind = isWord ? "word" : "proverb";
+  const headline = isWord ? btn.dataset.word : btn.dataset.proverbText;
+  const body = isWord ? btn.dataset.def : btn.dataset.proverbMeaning;
+  const kicker = isWord ? "Word of the Day" : "Crucian Proverb";
+
+  if (!headline) return;
+
+  const originalLabel = btn.getAttribute("aria-label");
+  btn.disabled = true;
+  btn.setAttribute("aria-label", "Generating image…");
+
+  try {
+    const canvas = await buildShareCard({ kicker, headline: `"${headline}"`, body: body || "" });
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+    if (!blob) throw new Error("Canvas produced no image data");
+
+    const filename = `crucian-${kind}-${slugify(headline)}.png`;
+    const file = new File([blob], filename, { type: "image/png" });
+
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({
+        files: [file],
+        title: "Crucian Heritage Archive",
+        text: `"${headline}"${body ? " — " + body : ""}`
+      });
+      track("share_card_share", { content_type: kind });
+    } else {
+      downloadBlob(blob, filename);
+      track("share_card_download", { content_type: kind });
+    }
+  } catch (err) {
+    if (err && err.name !== "AbortError") {
+      console.warn("Share card failed:", err);
+      showToast("Couldn't create the image — try again.");
+    }
+  } finally {
+    btn.disabled = false;
+    btn.setAttribute("aria-label", originalLabel);
+  }
+}
+
 /* ---------------- Proverbs ---------------- */
 
 function renderProverbs() {
@@ -345,7 +701,7 @@ function renderProverbs() {
     .map((p) => {
       const copyText = [p.text, p.translation, p.meaning].filter(Boolean).join(" — ");
       return `
-    <div class="modern-card p-10 flex flex-col h-full bg-white">
+    <div class="modern-card proverb-card p-10 flex flex-col h-full bg-white" data-item-id="${attrEscape(p.text)}">
       <div class="mb-6 flex items-start justify-between gap-3">
         <span class="text-[9px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full ${
           p.category === "Advice"
@@ -356,12 +712,19 @@ function renderProverbs() {
         }">
           ${p.category}
         </span>
-        ${copyButtonHtml(copyText, "", "proverb")}
+        <div class="flex items-center gap-2">
+          ${saveButtonHtml("proverb", p.text, p.text)}
+          ${copyButtonHtml(copyText, "", "proverb")}
+          <button type="button" class="copy-btn" data-proverb-text="${attrEscape(p.text)}" data-proverb-meaning="${attrEscape(p.meaning)}"
+            aria-label="Share this proverb as an image" onclick="event.stopPropagation(); handleShareClick(this)">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path stroke-linecap="round" d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"></path></svg>
+          </button>
+        </div>
       </div>
       <p class="serif text-2xl font-bold text-stone-900 mb-4 leading-tight">"${escapeHtml(p.text)}"</p>
       ${p.translation ? `<p class="text-stone-600 text-sm mb-10 font-semibold italic">${escapeHtml(p.translation)}</p>` : "<div class='mb-10'></div>"}
       <div class="mt-auto pt-8 border-t border-stone-100">
-        <p class="text-[9px] font-black text-stone-400 uppercase tracking-widest mb-2">Meaning</p>
+        <p class="text-[9px] font-black text-stone-500 uppercase tracking-widest mb-2">Meaning</p>
         <p class="text-stone-800 text-sm font-semibold leading-relaxed">${escapeHtml(p.meaning)}</p>
       </div>
     </div>`;
@@ -402,7 +765,7 @@ function renderDictionary(data = appData.dictionary) {
     .map((item) => {
       const copyText = `${item.word} — ${item.definition}`;
       return `
-    <div class="modern-card p-8 pb-16 relative group hover:bg-stone-50 transition-all border border-transparent">
+    <div class="modern-card dictionary-card p-8 pb-16 relative group hover:bg-stone-50 transition-all border border-transparent" data-item-id="${attrEscape(item.word)}">
       <div class="flex items-start justify-between gap-4 mb-2">
         <div>
           <h4 class="text-2xl font-black text-stone-900 group-hover:text-teal-700 transition-colors mb-2">${escapeHtml(item.word)}</h4>
@@ -412,10 +775,13 @@ function renderDictionary(data = appData.dictionary) {
           ${escapeHtml(item.origin)}
         </span>
       </div>
-      ${item.pronunciation ? `<p class="text-xs text-stone-400 italic font-mono mt-3">/${escapeHtml(item.pronunciation)}/</p>` : ""}
+      ${item.pronunciation ? `<p class="text-xs text-stone-500 italic font-mono mt-3">/${escapeHtml(item.pronunciation)}/</p>` : ""}
       ${item.altSpellings ? `<p class="text-xs text-stone-500 mt-2"><span class="font-bold">Also:</span> ${escapeHtml(item.altSpellings)}</p>` : ""}
       ${item.example ? `<p class="text-xs text-stone-500 mt-2 italic">${escapeHtml(item.example)}</p>` : ""}
-      ${copyButtonHtml(copyText, "absolute bottom-4 right-4", "dictionary")}
+      <div class="absolute bottom-4 right-4 flex items-center gap-2">
+        ${saveButtonHtml("dictionary", item.word, item.word)}
+        ${copyButtonHtml(copyText, "", "dictionary")}
+      </div>
     </div>`;
     })
     .join("");

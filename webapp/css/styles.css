@@ -195,6 +195,13 @@ body {
 
 .animate-in { animation: fadeIn 0.8s ease-out forwards; }
 
+/* Brief highlight ring when jumping to a card from the Saved drawer. */
+@keyframes cardFlash {
+  0%, 100% { box-shadow: var(--shadow-card); }
+  30% { box-shadow: 0 0 0 4px var(--accent-teal), var(--shadow-card-hover); }
+}
+.card-flash { animation: cardFlash 1.6s ease-out; }
+
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-thumb { background: var(--text-tertiary); border-radius: 10px; }
 
@@ -253,6 +260,42 @@ body {
   color: #5eead4;
   border-color: #2dd4bf;
 }
+
+/* --- Save/bookmark toggle: shares .copy-btn's circular button chrome,
+   swaps to a filled heart + warm accent when saved. Shape change (outline
+   -> filled), not color alone, so the state reads without relying on hue. */
+.save-btn .icon-heart { fill: none; }
+.save-btn.saved {
+  color: var(--accent-warm);
+  border-color: var(--accent-warm);
+}
+.save-btn.saved .icon-heart { fill: currentColor; }
+.save-btn.on-dark.saved {
+  color: #fb923c;
+  border-color: #fb923c;
+}
+
+/* --- Saved count badge on the header icon button. Fixed colors (not theme
+   vars) since it's a small filled pill — same "always-legible regardless of
+   theme" approach as the WOTD/Support cards. */
+#saved-badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  min-width: 1.15rem;
+  height: 1.15rem;
+  padding: 0 0.3rem;
+  border-radius: 999px;
+  background: #c2410c;
+  color: #fff;
+  font-size: 0.6rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+#saved-badge.hidden { display: none; }
 
 /* --- Horizontally-scrolling alphabet strip: no visible scrollbar, a soft
    right-edge fade hints there's more instead. --- */
@@ -327,6 +370,85 @@ body {
 }
 .example-pair .crucian { font-weight: 700; color: var(--text-primary); }
 .example-pair .standard { color: var(--text-tertiary); font-size: 0.85rem; font-style: italic; }
+
+/* --- Saved (bookmarks) drawer: slide-in panel, own theme-var colors so it
+   doesn't depend on the Tailwind dark-mode override list. --- */
+.saved-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: flex-end;
+}
+:root[data-theme="dark"] .saved-drawer-overlay { background: rgba(0, 0, 0, 0.6); }
+
+.saved-drawer-panel {
+  width: min(420px, 100%);
+  height: 100%;
+  background: var(--bg-card);
+  padding: 2rem 1.75rem;
+  overflow-y: auto;
+  box-shadow: -20px 0 60px -20px rgba(0, 0, 0, 0.35);
+}
+
+.saved-item {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 1rem;
+  padding: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+.saved-item-main {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+  padding: 0.7rem 0.9rem;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+.saved-item-main:hover,
+.saved-item-main:focus-visible {
+  background: var(--bg-subtle);
+}
+.saved-item-kind {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+  margin-bottom: 0.15rem;
+}
+.saved-item-label {
+  display: block;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.saved-item-remove {
+  width: 2.25rem;
+  height: 2.25rem;
+  flex-shrink: 0;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  color: var(--text-tertiary);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+}
+.saved-item-remove:hover,
+.saved-item-remove:focus-visible {
+  background: var(--bg-subtle);
+  color: var(--accent-warm);
+}
 
 /* --- Toast (used for offline / install feedback) --- */
 #toast {
