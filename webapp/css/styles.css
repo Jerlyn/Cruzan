@@ -238,6 +238,10 @@ body {
   cursor: pointer;
 }
 #install-btn.visible { display: inline-flex; }
+/* --accent-teal-strong flips from dark teal (light mode) to light mint
+   (dark mode) — the fixed white text above only has contrast in light
+   mode. Swap to dark text once the pill itself goes light. */
+:root[data-theme="dark"] #install-btn { color: #0c0a09; }
 
 /* --- Grammar section --- */
 .grammar-note-card {
