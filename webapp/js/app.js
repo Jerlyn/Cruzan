@@ -116,7 +116,7 @@ async function handleSuggestSubmit(e) {
   const btn = form.querySelector('button[type="submit"]');
   const endpoint = form.getAttribute("action") || "";
 
-  if (!endpoint || endpoint.includes("REPLACE_WITH")) {
+  if (!endpoint) {
     showToast("Suggestion form isn't connected yet — check back soon.");
     return;
   }
@@ -131,7 +131,12 @@ async function handleSuggestSubmit(e) {
       body: new FormData(form),
       headers: { Accept: "application/json" }
     });
-    if (!res.ok) throw new Error(`Submission failed (${res.status})`);
+    // Web3Forms returns HTTP 200 with a JSON { success: false, ... } body on
+    // validation errors, so a non-erroring fetch isn't proof it worked.
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || data.success === false) {
+      throw new Error(data.message || `Submission failed (${res.status})`);
+    }
     showToast("Thanks — your suggestion was submitted.");
     form.reset();
     toggleSuggest(false);
