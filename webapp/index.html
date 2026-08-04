@@ -65,7 +65,12 @@
         <div id="hero-scene-wrap">
             <div id="hero-scene" style="width:100%;height:100%;"></div>
             <div id="hero-scene-fallback"><span>Crucian Heritage Archive</span></div>
-            <span id="hero-scene-caption">216 words · 8 traced language roots · one dialect</span>
+            <div id="hero-tooltip" role="status" aria-live="polite">
+                <p class="tt-word" id="tt-word"></p>
+                <p class="tt-def" id="tt-def"></p>
+                <span class="tt-origin" id="tt-origin"></span>
+            </div>
+            <span id="hero-scene-caption">216 words, one point each &mdash; click one to meet it</span>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
@@ -170,7 +175,7 @@
             <label for="main-search" class="sr-only">Search terms, definitions, or roots</label>
             <div class="bg-white p-4 rounded-[2.5rem] shadow-sm flex items-center group search-focus transition-all duration-500 border border-transparent">
                 <div class="w-14 h-14 flex items-center justify-center text-stone-400 text-2xl group-focus-within:text-teal-700 transition-colors" aria-hidden="true">&#128269;</div>
-                <input type="text" id="main-search" oninput="handleSearch()" placeholder="Search terms, definitions, or roots..." class="bg-transparent w-full py-4 pr-8 outline-none font-bold text-2xl text-stone-800 placeholder:text-stone-300">
+                <input type="text" id="main-search" oninput="handleSearch()" placeholder="Search terms, definitions, or roots..." class="bg-transparent w-full py-4 pr-8 outline-none font-bold text-2xl text-stone-800">
             </div>
 
             <div class="mt-10 flex flex-wrap justify-center gap-1.5" id="alpha-nav" role="group" aria-label="Filter glossary by first letter"></div>

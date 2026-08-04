@@ -1,14 +1,20 @@
 /* Crucian Heritage Archive — three.js hero visualization.
    Renders the glossary as a particle constellation: one point per dictionary
-   word, colored by linguistic origin, arranged on a Fibonacci sphere. Slow
-   auto-rotation + mouse parallax. Falls back to a static caption if WebGL
-   or three.js itself is unavailable, and skips motion for
-   prefers-reduced-motion. */
+   word, colored by linguistic origin, arranged on a Fibonacci sphere. Click
+   (or tap) a particle to reveal that word via the onSelect callback — this
+   is a discovery mechanic, not just ambient decoration. Slow auto-rotation +
+   mouse parallax. Falls back to a static caption if WebGL or three.js itself
+   is unavailable, and skips motion for prefers-reduced-motion (click/tap
+   selection still works in that mode). */
 
 window.CrucianScene = (function () {
-  let renderer, scene, camera, points, raf;
+  let renderer, scene, camera, points, raf, canvas;
+  let entriesRef = [];
   let targetRotX = 0, targetRotY = 0, curRotX = 0, curRotY = 0;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const raycaster = new THREE.Raycaster ? new THREE.Raycaster() : null;
+  if (raycaster) raycaster.params.Points = { threshold: 0.28 };
+  const pointer = { x: 0, y: 0 };
 
   function fibonacciSphere(count, radius) {
     const pts = [];
@@ -29,9 +35,23 @@ window.CrucianScene = (function () {
     return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
   }
 
-  function init(containerId, entries) {
+  function setPointerFromEvent(e, rect) {
+    pointer.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    pointer.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+  }
+
+  function pickIndex() {
+    if (!raycaster || !points) return -1;
+    points.updateMatrixWorld();
+    raycaster.setFromCamera(pointer, camera);
+    const hits = raycaster.intersectObject(points);
+    return hits.length ? hits[0].index : -1;
+  }
+
+  function init(containerId, entries, onSelect) {
     const container = document.getElementById(containerId);
     const fallback = document.getElementById("hero-scene-fallback");
+    entriesRef = entries;
     if (!container || typeof THREE === "undefined") {
       if (fallback) fallback.style.display = "flex";
       return;
@@ -48,7 +68,8 @@ window.CrucianScene = (function () {
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setSize(width, height);
-      container.appendChild(renderer.domElement);
+      canvas = renderer.domElement;
+      container.appendChild(canvas);
 
       const count = Math.min(entries.length, 420);
       const sphere = fibonacciSphere(count, 5.2);
@@ -72,7 +93,7 @@ window.CrucianScene = (function () {
       geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
       const material = new THREE.PointsMaterial({
-        size: 0.16,
+        size: 0.22,
         vertexColors: true,
         transparent: true,
         opacity: 0.9,
@@ -101,6 +122,25 @@ window.CrucianScene = (function () {
         });
       }
 
+      // Hover feedback: swap cursor when a particle is under the pointer.
+      container.addEventListener("pointermove", (e) => {
+        const rect = container.getBoundingClientRect();
+        setPointerFromEvent(e, rect);
+        const idx = pickIndex();
+        canvas.classList.toggle("is-hoverable", idx !== -1);
+      });
+
+      // Click/tap a particle to surface that word; click empty space to dismiss.
+      container.addEventListener("click", (e) => {
+        const rect = container.getBoundingClientRect();
+        setPointerFromEvent(e, rect);
+        const idx = pickIndex();
+        if (typeof onSelect === "function") {
+          const entry = idx !== -1 ? entriesRef[idx % entriesRef.length] : null;
+          onSelect(entry, e.clientX - rect.left, e.clientY - rect.top);
+        }
+      });
+
       const ro = new ResizeObserver(() => {
         const w = container.clientWidth, h = container.clientHeight;
         if (!w || !h) return;
@@ -121,7 +161,7 @@ window.CrucianScene = (function () {
     if (reducedMotion) {
       points.rotation.y = 0.4;
       renderer.render(scene, camera);
-      return; // single static frame, no rAF loop
+      return; // single static frame, no rAF loop (click-to-select still works)
     }
     raf = requestAnimationFrame(animate);
     curRotX += (targetRotX - curRotX) * 0.04;

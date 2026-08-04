@@ -54,10 +54,47 @@ async function init() {
 
   if (window.CrucianScene) {
     const sample = appData.dictionary.map((d) => ({
+      word: d.word,
+      definition: d.definition,
+      origin: d.origin,
       color: ORIGIN_COLORS[d.origin] || ORIGIN_COLORS["Local / Undetermined"]
     }));
-    window.CrucianScene.init("hero-scene", sample);
+    window.CrucianScene.init("hero-scene", sample, handleHeroSelect);
   }
+}
+
+/* ---------------- Interactive hero tooltip ---------------- */
+
+let heroHideTimer = null;
+
+function handleHeroSelect(entry, x, y) {
+  const tip = document.getElementById("hero-tooltip");
+  if (!tip) return;
+
+  if (!entry) {
+    tip.classList.remove("show");
+    return;
+  }
+
+  document.getElementById("tt-word").textContent = entry.word;
+  document.getElementById("tt-def").textContent = entry.definition;
+  document.getElementById("tt-origin").textContent = entry.origin;
+
+  // Position near the click, clamped so it stays inside the hero box.
+  const wrap = document.getElementById("hero-scene-wrap");
+  const wrapRect = wrap.getBoundingClientRect();
+  tip.style.left = "0px";
+  tip.style.top = "0px";
+  tip.classList.add("show");
+  const tipW = tip.offsetWidth || 240;
+  const tipH = tip.offsetHeight || 100;
+  const left = Math.min(Math.max(8, x - tipW / 2), wrapRect.width - tipW - 8);
+  const top = Math.min(Math.max(8, y - tipH - 20), wrapRect.height - tipH - 8);
+  tip.style.left = `${left}px`;
+  tip.style.top = `${top}px`;
+
+  clearTimeout(heroHideTimer);
+  heroHideTimer = setTimeout(() => tip.classList.remove("show"), 6000);
 }
 
 /* ---------------- Word of the Day ---------------- */
@@ -162,6 +199,59 @@ function escapeHtml(str) {
   return div.innerHTML;
 }
 
+function attrEscape(str) {
+  return String(str)
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
+/* ---------------- Copy to clipboard ---------------- */
+
+function copyButtonHtml(text) {
+  return `
+    <button type="button" class="copy-btn" data-copy-text="${attrEscape(text)}"
+      aria-label="Copy to clipboard" onclick="event.stopPropagation(); handleCopyClick(this)">
+      <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 012-2h10"></path></svg>
+      <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+    </button>`;
+}
+
+function handleCopyClick(btn) {
+  copyToClipboard(btn.dataset.copyText, btn);
+}
+
+async function copyToClipboard(text, btn) {
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+    } else {
+      const ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand("copy");
+      document.body.removeChild(ta);
+    }
+    showToast("Copied to clipboard.");
+    if (btn) {
+      btn.classList.add("copied");
+      btn.setAttribute("aria-label", "Copied");
+      clearTimeout(btn._copyTimer);
+      btn._copyTimer = setTimeout(() => {
+        btn.classList.remove("copied");
+        btn.setAttribute("aria-label", "Copy to clipboard");
+      }, 1600);
+    }
+  } catch (err) {
+    console.warn("Copy failed:", err);
+    showToast("Couldn't copy — try selecting the text.");
+  }
+}
+
 /* ---------------- Proverbs ---------------- */
 
 function renderProverbs() {
@@ -171,10 +261,11 @@ function renderProverbs() {
     currentFilter === "all" ? appData.proverbs : appData.proverbs.filter((p) => p.category === currentFilter);
 
   grid.innerHTML = filtered
-    .map(
-      (p) => `
+    .map((p) => {
+      const copyText = [p.text, p.translation, p.meaning].filter(Boolean).join(" — ");
+      return `
     <div class="modern-card p-10 flex flex-col h-full bg-white">
-      <div class="mb-6">
+      <div class="mb-6 flex items-start justify-between gap-3">
         <span class="text-[9px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full ${
           p.category === "Advice"
             ? "bg-teal-50 text-teal-800"
@@ -184,6 +275,7 @@ function renderProverbs() {
         }">
           ${p.category}
         </span>
+        ${copyButtonHtml(copyText)}
       </div>
       <p class="serif text-2xl font-bold text-stone-900 mb-4 leading-tight">"${escapeHtml(p.text)}"</p>
       ${p.translation ? `<p class="text-stone-600 text-sm mb-10 font-semibold italic">${escapeHtml(p.translation)}</p>` : "<div class='mb-10'></div>"}
@@ -191,8 +283,8 @@ function renderProverbs() {
         <p class="text-[9px] font-black text-stone-400 uppercase tracking-widest mb-2">Meaning</p>
         <p class="text-stone-800 text-sm font-semibold leading-relaxed">${escapeHtml(p.meaning)}</p>
       </div>
-    </div>`
-    )
+    </div>`;
+    })
     .join("");
 }
 
@@ -225,23 +317,27 @@ function renderDictionary(data = appData.dictionary) {
 
   empty.classList.add("hidden");
   results.innerHTML = data
-    .map(
-      (item) => `
+    .map((item) => {
+      const copyText = `${item.word} — ${item.definition}`;
+      return `
     <div class="modern-card p-8 group hover:bg-stone-50 transition-all border border-transparent">
       <div class="flex items-start justify-between gap-4 mb-2">
         <div>
           <h4 class="text-2xl font-black text-stone-900 group-hover:text-teal-700 transition-colors mb-2">${escapeHtml(item.word)}</h4>
           <p class="text-stone-700 font-medium text-sm leading-relaxed">${escapeHtml(item.definition)}</p>
         </div>
-        <span class="shrink-0 text-[9px] font-black uppercase tracking-widest bg-stone-100/60 text-stone-600 px-3 py-1 rounded-lg">
-          ${escapeHtml(item.origin)}
-        </span>
+        <div class="flex flex-col items-end gap-2 shrink-0">
+          <span class="text-[9px] font-black uppercase tracking-widest bg-stone-100/60 text-stone-600 px-3 py-1 rounded-lg">
+            ${escapeHtml(item.origin)}
+          </span>
+          ${copyButtonHtml(copyText)}
+        </div>
       </div>
       ${item.pronunciation ? `<p class="text-xs text-stone-400 italic font-mono mt-3">/${escapeHtml(item.pronunciation)}/</p>` : ""}
       ${item.altSpellings ? `<p class="text-xs text-stone-500 mt-2"><span class="font-bold">Also:</span> ${escapeHtml(item.altSpellings)}</p>` : ""}
       ${item.example ? `<p class="text-xs text-stone-500 mt-2 italic">${escapeHtml(item.example)}</p>` : ""}
-    </div>`
-    )
+    </div>`;
+    })
     .join("");
 }
 

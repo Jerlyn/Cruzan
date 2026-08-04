@@ -145,6 +145,42 @@ body {
   border-color: var(--accent-teal);
 }
 
+/* Placeholder text bound to the theme's tertiary color, not a fixed Tailwind
+   shade, so it stays at/above 4.5:1 contrast in both light and dark mode.
+   (stone-300 on white was ~1.6:1 — well under WCAG AA.) */
+#main-search::placeholder {
+  color: var(--text-tertiary);
+  opacity: 1;
+}
+
+/* --- Copy-to-clipboard affordance on proverb/glossary cards --- */
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-tertiary);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+.copy-btn:hover {
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+}
+.copy-btn.copied {
+  color: var(--accent-teal-strong);
+  border-color: var(--accent-teal);
+}
+.copy-btn svg { width: 1rem; height: 1rem; pointer-events: none; }
+.copy-btn .icon-check { display: none; }
+.copy-btn.copied .icon-copy { display: none; }
+.copy-btn.copied .icon-check { display: block; }
+
 /* --- Three.js hero canvas --- */
 #hero-scene-wrap {
   position: relative;
@@ -185,6 +221,36 @@ body {
   letter-spacing: .2em;
   text-transform: uppercase;
   font-weight: 700;
+}
+#hero-scene-wrap canvas.is-hoverable { cursor: pointer; }
+
+#hero-tooltip {
+  position: absolute;
+  max-width: 15rem;
+  background: rgba(255,255,255,0.97);
+  color: #1c1917;
+  border-radius: 1.25rem;
+  padding: 1.1rem 1.25rem;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(6px) scale(0.97);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 5;
+}
+#hero-tooltip.show { opacity: 1; transform: translateY(0) scale(1); }
+#hero-tooltip .tt-word { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.25rem; margin-bottom: 0.25rem; }
+#hero-tooltip .tt-def { font-size: 0.8rem; line-height: 1.4; color: #57534e; margin-bottom: 0.6rem; }
+#hero-tooltip .tt-origin {
+  display: inline-block;
+  font-size: 0.6rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: #f5f5f4;
+  color: #57534e;
 }
 
 /* --- Header controls: theme toggle + install button --- */
@@ -257,6 +323,7 @@ body {
    because the prototype used Tailwind utility classes directly. */
 :root[data-theme="dark"] .bg-white { background-color: var(--bg-card) !important; }
 :root[data-theme="dark"] .bg-stone-50 { background-color: var(--bg-subtle) !important; }
+:root[data-theme="dark"] .bg-stone-100 { background-color: rgba(255,255,255,0.08) !important; }
 :root[data-theme="dark"] .bg-stone-100\/40 { background-color: var(--bg-subtle) !important; }
 :root[data-theme="dark"] .bg-stone-100\/60 { background-color: rgba(255,255,255,0.08) !important; }
 :root[data-theme="dark"] .bg-stone-200\/40 { background-color: rgba(255,255,255,0.06) !important; }
