@@ -203,12 +203,22 @@ function renderGrammar() {
   const notesEl = document.getElementById("grammar-notes");
   if (notesEl) {
     notesEl.innerHTML = appData.grammarNotes
-      .map(
-        (n) => `
+      .map((n) => {
+        // Most notes are "Title: explanation" (source docx style); a few
+        // (the "deh" bullets) are plain sentences with no title — only
+        // split when the colon shows up early enough to actually be one.
+        const idx = n.indexOf(":");
+        const hasTitle = idx > -1 && idx < 70;
+        const title = hasTitle ? n.slice(0, idx).trim() : null;
+        const body = hasTitle ? n.slice(idx + 1).trim() : n;
+        return `
       <div class="grammar-note-card">
-        <p class="text-sm leading-relaxed font-medium text-stone-700">${escapeHtml(n)}</p>
-      </div>`
-      )
+        <div class="border-l-2 border-teal-600 pl-4">
+          ${title ? `<h4 class="serif text-lg font-bold text-stone-900 mb-2">${escapeHtml(title)}</h4>` : ""}
+          <p class="text-sm leading-relaxed font-medium text-stone-600">${escapeHtml(body)}</p>
+        </div>
+      </div>`;
+      })
       .join("");
   }
 
