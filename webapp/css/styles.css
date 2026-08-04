@@ -181,7 +181,7 @@ body {
 .copy-btn.copied .icon-copy { display: none; }
 .copy-btn.copied .icon-check { display: block; }
 
-/* --- Three.js hero canvas --- */
+/* --- Hero: lightweight SVG "converging histories" diagram (no WebGL) --- */
 #hero-scene-wrap {
   position: relative;
   width: 100%;
@@ -194,7 +194,7 @@ body {
 :root[data-theme="dark"] #hero-scene-wrap {
   background: linear-gradient(160deg, #0c0a09, #000000);
 }
-#hero-scene-wrap canvas {
+#origin-map {
   display: block;
   width: 100%;
   height: 100%;
@@ -210,47 +210,54 @@ body {
   letter-spacing: 0.25em;
   pointer-events: none;
 }
-#hero-scene-fallback {
-  position: absolute;
-  inset: 0;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  color: rgba(255,255,255,0.5);
-  font-size: .75rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  font-weight: 700;
-}
-#hero-scene-wrap canvas.is-hoverable { cursor: pointer; }
 
-#hero-tooltip {
-  position: absolute;
-  max-width: 15rem;
-  background: rgba(255,255,255,0.97);
-  color: #1c1917;
-  border-radius: 1.25rem;
-  padding: 1.1rem 1.25rem;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.35);
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(6px) scale(0.97);
-  transition: opacity 0.18s ease, transform 0.18s ease;
-  z-index: 5;
+.flow-line {
+  fill: none;
+  stroke: var(--flow-color, #0d9488);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-dasharray: 4 7;
+  opacity: 0.55;
+  animation: flow-dash 2.4s linear infinite;
 }
-#hero-tooltip.show { opacity: 1; transform: translateY(0) scale(1); }
-#hero-tooltip .tt-word { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.25rem; margin-bottom: 0.25rem; }
-#hero-tooltip .tt-def { font-size: 0.8rem; line-height: 1.4; color: #57534e; margin-bottom: 0.6rem; }
-#hero-tooltip .tt-origin {
-  display: inline-block;
-  font-size: 0.6rem;
+@keyframes flow-dash {
+  to { stroke-dashoffset: -22; }
+}
+
+.origin-node circle {
+  transition: r 0.2s ease;
+}
+.origin-node:hover circle,
+.origin-node:focus-visible circle {
+  r: 12;
+}
+.node-label {
+  fill: rgba(255,255,255,0.92);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 12px;
   font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  padding: 0.2rem 0.6rem;
-  border-radius: 999px;
-  background: #f5f5f4;
-  color: #57534e;
+  letter-spacing: 0.08em;
+}
+.node-sub {
+  fill: rgba(255,255,255,0.55);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 500;
+}
+.node-center-glow {
+  fill: rgba(45, 212, 191, 0.12);
+}
+.node-center {
+  fill: #0d9488;
+  stroke: rgba(255,255,255,0.4);
+  stroke-width: 1.5;
+}
+.node-center-label {
+  fill: #0c0a09;
+  font-family: 'Fraunces', serif;
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.02em;
 }
 
 /* --- Header controls: theme toggle + install button --- */

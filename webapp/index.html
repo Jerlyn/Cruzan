@@ -63,14 +63,41 @@
 
     <section id="home" class="section-content animate-in">
         <div id="hero-scene-wrap">
-            <div id="hero-scene" style="width:100%;height:100%;"></div>
-            <div id="hero-scene-fallback"><span>Crucian Heritage Archive</span></div>
-            <div id="hero-tooltip" role="status" aria-live="polite">
-                <p class="tt-word" id="tt-word"></p>
-                <p class="tt-def" id="tt-def"></p>
-                <span class="tt-origin" id="tt-origin"></span>
-            </div>
-            <span id="hero-scene-caption">216 words, one point each &mdash; click one to meet it</span>
+            <svg id="origin-map" viewBox="0 0 800 320" preserveAspectRatio="xMidYMid meet" role="img"
+                aria-label="Diagram of Crucian's four main lines of influence — West Africa, Denmark, Ireland and Britain, and Spain via Puerto Rico — converging on St. Croix">
+                <g class="flow-lines">
+                    <path class="flow-line" style="--flow-color:#0d9488" d="M90,70 C260,60 320,110 400,160" />
+                    <path class="flow-line" style="--flow-color:#c2410c" d="M710,60 C540,55 470,110 400,160" />
+                    <path class="flow-line" style="--flow-color:#57534e" d="M100,260 C270,250 330,200 400,160" />
+                    <path class="flow-line" style="--flow-color:#3b82f6" d="M700,270 C530,260 470,205 400,160" />
+                </g>
+
+                <g class="origin-node" transform="translate(90,70)">
+                    <circle r="9" style="fill:#0d9488" />
+                    <text class="node-label" y="-20">WEST AFRICA</text>
+                    <text class="node-sub" y="-4">Grammar &amp; vocabulary substrate</text>
+                </g>
+                <g class="origin-node" transform="translate(710,60)">
+                    <circle r="9" style="fill:#c2410c" />
+                    <text class="node-label" y="-20" text-anchor="end">DENMARK</text>
+                    <text class="node-sub" y="-4" text-anchor="end">Colonial rule, loanwords</text>
+                </g>
+                <g class="origin-node" transform="translate(100,260)">
+                    <circle r="9" style="fill:#57534e" />
+                    <text class="node-label" y="30">IRELAND &amp; BRITAIN</text>
+                    <text class="node-sub" y="46">Planters, phonetic shifts</text>
+                </g>
+                <g class="origin-node" transform="translate(700,270)">
+                    <circle r="9" style="fill:#3b82f6" />
+                    <text class="node-label" y="30" text-anchor="end">SPAIN / PUERTO RICO</text>
+                    <text class="node-sub" y="46" text-anchor="end">Trade, code-switching</text>
+                </g>
+
+                <circle class="node-center-glow" cx="400" cy="160" r="34" />
+                <circle class="node-center" cx="400" cy="160" r="20" />
+                <text class="node-center-label" x="400" y="165" text-anchor="middle">ST. CROIX</text>
+            </svg>
+            <span id="hero-scene-caption">One dialect, four converging histories</span>
         </div>
 
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-24">
@@ -232,8 +259,6 @@
 
 <div id="toast" role="status" aria-live="polite"></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="./js/three-scene.js"></script>
 <script src="./js/app.js"></script>
 </body>
 </html>

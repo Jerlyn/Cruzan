@@ -51,50 +51,6 @@ async function init() {
   initTheme();
   initInstallPrompt();
   registerServiceWorker();
-
-  if (window.CrucianScene) {
-    const sample = appData.dictionary.map((d) => ({
-      word: d.word,
-      definition: d.definition,
-      origin: d.origin,
-      color: ORIGIN_COLORS[d.origin] || ORIGIN_COLORS["Local / Undetermined"]
-    }));
-    window.CrucianScene.init("hero-scene", sample, handleHeroSelect);
-  }
-}
-
-/* ---------------- Interactive hero tooltip ---------------- */
-
-let heroHideTimer = null;
-
-function handleHeroSelect(entry, x, y) {
-  const tip = document.getElementById("hero-tooltip");
-  if (!tip) return;
-
-  if (!entry) {
-    tip.classList.remove("show");
-    return;
-  }
-
-  document.getElementById("tt-word").textContent = entry.word;
-  document.getElementById("tt-def").textContent = entry.definition;
-  document.getElementById("tt-origin").textContent = entry.origin;
-
-  // Position near the click, clamped so it stays inside the hero box.
-  const wrap = document.getElementById("hero-scene-wrap");
-  const wrapRect = wrap.getBoundingClientRect();
-  tip.style.left = "0px";
-  tip.style.top = "0px";
-  tip.classList.add("show");
-  const tipW = tip.offsetWidth || 240;
-  const tipH = tip.offsetHeight || 100;
-  const left = Math.min(Math.max(8, x - tipW / 2), wrapRect.width - tipW - 8);
-  const top = Math.min(Math.max(8, y - tipH - 20), wrapRect.height - tipH - 8);
-  tip.style.left = `${left}px`;
-  tip.style.top = `${top}px`;
-
-  clearTimeout(heroHideTimer);
-  heroHideTimer = setTimeout(() => tip.classList.remove("show"), 6000);
 }
 
 /* ---------------- Word of the Day ---------------- */
