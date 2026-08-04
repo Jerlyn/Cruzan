@@ -299,26 +299,32 @@ function renderDictionary(data = appData.dictionary) {
 
 function renderAlphaNav() {
   const nav = document.getElementById("alpha-nav");
-  const present = new Set(
-    appData.dictionary.map((i) => i.word.replace(/[^a-zA-Z]/g, "").charAt(0).toUpperCase())
-  );
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  // Only render letters that actually have entries — no dead/disabled
+  // buttons taking up space, and it self-updates as the glossary grows.
+  const present = [
+    ...new Set(appData.dictionary.map((i) => i.word.replace(/[^a-zA-Z]/g, "").charAt(0).toUpperCase()))
+  ]
+    .filter(Boolean)
+    .sort();
+
   nav.innerHTML = `
-    <button onclick="renderDictionary(); setActiveAlpha(this)" class="alpha-btn active px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all">All</button>
-    ${letters
+    <button onclick="renderDictionary(); setActiveAlpha(this)" class="alpha-btn active shrink-0 px-5 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all" aria-pressed="true">All</button>
+    ${present
       .map(
         (l) =>
-          `<button onclick="filterByAlpha('${l}', this)" ${present.has(l) ? "" : "disabled"} class="alpha-btn w-10 h-10 rounded-xl text-[10px] font-black transition-all ${
-            present.has(l) ? "text-stone-500 hover:bg-white hover:shadow-sm" : "text-stone-200 cursor-not-allowed"
-          }">${l}</button>`
+          `<button onclick="filterByAlpha('${l}', this)" class="alpha-btn shrink-0 w-10 h-10 rounded-xl text-[10px] font-black transition-all text-stone-500 hover:bg-white hover:shadow-sm" aria-pressed="false">${l}</button>`
       )
       .join("")}
   `;
 }
 
 function setActiveAlpha(btn) {
-  document.querySelectorAll(".alpha-btn").forEach((b) => b.classList.remove("active"));
+  document.querySelectorAll(".alpha-btn").forEach((b) => {
+    b.classList.remove("active");
+    b.setAttribute("aria-pressed", "false");
+  });
   btn.classList.add("active");
+  btn.setAttribute("aria-pressed", "true");
 }
 
 function filterByAlpha(l, btn) {
