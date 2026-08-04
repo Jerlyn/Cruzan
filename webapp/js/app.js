@@ -97,6 +97,53 @@ function mobileToggle() {
   document.getElementById("mobile-menu").classList.toggle("hidden");
 }
 
+/* ---------------- Suggest a word (accordion + form) ---------------- */
+
+function toggleSuggest(forceOpen) {
+  const panel = document.getElementById("suggest-panel");
+  const icon = document.getElementById("suggest-icon");
+  const btn = document.getElementById("suggest-toggle");
+  if (!panel || !icon || !btn) return;
+  const shouldOpen = typeof forceOpen === "boolean" ? forceOpen : panel.classList.contains("hidden");
+  panel.classList.toggle("hidden", !shouldOpen);
+  icon.textContent = shouldOpen ? "−" : "+";
+  btn.setAttribute("aria-expanded", String(shouldOpen));
+}
+
+async function handleSuggestSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('button[type="submit"]');
+  const endpoint = form.getAttribute("action") || "";
+
+  if (!endpoint || endpoint.includes("REPLACE_WITH")) {
+    showToast("Suggestion form isn't connected yet — check back soon.");
+    return;
+  }
+
+  const original = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = "Sending…";
+
+  try {
+    const res = await fetch(endpoint, {
+      method: "POST",
+      body: new FormData(form),
+      headers: { Accept: "application/json" }
+    });
+    if (!res.ok) throw new Error(`Submission failed (${res.status})`);
+    showToast("Thanks — your suggestion was submitted.");
+    form.reset();
+    toggleSuggest(false);
+  } catch (err) {
+    console.warn("Suggestion submit failed:", err);
+    showToast("Couldn't submit — try again, or use the GitHub Issue link below.");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = original;
+  }
+}
+
 /* ---------------- Pronouns ---------------- */
 
 function renderPronouns() {

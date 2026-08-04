@@ -127,6 +127,63 @@
                 </table>
             </div>
         </div>
+
+        <div class="mt-16">
+            <button type="button" id="suggest-toggle" onclick="toggleSuggest()"
+                class="w-full modern-card p-8 md:p-10 bg-white flex items-center justify-between gap-4 text-left border-t-4 border-orange-700"
+                aria-expanded="false" aria-controls="suggest-panel">
+                <h3 class="text-2xl font-black text-stone-900">Suggest a Word or Phrase</h3>
+                <span id="suggest-icon" class="text-3xl text-orange-700 font-bold leading-none" aria-hidden="true">+</span>
+            </button>
+            <div id="suggest-panel" class="hidden modern-card mt-2 p-8 md:p-10 bg-white">
+                <p class="text-stone-600 font-medium mb-8">Know a Crucian word, phrase, or correction that belongs here? Submit it below — no account needed.</p>
+
+                <!-- TODO: replace with your real Formspree (or other) form endpoint before this goes live. -->
+                <form id="suggest-form" action="https://formspree.io/f/REPLACE_WITH_YOUR_FORM_ID" method="POST" onsubmit="handleSuggestSubmit(event)">
+                    <div class="mb-6">
+                        <label for="sugg-word" class="block text-sm font-bold text-stone-800 mb-2">Crucian word or phrase</label>
+                        <input type="text" id="sugg-word" name="word" required
+                            class="w-full px-4 py-3 rounded-xl border border-stone-200 bg-transparent text-stone-900 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100 transition-all">
+                    </div>
+                    <div class="mb-6">
+                        <label for="sugg-meaning" class="block text-sm font-bold text-stone-800 mb-2">English meaning</label>
+                        <input type="text" id="sugg-meaning" name="meaning" required
+                            class="w-full px-4 py-3 rounded-xl border border-stone-200 bg-transparent text-stone-900 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100 transition-all">
+                    </div>
+                    <div class="mb-6">
+                        <label for="sugg-pronunciation" class="block text-sm font-bold text-stone-800 mb-2">Pronunciation <span class="font-normal text-stone-400">(optional, spelled phonetically)</span></label>
+                        <input type="text" id="sugg-pronunciation" name="pronunciation"
+                            class="w-full px-4 py-3 rounded-xl border border-stone-200 bg-transparent text-stone-900 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100 transition-all">
+                    </div>
+                    <div class="mb-6">
+                        <label for="sugg-example" class="block text-sm font-bold text-stone-800 mb-2">Example sentence <span class="font-normal text-stone-400">(optional)</span></label>
+                        <textarea id="sugg-example" name="example" rows="3"
+                            class="w-full px-4 py-3 rounded-xl border border-stone-200 bg-transparent text-stone-900 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100 transition-all"></textarea>
+                    </div>
+                    <div class="mb-4">
+                        <label for="sugg-name" class="block text-sm font-bold text-stone-800 mb-2">Your name or village <span class="font-normal text-stone-400">(optional, for credit)</span></label>
+                        <input type="text" id="sugg-name" name="name"
+                            class="w-full px-4 py-3 rounded-xl border border-stone-200 bg-transparent text-stone-900 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100 transition-all">
+                    </div>
+                    <p class="text-xs text-stone-400 mb-6">Submitted directly to our team. Nothing is posted publicly.</p>
+                    <button type="submit" class="px-8 py-3.5 bg-teal-700 hover:bg-teal-800 text-white font-black text-xs uppercase tracking-widest rounded-full transition-all">Submit Suggestion</button>
+                </form>
+
+                <div class="mt-8 pt-6 border-t border-stone-100 text-sm text-stone-500">
+                    Prefer GitHub? <a href="https://github.com/Jerlyn/REPLACE-REPO-NAME/issues/new?title=Word+suggestion&amp;labels=suggestion" target="_blank" rel="noopener" class="text-teal-700 font-bold underline hover:text-teal-800">Submit as a GitHub Issue instead</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-16 mb-24">
+            <h3 class="text-2xl font-black text-teal-700 mb-6">Support the Project</h3>
+            <div class="modern-card p-10 md:p-14 bg-gradient-to-br from-stone-900 to-stone-800 text-white text-center">
+                <p class="text-stone-200 text-lg leading-relaxed max-w-2xl mx-auto mb-8">Crucian Heritage Archive is a free, independent effort to preserve a living dialect. If it's meaningful to you, consider supporting the work.</p>
+                <!-- TODO: replace with your real Ko-fi (or other) donation link. -->
+                <a href="https://ko-fi.com/REPLACE_WITH_YOUR_USERNAME" target="_blank" rel="noopener"
+                    class="inline-block px-8 py-4 bg-orange-700 hover:bg-orange-800 text-white font-black text-xs uppercase tracking-widest rounded-full transition-all">Donate via Ko-fi</a>
+            </div>
+        </div>
     </section>
 
     <section id="grammar" class="section-content hidden animate-in">
