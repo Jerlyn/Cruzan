@@ -112,9 +112,31 @@ body {
   box-shadow: var(--shadow-card-hover);
 }
 
+/* --- Primary nav: floating pill track, matching the modern-card language --- */
+.nav-pill {
+  background: var(--bg-subtle);
+  border-radius: 999px;
+  padding: 0.3rem;
+  box-shadow: 0 4px 16px -6px rgba(0, 0, 0, 0.1);
+  margin-top: 0.25rem;
+}
+:root[data-theme="dark"] .nav-pill {
+  box-shadow: 0 4px 16px -6px rgba(0, 0, 0, 0.4);
+}
+
+.nav-btn {
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Active state is shape + shadow + color together, not color alone —
+   readable without relying on hue (WCAG 1.4.1). */
 .nav-active {
-  color: var(--accent-teal-strong);
+  background: var(--bg-card);
+  color: var(--text-primary);
   font-weight: 800;
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.15);
 }
 
 .chart-container {
