@@ -167,9 +167,9 @@ function attrEscape(str) {
 
 /* ---------------- Copy to clipboard ---------------- */
 
-function copyButtonHtml(text) {
+function copyButtonHtml(text, extraClass = "") {
   return `
-    <button type="button" class="copy-btn" data-copy-text="${attrEscape(text)}"
+    <button type="button" class="copy-btn ${extraClass}" data-copy-text="${attrEscape(text)}"
       aria-label="Copy to clipboard" onclick="event.stopPropagation(); handleCopyClick(this)">
       <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 012-2h10"></path></svg>
       <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
@@ -278,22 +278,20 @@ function renderDictionary(data = appData.dictionary) {
     .map((item) => {
       const copyText = `${item.word} — ${item.definition}`;
       return `
-    <div class="modern-card p-8 group hover:bg-stone-50 transition-all border border-transparent">
+    <div class="modern-card p-8 pb-16 relative group hover:bg-stone-50 transition-all border border-transparent">
       <div class="flex items-start justify-between gap-4 mb-2">
         <div>
           <h4 class="text-2xl font-black text-stone-900 group-hover:text-teal-700 transition-colors mb-2">${escapeHtml(item.word)}</h4>
           <p class="text-stone-700 font-medium text-sm leading-relaxed">${escapeHtml(item.definition)}</p>
         </div>
-        <div class="flex flex-col items-end gap-2 shrink-0">
-          <span class="text-[9px] font-black uppercase tracking-widest bg-stone-100/60 text-stone-600 px-3 py-1 rounded-lg">
-            ${escapeHtml(item.origin)}
-          </span>
-          ${copyButtonHtml(copyText)}
-        </div>
+        <span class="shrink-0 text-[9px] font-black uppercase tracking-widest bg-stone-100/60 text-stone-600 px-3 py-1 rounded-lg">
+          ${escapeHtml(item.origin)}
+        </span>
       </div>
       ${item.pronunciation ? `<p class="text-xs text-stone-400 italic font-mono mt-3">/${escapeHtml(item.pronunciation)}/</p>` : ""}
       ${item.altSpellings ? `<p class="text-xs text-stone-500 mt-2"><span class="font-bold">Also:</span> ${escapeHtml(item.altSpellings)}</p>` : ""}
       ${item.example ? `<p class="text-xs text-stone-500 mt-2 italic">${escapeHtml(item.example)}</p>` : ""}
+      ${copyButtonHtml(copyText, "absolute bottom-4 right-4")}
     </div>`;
     })
     .join("");
