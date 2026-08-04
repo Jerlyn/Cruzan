@@ -6,6 +6,17 @@
 <title>Crucian Heritage | The Complete Archive</title>
 <meta name="description" content="An interactive dictionary, grammar guide, and proverb archive for the Crucian dialect of St. Croix, U.S. Virgin Islands.">
 
+<!-- Google tag (gtag.js) — send_page_view is off because this is a single-page
+     app; app.js fires page_view manually on every section change instead
+     (see trackPageview() / navTo()), so sections get counted like real pages. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YT92NJEFDP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YT92NJEFDP', { send_page_view: false });
+</script>
+
 <link rel="manifest" href="./manifest.json">
 <meta name="theme-color" content="#1c1917">
 <link rel="icon" href="./icons/favicon.ico" sizes="any">
@@ -74,7 +85,7 @@
                 <div class="relative z-10">
                     <div class="flex items-start justify-between gap-4 mb-6">
                         <span class="text-[10px] font-black uppercase tracking-[0.3em] opacity-60 text-stone-100">Word of the Day</span>
-                        <button type="button" id="wotd-copy" class="copy-btn on-dark" data-copy-text=""
+                        <button type="button" id="wotd-copy" class="copy-btn on-dark" data-copy-text="" data-content-type="word_of_day"
                             aria-label="Copy to clipboard" onclick="handleCopyClick(this)">
                             <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 012-2h10"></path></svg>
                             <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
@@ -82,7 +93,7 @@
                     </div>
                     <h2 id="wotd-word" class="serif text-5xl font-bold mb-4 italic transition-opacity duration-300">Loading...</h2>
                     <p id="wotd-def" class="text-stone-200 text-lg leading-relaxed mb-10 transition-opacity duration-300">Searching the archive...</p>
-                    <button onclick="randomizeWotd()" class="text-[10px] font-black uppercase tracking-widest px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full transition-all">New Random Word</button>
+                    <button onclick="randomizeWotd(true)" class="text-[10px] font-black uppercase tracking-widest px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 rounded-full transition-all">New Random Word</button>
                 </div>
                 <div class="absolute -bottom-10 -right-10 text-white/5 serif italic text-9xl font-black select-none pointer-events-none" aria-hidden="true">CRUCIAN</div>
             </div>
@@ -172,7 +183,7 @@
                 </form>
 
                 <div class="mt-8 pt-6 border-t border-stone-100 text-sm text-stone-500">
-                    Prefer GitHub? <a href="https://github.com/Jerlyn/Cruzan/issues/new?title=Word+suggestion&amp;labels=suggestion" target="_blank" rel="noopener" class="text-teal-700 font-bold underline hover:text-teal-800">Submit as a GitHub Issue instead</a>
+                    Prefer GitHub? <a href="https://github.com/Jerlyn/Cruzan/issues/new?title=Word+suggestion&amp;labels=suggestion" target="_blank" rel="noopener" onclick="track('github_issue_click')" class="text-teal-700 font-bold underline hover:text-teal-800">Submit as a GitHub Issue instead</a>
                 </div>
             </div>
         </div>
@@ -181,7 +192,7 @@
             <div class="modern-card p-10 md:p-14 bg-gradient-to-br from-stone-900 to-stone-800 text-white text-center">
                 <h3 class="serif text-4xl font-bold tracking-tight text-white mb-4">Support the Project</h3>
                 <p class="text-stone-200 text-lg leading-relaxed max-w-2xl mx-auto mb-8">Crucian Heritage Archive is a free, independent effort to preserve a living dialect. If it's meaningful to you, consider supporting the work.</p>
-                <a href="https://ko-fi.com/designlady" target="_blank" rel="noopener"
+                <a href="https://ko-fi.com/designlady" target="_blank" rel="noopener" onclick="track('donate_click', {destination:'ko-fi'})"
                     class="inline-block px-8 py-4 bg-orange-700 hover:bg-orange-800 text-white font-black text-xs uppercase tracking-widest rounded-full transition-all">Donate via Ko-fi</a>
             </div>
         </div>

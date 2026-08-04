@@ -18,6 +18,32 @@ const ORIGIN_COLORS = {
 let appData = null;
 let dictSort = "az"; // az | origin
 
+/* ---------------- Analytics (GA4) ----------------
+   gtag() is defined inline in index.html's <head> regardless of whether the
+   remote googletagmanager.com script actually loads (ad blockers etc.), so
+   these calls are safe no-ops rather than throwing when analytics is blocked. */
+
+function track(name, params = {}) {
+  if (typeof gtag === "function") gtag("event", name, params);
+}
+
+const VIEW_TITLES = {
+  home: "Home",
+  grammar: "Grammar & Phonetics",
+  proverbs: "Oral History",
+  dictionary: "Interactive Glossary",
+  roots: "Etymological Map"
+};
+
+function trackPageview(viewId) {
+  if (typeof gtag !== "function") return;
+  gtag("event", "page_view", {
+    page_title: `Crucian Heritage Archive — ${VIEW_TITLES[viewId] || viewId}`,
+    page_location: location.href,
+    page_path: location.pathname + location.search
+  });
+}
+
 /* ---------------- Data loading ---------------- */
 
 async function loadData() {
@@ -55,7 +81,7 @@ async function init() {
 
 /* ---------------- Word of the Day ---------------- */
 
-function randomizeWotd() {
+function randomizeWotd(userInitiated = false) {
   const word = appData.dictionary[Math.floor(Math.random() * appData.dictionary.length)];
   const wordEl = document.getElementById("wotd-word");
   const defEl = document.getElementById("wotd-def");
@@ -71,6 +97,8 @@ function randomizeWotd() {
     const copyBtn = document.getElementById("wotd-copy");
     if (copyBtn) copyBtn.dataset.copyText = `${word.word} — ${word.definition}`;
   }, 300);
+
+  if (userInitiated) track("wotd_shuffle", { word: word.word });
 }
 
 /* ---------------- Navigation ---------------- */
@@ -91,6 +119,7 @@ function navTo(id) {
   }
   window.scrollTo({ top: 0, behavior: "smooth" });
   history.replaceState(null, "", `?view=${id}`);
+  trackPageview(id);
 }
 
 function mobileToggle() {
@@ -138,11 +167,13 @@ async function handleSuggestSubmit(e) {
       throw new Error(data.message || `Submission failed (${res.status})`);
     }
     showToast("Thanks — your suggestion was submitted.");
+    track("generate_lead", { method: "web3forms" });
     form.reset();
     toggleSuggest(false);
   } catch (err) {
     console.warn("Suggestion submit failed:", err);
     showToast("Couldn't submit — try again, or use the GitHub Issue link below.");
+    track("form_submit_error", { method: "web3forms", message: String(err.message || err).slice(0, 100) });
   } finally {
     btn.disabled = false;
     btn.textContent = original;
@@ -219,9 +250,9 @@ function attrEscape(str) {
 
 /* ---------------- Copy to clipboard ---------------- */
 
-function copyButtonHtml(text, extraClass = "") {
+function copyButtonHtml(text, extraClass = "", contentType = "dictionary") {
   return `
-    <button type="button" class="copy-btn ${extraClass}" data-copy-text="${attrEscape(text)}"
+    <button type="button" class="copy-btn ${extraClass}" data-copy-text="${attrEscape(text)}" data-content-type="${contentType}"
       aria-label="Copy to clipboard" onclick="event.stopPropagation(); handleCopyClick(this)">
       <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 012-2h10"></path></svg>
       <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
@@ -229,10 +260,10 @@ function copyButtonHtml(text, extraClass = "") {
 }
 
 function handleCopyClick(btn) {
-  copyToClipboard(btn.dataset.copyText, btn);
+  copyToClipboard(btn.dataset.copyText, btn, btn.dataset.contentType || "unknown");
 }
 
-async function copyToClipboard(text, btn) {
+async function copyToClipboard(text, btn, contentType = "unknown") {
   try {
     if (navigator.clipboard && window.isSecureContext) {
       await navigator.clipboard.writeText(text);
@@ -247,6 +278,7 @@ async function copyToClipboard(text, btn) {
       document.body.removeChild(ta);
     }
     showToast("Copied to clipboard.");
+    track("copy_text", { content_type: contentType, item: text.slice(0, 80) });
     if (btn) {
       btn.classList.add("copied");
       btn.setAttribute("aria-label", "Copied");
@@ -285,7 +317,7 @@ function renderProverbs() {
         }">
           ${p.category}
         </span>
-        ${copyButtonHtml(copyText)}
+        ${copyButtonHtml(copyText, "", "proverb")}
       </div>
       <p class="serif text-2xl font-bold text-stone-900 mb-4 leading-tight">"${escapeHtml(p.text)}"</p>
       ${p.translation ? `<p class="text-stone-600 text-sm mb-10 font-semibold italic">${escapeHtml(p.translation)}</p>` : "<div class='mb-10'></div>"}
@@ -308,6 +340,7 @@ function filterProverbs(cat) {
     }
   });
   renderProverbs();
+  track("filter_proverbs", { category: cat });
 }
 
 /* ---------------- Dictionary ---------------- */
@@ -343,7 +376,7 @@ function renderDictionary(data = appData.dictionary) {
       ${item.pronunciation ? `<p class="text-xs text-stone-400 italic font-mono mt-3">/${escapeHtml(item.pronunciation)}/</p>` : ""}
       ${item.altSpellings ? `<p class="text-xs text-stone-500 mt-2"><span class="font-bold">Also:</span> ${escapeHtml(item.altSpellings)}</p>` : ""}
       ${item.example ? `<p class="text-xs text-stone-500 mt-2 italic">${escapeHtml(item.example)}</p>` : ""}
-      ${copyButtonHtml(copyText, "absolute bottom-4 right-4")}
+      ${copyButtonHtml(copyText, "absolute bottom-4 right-4", "dictionary")}
     </div>`;
     })
     .join("");
@@ -384,7 +417,10 @@ function filterByAlpha(l, btn) {
   const filtered = appData.dictionary.filter((i) => i.word.toUpperCase().startsWith(l));
   renderDictionary(filtered);
   document.getElementById("main-search").value = "";
+  track("filter_alpha", { letter: l, results_count: filtered.length });
 }
+
+let searchTrackTimer = null;
 
 function handleSearch() {
   const query = document.getElementById("main-search").value.toLowerCase().trim();
@@ -392,6 +428,7 @@ function handleSearch() {
   if (!query) {
     document.querySelector(".alpha-btn").classList.add("active");
     renderDictionary();
+    clearTimeout(searchTrackTimer);
     return;
   }
   const filtered = appData.dictionary.filter(
@@ -402,6 +439,13 @@ function handleSearch() {
       (i.altSpellings && i.altSpellings.toLowerCase().includes(query))
   );
   renderDictionary(filtered);
+
+  // Debounced so we send one event per pause-in-typing, not one per keystroke.
+  clearTimeout(searchTrackTimer);
+  searchTrackTimer = setTimeout(() => {
+    track("search", { search_term: query, results_count: filtered.length });
+    if (filtered.length === 0) track("search_no_results", { search_term: query });
+  }, 800);
 }
 
 /* ---------------- Origins chart ---------------- */
@@ -498,7 +542,9 @@ function applyTheme(theme) {
 
 function toggleTheme() {
   const current = document.documentElement.getAttribute("data-theme") || "light";
-  applyTheme(current === "dark" ? "light" : "dark");
+  const next = current === "dark" ? "light" : "dark";
+  applyTheme(next);
+  track("theme_toggle", { theme: next });
 }
 
 /* ---------------- Install prompt (PWA) ---------------- */
@@ -517,9 +563,11 @@ function initInstallPrompt() {
 
   btn.addEventListener("click", async () => {
     if (!deferredInstallPrompt) return;
+    track("install_click");
     deferredInstallPrompt.prompt();
     const choice = await deferredInstallPrompt.userChoice;
     showToast(choice.outcome === "accepted" ? "Archive installed. Aiight!" : "Maybe next time.");
+    track("pwa_install_prompt_outcome", { outcome: choice.outcome });
     deferredInstallPrompt = null;
     btn.classList.remove("visible");
   });
@@ -527,6 +575,7 @@ function initInstallPrompt() {
   window.addEventListener("appinstalled", () => {
     btn.classList.remove("visible");
     showToast("Archive installed to your home screen.");
+    track("pwa_installed");
   });
 }
 
@@ -540,8 +589,14 @@ function registerServiceWorker() {
     });
   });
 
-  window.addEventListener("online", () => showToast("Back online."));
-  window.addEventListener("offline", () => showToast("You're offline — cached content still works."));
+  window.addEventListener("online", () => {
+    showToast("Back online.");
+    track("connectivity_change", { status: "online" });
+  });
+  window.addEventListener("offline", () => {
+    showToast("You're offline — cached content still works.");
+    track("connectivity_change", { status: "offline" });
+  });
 }
 
 /* ---------------- Toast ---------------- */
