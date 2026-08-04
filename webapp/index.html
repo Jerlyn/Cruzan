@@ -42,12 +42,12 @@
             <span class="font-extrabold text-lg tracking-tight">Crucian Archive</span>
         </button>
 
-        <div class="hidden md:flex nav-pill items-center gap-1 text-[11px] font-bold uppercase tracking-[0.2em] text-stone-500">
-            <button onclick="navTo('home')" class="nav-btn hover:text-stone-900 transition-colors" id="btn-home">Home</button>
-            <button onclick="navTo('grammar')" class="nav-btn hover:text-stone-900 transition-colors" id="btn-grammar">Grammar</button>
-            <button onclick="navTo('proverbs')" class="nav-btn hover:text-stone-900 transition-colors" id="btn-proverbs">Proverbs</button>
-            <button onclick="navTo('dictionary')" class="nav-btn hover:text-stone-900 transition-colors" id="btn-dictionary">Glossary</button>
-            <button onclick="navTo('roots')" class="nav-btn hover:text-stone-900 transition-colors" id="btn-roots">Heritage</button>
+        <div class="hidden md:flex nav-pill items-center gap-1 text-[11px] font-bold uppercase tracking-[0.2em] text-stone-600">
+            <button onclick="navTo('home')" class="nav-btn transition-colors" id="btn-home">Home</button>
+            <button onclick="navTo('grammar')" class="nav-btn transition-colors" id="btn-grammar">Grammar</button>
+            <button onclick="navTo('proverbs')" class="nav-btn transition-colors" id="btn-proverbs">Proverbs</button>
+            <button onclick="navTo('dictionary')" class="nav-btn transition-colors" id="btn-dictionary">Glossary</button>
+            <button onclick="navTo('roots')" class="nav-btn transition-colors" id="btn-roots">Heritage</button>
         </div>
 
         <div class="flex items-center gap-3">
@@ -164,21 +164,21 @@
                             class="w-full px-4 py-3 rounded-xl border border-stone-200 bg-transparent text-stone-900 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100 transition-all">
                     </div>
                     <div class="mb-6">
-                        <label for="sugg-pronunciation" class="block text-sm font-bold text-stone-800 mb-2">Pronunciation <span class="font-normal text-stone-400">(optional, spelled phonetically)</span></label>
+                        <label for="sugg-pronunciation" class="block text-sm font-bold text-stone-800 mb-2">Pronunciation <span class="font-normal text-stone-500">(optional, spelled phonetically)</span></label>
                         <input type="text" id="sugg-pronunciation" name="pronunciation"
                             class="w-full px-4 py-3 rounded-xl border border-stone-200 bg-transparent text-stone-900 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100 transition-all">
                     </div>
                     <div class="mb-6">
-                        <label for="sugg-example" class="block text-sm font-bold text-stone-800 mb-2">Example sentence <span class="font-normal text-stone-400">(optional)</span></label>
+                        <label for="sugg-example" class="block text-sm font-bold text-stone-800 mb-2">Example sentence <span class="font-normal text-stone-500">(optional)</span></label>
                         <textarea id="sugg-example" name="example" rows="3"
                             class="w-full px-4 py-3 rounded-xl border border-stone-200 bg-transparent text-stone-900 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100 transition-all"></textarea>
                     </div>
                     <div class="mb-4">
-                        <label for="sugg-name" class="block text-sm font-bold text-stone-800 mb-2">Your name and contact <span class="font-normal text-stone-400">(optional, for credit)</span></label>
+                        <label for="sugg-name" class="block text-sm font-bold text-stone-800 mb-2">Your name and contact <span class="font-normal text-stone-500">(optional, for credit)</span></label>
                         <input type="text" id="sugg-name" name="name"
                             class="w-full px-4 py-3 rounded-xl border border-stone-200 bg-transparent text-stone-900 focus:border-teal-500 focus:outline-none focus:ring-2 focus:ring-teal-100 transition-all">
                     </div>
-                    <p class="text-xs text-stone-400 mb-6">Submitted directly to our team. Nothing is posted publicly.</p>
+                    <p class="text-xs text-stone-500 mb-6">Submitted directly to our team. Nothing is posted publicly.</p>
                     <button type="submit" class="px-8 py-3.5 bg-teal-700 hover:bg-teal-800 text-white font-black text-xs uppercase tracking-widest rounded-full transition-all">Submit Suggestion</button>
                 </form>
 
@@ -239,7 +239,7 @@
 
             <label for="main-search" class="sr-only">Search terms, definitions, or roots</label>
             <div class="bg-white p-4 rounded-[2.5rem] shadow-sm flex items-center group search-focus transition-all duration-500 border border-transparent">
-                <div class="w-14 h-14 flex items-center justify-center text-stone-400 text-2xl group-focus-within:text-teal-700 transition-colors" aria-hidden="true">&#128269;</div>
+                <div class="w-14 h-14 flex items-center justify-center text-stone-500 text-2xl group-focus-within:text-teal-700 transition-colors" aria-hidden="true">&#128269;</div>
                 <input type="text" id="main-search" oninput="handleSearch()" placeholder="Search terms, definitions, or roots..." class="bg-transparent w-full py-4 pr-8 outline-none font-bold text-2xl text-stone-800">
             </div>
 
@@ -248,7 +248,7 @@
 
         <div id="dictionary-results" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
         <div id="empty-state" class="hidden text-center py-40">
-            <p class="text-stone-300 text-6xl serif italic mb-6">"It ayn deh deh..."</p>
+            <p class="text-stone-500 text-6xl serif italic mb-6">"It ayn deh deh..."</p>
             <p class="text-stone-500 font-bold uppercase tracking-widest text-xs">Term not found in the current archive</p>
         </div>
     </section>
@@ -290,7 +290,7 @@
         </button>
         <div class="text-center md:text-right">
             <p class="text-stone-500 text-[10px] uppercase tracking-[0.3em] font-black mb-2">Made with care, <a href="http://www.designlady.com">designlady.com</a></p>
-            <p class="text-stone-400 text-sm font-medium italic">"Ah crab nebba forget 'e hole."</p>
+            <p class="text-stone-500 text-sm font-medium italic">"Ah crab nebba forget 'e hole."</p>
         </div>
     </div>
 </footer>

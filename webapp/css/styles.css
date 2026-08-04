@@ -130,6 +130,13 @@ body {
   transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
 }
 
+/* Was a raw Tailwind hover:text-stone-900 utility — invisible in dark mode
+   since it has no dark-theme override and rendered near-black text on the
+   near-black nav pill. Bound to the theme var so it always tracks. */
+.nav-btn:hover {
+  color: var(--text-primary);
+}
+
 /* Active state is shape + shadow + color together, not color alone —
    readable without relying on hue (WCAG 1.4.1). */
 .nav-active {
