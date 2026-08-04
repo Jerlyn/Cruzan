@@ -1,7 +1,7 @@
 // Crucian Heritage Archive — service worker
 // Cache-first app shell, network-first data, stale-while-revalidate for CDN libs.
 
-const VERSION = "v1.1.0";
+const VERSION = "v1.2.0";
 const SHELL_CACHE = `crucian-shell-${VERSION}`;
 const DATA_CACHE = `crucian-data-${VERSION}`;
 const CDN_CACHE = `crucian-cdn-${VERSION}`;
@@ -81,7 +81,7 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Third-party CDN libraries (Tailwind, Chart.js, Three.js, Google Fonts): stale-while-revalidate.
+  // Third-party CDN libraries (Tailwind, Chart.js, Google Fonts): stale-while-revalidate.
   if (isCDN(url)) {
     event.respondWith(
       caches.open(CDN_CACHE).then((cache) =>

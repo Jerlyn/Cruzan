@@ -4,12 +4,12 @@ An installable, offline-capable PWA documenting the Crucian dialect (Virgin Isla
 
 ## Stack
 
-Vanilla HTML/CSS/JS, no build step. Tailwind CDN for utility classes, Chart.js for the origins doughnut chart. The hero is a hand-built animated SVG diagram (no WebGL/three.js — that was tried and cut for being more complexity than payoff; see git history if curious). Data lives in `data/dictionary.json`, generated from the source docx by `scripts/parse.py`.
+Vanilla HTML/CSS/JS, no build step. Tailwind CDN for utility classes, Chart.js for the origins doughnut chart. No hero visual — two were tried (a three.js particle constellation, then a lightweight SVG diagram) and both got cut as not worth their weight; see git history if curious. Data lives in `data/dictionary.json`, generated from the source docx by `scripts/parse.py`.
 
 ## Structure
 
 ```
-index.html            App shell (nav, sections, hero SVG diagram)
+index.html            App shell (nav, sections)
 css/styles.css         Design tokens (light + dark), a11y layer, dark-mode overrides
 js/app.js               Data fetch, rendering, search/filter, dark mode, install prompt, SW registration
 data/dictionary.json    Parsed dictionary, proverbs, grammar notes, pronouns, origin distribution
