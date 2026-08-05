@@ -1,7 +1,7 @@
 // Crucian Heritage Archive — service worker
 // Cache-first app shell, network-first data, stale-while-revalidate for CDN libs.
 
-const VERSION = "v1.7.2";
+const VERSION = "v1.7.3";
 const SHELL_CACHE = `crucian-shell-${VERSION}`;
 const DATA_CACHE = `crucian-data-${VERSION}`;
 const CDN_CACHE = `crucian-cdn-${VERSION}`;
@@ -99,8 +99,18 @@ self.addEventListener("fetch", (event) => {
     return;
   }
 
-  // Same-origin app shell assets: cache-first.
+  // Same-origin app shell assets: cache-first, falling back to the cached
+  // shell/offline page if the network fetch itself fails. Every other
+  // branch above already has this fallback — this one was missing it,
+  // which left an unhandled rejection (and a hard navigation failure)
+  // whenever the network request errored instead of just 404ing.
   event.respondWith(
-    caches.match(request).then((cached) => cached || fetch(request))
+    caches.match(request).then(
+      (cached) =>
+        cached ||
+        fetch(request).catch(
+          () => caches.match("./index.html").then((shell) => shell || caches.match("./offline.html"))
+        )
+    )
   );
 });
