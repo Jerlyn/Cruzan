@@ -122,6 +122,7 @@ function randomizeWotd(userInitiated = false) {
 function navTo(id) {
   const valid = ["home", "grammar", "proverbs", "dictionary", "roots"];
   if (!valid.includes(id)) id = "home";
+  hideToast();
   document.querySelectorAll(".section-content").forEach((s) => s.classList.add("hidden"));
   document.getElementById(id).classList.remove("hidden");
   document.querySelectorAll(".nav-btn").forEach((b) => {
@@ -1014,6 +1015,13 @@ function showToast(message) {
   el.classList.add("show");
   clearTimeout(toastTimer);
   toastTimer = setTimeout(() => el.classList.remove("show"), 3200);
+}
+
+function hideToast() {
+  const el = document.getElementById("toast");
+  if (!el) return;
+  clearTimeout(toastTimer);
+  el.classList.remove("show");
 }
 
 window.addEventListener("DOMContentLoaded", init);
