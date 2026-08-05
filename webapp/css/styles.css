@@ -455,7 +455,13 @@ body {
   position: fixed;
   bottom: 1.5rem;
   left: 50%;
-  transform: translateX(-50%) translateY(120%);
+  /* translateY(%) is relative to the element's OWN height, not the 1.5rem
+     "bottom" offset above — a percentage alone can't clear both. Below
+     ~120px tall (ours is ~40-50px), 120% undershoots and leaves a sliver
+     of the pill permanently visible above the viewport edge. Clearing its
+     own full height (100%) plus an explicit fixed margin guarantees it's
+     fully off-screen regardless of how tall the message text makes it. */
+  transform: translateX(-50%) translateY(calc(100% + 2rem));
   background: var(--text-primary);
   color: var(--bg-main);
   padding: 0.9rem 1.5rem;
