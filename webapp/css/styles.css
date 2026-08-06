@@ -102,13 +102,17 @@ body {
 .modern-card {
   background: var(--bg-card);
   box-shadow: var(--shadow-card);
-  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+  /* Slight overshoot ("back" easing) instead of a flat ease-out gives the
+     lift a touch of spring on the catch, rather than just gliding to a
+     stop. prefers-reduced-motion already forces all transition-durations
+     to 0.01ms globally, so this stays inert for anyone who's asked for it. */
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease;
   border-radius: 2.5rem;
   border: none;
 }
 
 .modern-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-4px) scale(1.015);
   box-shadow: var(--shadow-card-hover);
 }
 
@@ -195,6 +199,20 @@ body {
 
 .animate-in { animation: fadeIn 0.8s ease-out forwards; }
 
+/* --- Scroll-triggered reveal: applied via JS (IntersectionObserver) only
+   to static, render-once grids (home teasers, grammar cards) — NOT to
+   Dictionary/Proverbs, which re-render on every search keystroke/filter
+   click and would flicker if they re-hid themselves each time. */
+.reveal-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal-item.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 /* Brief highlight ring when jumping to a card from the Saved drawer. */
 @keyframes cardFlash {
   0%, 100% { box-shadow: var(--shadow-card); }
@@ -273,6 +291,20 @@ body {
 .save-btn.on-dark.saved {
   color: #fb923c;
   border-color: #fb923c;
+}
+
+/* Bounce on the icon when saving (not on un-saving — the pop is a "yes,
+   got it" delight cue, not something you want on removal too). Uses the
+   same overshoot vocabulary as the card hover for a consistent feel. */
+@keyframes heartPop {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.35); }
+  60% { transform: scale(0.92); }
+  100% { transform: scale(1); }
+}
+.save-btn.pop .icon-heart {
+  animation: heartPop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: center;
 }
 
 /* --- Saved count badge on the header icon button. Fixed colors (not theme

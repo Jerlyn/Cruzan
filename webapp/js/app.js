@@ -52,6 +52,35 @@ async function loadData() {
   return res.json();
 }
 
+/* ---------------- Scroll-triggered reveal ----------------
+   Only used on static, render-once grids (home teasers, grammar cards).
+   Deliberately NOT wired into Dictionary/Proverbs -- those re-render their
+   innerHTML on every search keystroke and filter click, and re-hiding
+   already-visible cards each time would read as flicker, not polish. */
+
+const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+let revealObserver = null;
+
+function initScrollReveal(root = document) {
+  if (prefersReducedMotion) return; // skip the whole system, don't just speed it up
+  if (!revealObserver) {
+    revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("in-view");
+          revealObserver.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
+    );
+  }
+  root.querySelectorAll(".reveal-item:not(.in-view)").forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 6) * 60}ms`;
+    revealObserver.observe(el);
+  });
+}
+
 /* ---------------- Init ---------------- */
 
 async function init() {
@@ -72,6 +101,7 @@ async function init() {
   randomizeWotd();
   renderSavedDrawer();
   preloadShareFonts();
+  initScrollReveal();
 
   const params = new URLSearchParams(location.search);
   navTo(params.get("view") || "home");
@@ -265,7 +295,7 @@ function renderGrammar() {
           '<code class="letter-chip">$1</code> or <code class="letter-chip">$2</code>'
         );
         return `
-      <div class="grammar-note-card">
+      <div class="grammar-note-card reveal-item">
         ${title ? `<h4 class="serif text-lg font-bold text-stone-900 mb-2">${escapeHtml(title)}</h4>` : ""}
         <p class="text-sm leading-relaxed font-medium text-stone-600">${bodyHtml}</p>
       </div>`;
@@ -278,7 +308,7 @@ function renderGrammar() {
     exEl.innerHTML = appData.grammarExamples
       .map(
         (group) => `
-      <div class="modern-card p-8 bg-white">
+      <div class="modern-card reveal-item p-8 bg-white">
         <h4 class="serif text-xl font-bold mb-6 text-stone-900">${escapeHtml(group.group)}</h4>
         ${group.pairs
           .map(
@@ -419,8 +449,19 @@ function syncSaveButtons(type, id, saved) {
     btn.classList.toggle("saved", saved);
     btn.setAttribute("aria-pressed", String(saved));
     btn.setAttribute("aria-label", saved ? "Remove from saved" : "Save this");
+    if (saved) {
+      btn.classList.remove("pop");
+      void btn.offsetWidth; // force reflow so a rapid re-save restarts the animation
+      btn.classList.add("pop");
+    }
   });
 }
+
+// One delegated listener handles cleanup for every .save-btn, including
+// ones rendered after this fires (search re-renders, filter changes).
+document.addEventListener("animationend", (e) => {
+  if (e.animationName === "heartPop") e.target.classList.remove("pop");
+});
 
 function renderSavedDrawer() {
   const saved = getSaved();
