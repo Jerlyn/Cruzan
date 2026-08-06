@@ -54,28 +54,48 @@ async function loadData() {
 
 /* ---------------- Scroll-triggered reveal ----------------
    Only used on static, render-once grids (home teasers, grammar cards).
-   Deliberately NOT wired into Dictionary/Proverbs -- those re-render their
-   innerHTML on every search keystroke and filter click, and re-hiding
-   already-visible cards each time would read as flicker, not polish. */
+   Also wired into Dictionary/Proverbs, which DO re-render their innerHTML
+   on every search keystroke and filter click -- revealedKeys below tracks
+   which specific items have actually been seen on screen at least once
+   (by word/proverb text, not DOM node identity, since re-renders create
+   fresh nodes), so a re-render shows already-seen cards immediately with
+   no animation and only plays the reveal for genuinely new-to-view ones. */
 
 const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let revealObserver = null;
+const revealedKeys = new Set();
+
+function revealKeyFor(el) {
+  if (!el.dataset.itemId) return null;
+  if (el.classList.contains("dictionary-card")) return `dictionary:${el.dataset.itemId}`;
+  if (el.classList.contains("proverb-card")) return `proverb:${el.dataset.itemId}`;
+  return null;
+}
 
 function initScrollReveal(root = document) {
-  if (prefersReducedMotion) return; // skip the whole system, don't just speed it up
+  const items = root.querySelectorAll(".reveal-item:not(.in-view)");
+  // Reduced motion must still end up visible -- skipping the observer
+  // entirely previously left these permanently at opacity:0 since nothing
+  // ever added .in-view. Show everything immediately instead of animating.
+  if (prefersReducedMotion) {
+    items.forEach((el) => el.classList.add("in-view"));
+    return;
+  }
   if (!revealObserver) {
     revealObserver = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           entry.target.classList.add("in-view");
+          const key = revealKeyFor(entry.target);
+          if (key) revealedKeys.add(key);
           revealObserver.unobserve(entry.target);
         });
       },
       { threshold: 0.15, rootMargin: "0px 0px -40px 0px" }
     );
   }
-  root.querySelectorAll(".reveal-item:not(.in-view)").forEach((el, i) => {
+  items.forEach((el, i) => {
     el.style.transitionDelay = `${(i % 6) * 60}ms`;
     revealObserver.observe(el);
   });
@@ -764,8 +784,9 @@ function renderProverbs() {
   grid.innerHTML = filtered
     .map((p) => {
       const copyText = [p.text, p.translation, p.meaning].filter(Boolean).join(" — ");
+      const revealClass = revealedKeys.has(`proverb:${p.text}`) ? "reveal-item in-view" : "reveal-item";
       return `
-    <div class="modern-card proverb-card p-10 flex flex-col h-full bg-white" data-item-id="${attrEscape(p.text)}">
+    <div class="modern-card proverb-card ${revealClass} p-10 flex flex-col h-full bg-white" data-item-id="${attrEscape(p.text)}">
       <div class="mb-6 flex items-start justify-between gap-3">
         <span class="text-[9px] font-black uppercase tracking-[0.2em] px-4 py-1.5 rounded-full ${
           p.category === "Advice"
@@ -794,6 +815,7 @@ function renderProverbs() {
     </div>`;
     })
     .join("");
+  initScrollReveal(grid);
 }
 
 function filterProverbs(cat) {
@@ -828,8 +850,9 @@ function renderDictionary(data = appData.dictionary) {
   results.innerHTML = data
     .map((item) => {
       const copyText = `${item.word} — ${item.definition}`;
+      const revealClass = revealedKeys.has(`dictionary:${item.word}`) ? "reveal-item in-view" : "reveal-item";
       return `
-    <div class="modern-card dictionary-card p-8 pb-16 relative group hover:bg-stone-50 transition-all border border-transparent" data-item-id="${attrEscape(item.word)}">
+    <div class="modern-card dictionary-card ${revealClass} p-8 pb-16 relative group hover:bg-stone-50 transition-all border border-transparent" data-item-id="${attrEscape(item.word)}">
       <div class="flex items-start justify-between gap-4 mb-2">
         <div>
           <h4 class="text-2xl font-black text-stone-900 group-hover:text-teal-700 transition-colors mb-2">${escapeHtml(item.word)}</h4>
@@ -849,6 +872,7 @@ function renderDictionary(data = appData.dictionary) {
     </div>`;
     })
     .join("");
+  initScrollReveal(results);
 }
 
 function renderAlphaNav() {
