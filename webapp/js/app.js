@@ -119,13 +119,17 @@ function randomizeWotd(userInitiated = false) {
   const defEl = document.getElementById("wotd-def");
 
   wordEl.style.opacity = 0;
+  wordEl.style.transform = "translateY(8px)";
   defEl.style.opacity = 0;
+  defEl.style.transform = "translateY(8px)";
 
   setTimeout(() => {
     wordEl.innerText = word.word;
     defEl.innerText = word.definition;
     wordEl.style.opacity = 1;
+    wordEl.style.transform = "translateY(0)";
     defEl.style.opacity = 1;
+    defEl.style.transform = "translateY(0)";
     const copyBtn = document.getElementById("wotd-copy");
     if (copyBtn) copyBtn.dataset.copyText = `${word.word} — ${word.definition}`;
     const saveBtn = document.getElementById("wotd-save");
@@ -169,7 +173,25 @@ function navTo(id) {
   window.scrollTo({ top: 0, behavior: "smooth" });
   history.replaceState(null, "", `?view=${id}`);
   trackPageview(id);
+  positionNavIndicator();
 }
+
+// Sliding pill behind the active desktop tab. Reads the active button's
+// own box (offsetLeft/offsetWidth), so it stays correct through font
+// changes, zoom, or a longer label -- no hardcoded positions per tab.
+function positionNavIndicator() {
+  const pill = document.querySelector(".nav-pill");
+  const indicator = document.getElementById("nav-indicator");
+  const active = pill ? pill.querySelector(".nav-btn.nav-active") : null;
+  if (!pill || !indicator || !active) return;
+  indicator.style.width = `${active.offsetWidth}px`;
+  indicator.style.transform = `translateX(${active.offsetLeft}px)`;
+}
+
+window.addEventListener("resize", () => {
+  clearTimeout(window._navIndicatorResizeTimer);
+  window._navIndicatorResizeTimer = setTimeout(positionNavIndicator, 150);
+});
 
 function mobileToggle() {
   const menu = document.getElementById("mobile-menu");

@@ -118,6 +118,7 @@ body {
 
 /* --- Primary nav: floating pill track, matching the modern-card language --- */
 .nav-pill {
+  position: relative;
   background: var(--bg-subtle);
   border-radius: 999px;
   padding: 0.3rem;
@@ -128,10 +129,30 @@ body {
   box-shadow: 0 4px 16px -6px rgba(0, 0, 0, 0.4);
 }
 
+/* Sliding pill behind the active tab — JS sets width/transform to match
+   whichever button is active, so it springs from one tab to the next
+   instead of the old instant class-swap. Sits behind button text (z-index
+   0 vs. 1) so labels stay readable while it's mid-slide. */
+.nav-indicator {
+  position: absolute;
+  top: 0.3rem;
+  bottom: 0.3rem;
+  left: 0;
+  width: 0;
+  border-radius: 999px;
+  background: var(--bg-card);
+  box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.15);
+  transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), width 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 0;
+  pointer-events: none;
+}
+
 .nav-btn {
+  position: relative;
+  z-index: 1;
   padding: 0.55rem 1.1rem;
   border-radius: 999px;
-  transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+  transition: background-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease;
 }
 
 /* Was a raw Tailwind hover:text-stone-900 utility — invisible in dark mode
@@ -142,12 +163,19 @@ body {
 }
 
 /* Active state is shape + shadow + color together, not color alone —
-   readable without relying on hue (WCAG 1.4.1). */
+   readable without relying on hue (WCAG 1.4.1). Background/shadow live
+   here for the mobile full-screen nav (no sliding indicator there); the
+   desktop pill overrides them off below since .nav-indicator provides
+   that same look, animated. */
 .nav-active {
   background: var(--bg-card);
   color: var(--text-primary);
   font-weight: 800;
   box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.15);
+}
+.nav-pill .nav-active {
+  background: transparent;
+  box-shadow: none;
 }
 
 /* --- Mobile nav: full-screen takeover with large tap targets, for touch
@@ -354,6 +382,25 @@ body {
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
 .icon-btn:hover { transform: translateY(-1px); }
+
+/* --- Press feedback: quick tactile scale-down while a button is actually
+   held, on top of whatever hover state it's in. Scoped to real action
+   buttons, deliberately not .modern-card broadly -- dictionary/proverb
+   cards aren't click targets as a whole, and scaling the entire card on
+   any mousedown (e.g. selecting text inside it) would feel like a bug. */
+.icon-btn:active,
+.copy-btn:active,
+.nav-btn:active,
+.alpha-btn:active,
+.prov-filter:active {
+  transform: scale(0.94);
+}
+.btn-press {
+  transition: transform 0.2s ease;
+}
+.btn-press:active {
+  transform: scale(0.95);
+}
 
 #install-btn {
   display: none;
