@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Crucian Word Lookup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Fraunces:ital,wght@0,600;1,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="shared/tokens.css" />
+<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+<div class="popup-wrap">
+
+  <header class="popup-header">
+    <div class="title-group">
+      <img src="icons/icon-48.png" class="brand-mark" alt="" aria-hidden="true" />
+      <h1 class="popup-title">Crucian Word Lookup</h1>
+    </div>
+    <div class="header-actions">
+      <button id="theme-toggle" class="icon-btn" type="button" aria-label="Switch to dark mode">
+        <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        <svg id="icon-sun" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+      </button>
+      <button id="about-open" class="icon-btn" type="button" aria-haspopup="dialog" aria-expanded="false" aria-controls="about-overlay" aria-label="About this extension">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <div id="popup-main">
+
+    <div class="tablist" role="tablist" aria-label="Sections">
+      <button id="tab-today" class="tab-btn" type="button" role="tab" aria-selected="true" aria-controls="panel-today">Today</button>
+      <button id="tab-lookup" class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="panel-lookup" tabindex="-1">Look Up</button>
+    </div>
+
+    <div id="panel-today" class="tabpanel" role="tabpanel" aria-labelledby="tab-today" tabindex="0">
+
+      <section class="wotd-card card" aria-labelledby="wotd-heading">
+        <div class="wotd-top">
+          <span id="wotd-heading" class="eyebrow">Word of the Day</span>
+          <div class="wotd-actions">
+            <button id="wotd-save" class="icon-btn save-btn" type="button" data-save-type="dictionary" data-save-id="" aria-pressed="false" aria-label="Save this word">
+              <svg class="icon-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 000-7.8z"></path></svg>
+            </button>
+            <button id="wotd-copy" class="icon-btn copy-btn" type="button" data-copy-text="" aria-label="Copy word and definition">
+              <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 012-2h10"></path></svg>
+              <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+            </button>
+          </div>
+        </div>
+        <p id="wotd-word" class="serif wotd-word">Loading…</p>
+        <p id="wotd-def" class="wotd-def"></p>
+        <p id="wotd-pron" class="wotd-pron"></p>
+      </section>
+
+      <p id="streak-line" class="streak-pill" aria-live="polite">
+        <svg class="flame-icon" viewBox="0 0 24 24" fill="currentColor" stroke="none" aria-hidden="true"><path d="M12 22c4 0 7-2.5 7-6.5 0-3-2-5-3-7 0 2-1.5 3-2.5 2 1-2.5-.5-5.5-3-7 .5 2.5-1 4-2.5 6C6.5 11 5 13 5 15.5 5 19.5 8 22 12 22z"/></svg>
+        <span id="streak-text"></span>
+      </p>
+
+      <section class="dyk-card card" aria-labelledby="dyk-heading">
+        <div class="dyk-top">
+          <svg class="dyk-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M9 18h6M10 22h4M12 2a6 6 0 00-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0012 2z"/></svg>
+          <span id="dyk-heading" class="eyebrow">Did You Know</span>
+        </div>
+        <p id="dyk-word" class="serif dyk-word"></p>
+        <p id="dyk-def" class="dyk-def"></p>
+        <button id="dyk-cta" class="dyk-cta" type="button"></button>
+      </section>
+
+    </div>
+
+    <div id="panel-lookup" class="tabpanel hidden" role="tabpanel" aria-labelledby="tab-lookup" tabindex="0">
+      <section class="search-section" aria-label="Quick search">
+        <label for="search-input" class="search-label">Look up a word</label>
+        <input id="search-input" type="search" autocomplete="off" placeholder="Crucian or English word…" />
+        <p id="search-status" class="sr-only" role="status" aria-live="polite"></p>
+        <ul id="search-results" class="search-results"></ul>
+      </section>
+    </div>
+
+  </div>
+
+  <div id="about-overlay" class="about-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="about-heading">
+    <div class="about-panel">
+      <div class="about-header">
+        <div class="title-group">
+          <img src="icons/icon-48.png" class="brand-mark" alt="" aria-hidden="true" />
+          <h2 id="about-heading" class="about-title">Crucian Word Lookup</h2>
+        </div>
+        <button id="about-close" class="icon-btn" type="button" aria-label="Close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" d="M6 6l12 12M18 6L6 18"></path></svg>
+        </button>
+      </div>
+
+      <p class="about-blurb">Look up Crucian words, catch a proverb or a bit of heritage each day, and save words across your devices — a companion to the Crucian Heritage Archive.</p>
+
+      <div class="about-icon-row">
+        <a id="about-website-link" class="icon-btn" href="#" target="_blank" rel="noopener" aria-label="designlady.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><line x1="3" y1="12" x2="21" y2="12"></line><path d="M12 3a14 14 0 013.5 9A14 14 0 0112 21a14 14 0 01-3.5-9A14 14 0 0112 3z"></path></svg>
+        </a>
+        <a id="about-linkedin-link" class="icon-btn" href="#" target="_blank" rel="noopener" aria-label="LinkedIn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="4"></rect><line x1="7.5" y1="10" x2="7.5" y2="16.5"></line><circle cx="7.5" cy="6.8" r="0.9" fill="currentColor" stroke="none"></circle><line x1="11.5" y1="10" x2="11.5" y2="16.5"></line><path d="M11.5 13a2.5 2.5 0 015 0v3.5"></path></svg>
+        </a>
+      </div>
+
+      <div class="about-links">
+        <button id="about-open-archive" class="about-btn" type="button">Open in Crucian Heritage Archive</button>
+        <a id="about-support-link" class="about-btn about-btn-warm" href="#" target="_blank" rel="noopener">Support the project ↗</a>
+      </div>
+
+      <div class="about-signoff">
+        <img id="about-made-img" src="icons/madeBlack.png" alt="Made with love, Design Lady" />
+        <p id="about-version" class="about-version"></p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="shared/config.js"></script>
+<script src="shared/dictionary.js"></script>
+<script src="shared/wotd.js"></script>
+<script src="shared/storage.js"></script>
+<script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Crucian Heritage Archive — Explore Virgin Islands Creole</title>
+<meta name="description" content="A dictionary, grammar guide, and proverb archive for Crucian, the Virgin Islands Creole dialect of St. Croix. Use it as an installable web app, or keep it a click away with the browser extension.">
+
+<!-- Google tag (gtag.js) — same property as the webapp (webapp/index.html),
+     so landing → webapp/extension shows up as one funnel. Unlike the
+     webapp (a single-page app that disables the automatic hit and fires
+     page_view per section instead), this page is a single static view, so
+     it keeps gtag's default automatic page_view. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YT92NJEFDP"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-YT92NJEFDP');
+</script>
+
+<link rel="icon" href="./webapp/icons/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="192x192" href="./webapp/icons/icon-192.png">
+<link rel="apple-touch-icon" href="./webapp/icons/apple-touch-icon.png">
+<meta name="theme-color" content="#1c1917">
+
+<meta property="og:title" content="Crucian Heritage Archive">
+<meta property="og:description" content="A dictionary, grammar guide, and proverb archive for Crucian — the Virgin Islands Creole dialect of St. Croix.">
+<meta property="og:image" content="./webapp/icons/icon-512.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jerlyn.github.io/Cruzan/">
+
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+
+<style>
+  /* Same design tokens as the webapp (webapp/css/styles.css), including the
+     dark-mode values and the "crucian-theme" localStorage key below — the
+     two pages share an origin, so a theme choice made on either one carries
+     over to the other. */
+  :root {
+    --bg-main: #faf9f6;
+    --bg-card: #ffffff;
+    --bg-subtle: #f5f5f4;
+    --accent-teal: #0d9488;
+    --accent-teal-strong: #0f766e;
+    --accent-warm: #c2410c;
+    --text-primary: #1c1917;
+    --text-secondary: #57534e;
+    --text-tertiary: #78716c;
+    --border-subtle: rgba(0, 0, 0, 0.08);
+    --glass: rgba(255, 255, 255, 0.75);
+    --focus-ring: #0d9488;
+    --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.08);
+    --shadow-card-hover: 0 20px 60px -15px rgba(0, 0, 0, 0.14);
+    /* Fixed brand orange, not theme-reactive — matches the webapp's actual
+       "Donate via Ko-fi" button (bg-orange-700/800 in webapp/index.html),
+       which stays the same color in both its light and dark mode rather
+       than following --accent-warm's lighter dark-theme value. */
+    --brand-orange: #c2410c;
+    --brand-orange-hover: #9a3412;
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    --bg-main: #14120f;
+    --bg-card: #1f1c19;
+    --bg-subtle: #26221e;
+    --accent-teal: #2dd4bf;
+    --accent-teal-strong: #5eead4;
+    --accent-warm: #fb923c;
+    --text-primary: #f5f4f2;
+    --text-secondary: #d6d3d1;
+    --text-tertiary: #a8a29e;
+    --border-subtle: rgba(255, 255, 255, 0.08);
+    --glass: rgba(20, 18, 15, 0.75);
+    --focus-ring: #5eead4;
+    --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --shadow-card-hover: 0 20px 60px -15px rgba(0, 0, 0, 0.65);
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  body { transition: background-color .3s ease, color .3s ease; }
+  body {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background: var(--bg-main);
+    color: var(--text-primary);
+    line-height: 1.5;
+    position: relative;
+  }
+
+  /* Ambient background: two soft, fixed color fields (teal + warm) behind
+     everything. Purely decorative, no animation, so it's inert for
+     prefers-reduced-motion by default — it's a static gradient, not motion. */
+  .ambient {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background:
+      radial-gradient(720px circle at 12% -10%, rgba(13, 148, 136, 0.10), transparent 60%),
+      radial-gradient(640px circle at 96% 18%, rgba(194, 65, 12, 0.07), transparent 55%);
+  }
+  .serif { font-family: 'Fraunces', serif; }
+  a { color: inherit; }
+  :focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  .skip-link {
+    position: absolute; left: -999px; top: auto;
+    background: var(--text-primary); color: var(--bg-main);
+    padding: 1rem 1.5rem; border-radius: 0 0 .75rem 0; font-weight: 700; z-index: 100;
+  }
+  .skip-link:focus { left: 0; top: 0; }
+
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+
+  header.site-header {
+    position: sticky; top: 0; z-index: 50;
+    padding: 1rem 0;
+    background: var(--glass);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-bottom: 1px solid var(--border-subtle);
+  }
+  .site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .logo { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
+  .logo img { width: 36px; height: 36px; border-radius: 10px; }
+  .logo span { font-weight: 800; font-size: 1.05rem; letter-spacing: -0.01em; }
+
+  .header-right { display: flex; align-items: center; gap: .75rem; }
+
+  /* Floating pill nav, same shape/motion language as the webapp's — a
+     rounded track with rounded buttons inside, no sliding-indicator element
+     since only one link is ever active at a time (see hash-based highlight
+     logic below). */
+  .header-links {
+    display: flex; gap: .2rem;
+    background: var(--bg-subtle);
+    border-radius: 999px;
+    padding: .3rem;
+    font-weight: 700; font-size: 11px; letter-spacing: .2em;
+  }
+  .header-links a {
+    text-decoration: none; color: var(--text-secondary);
+    padding: .55rem 1.1rem; border-radius: 999px;
+    transition: background-color .25s ease, color .25s ease, box-shadow .25s ease;
+  }
+  .header-links a:hover { color: var(--text-primary); }
+  .header-links a.nav-active {
+    background: var(--bg-card); color: var(--text-primary);
+    box-shadow: 0 2px 8px -2px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Matches the webapp's .icon-btn exactly (webapp/css/styles.css): outlined
+     circle on the card color, lift on hover rather than a background swap. */
+  .icon-btn {
+    display: flex; align-items: center; justify-content: center;
+    width: 2.75rem; height: 2.75rem; border-radius: 999px;
+    background: var(--bg-card); border: 1px solid var(--border-subtle); cursor: pointer;
+    color: var(--text-primary);
+    transition: transform .2s ease, background-color .2s ease;
+  }
+  .icon-btn:hover { transform: translateY(-1px); }
+  .icon-btn:active { transform: scale(.94); }
+  .icon-btn svg { width: 17px; height: 17px; }
+  .icon-btn .icon-sun { display: none; }
+  :root[data-theme="dark"] .icon-btn .icon-moon { display: none; }
+  :root[data-theme="dark"] .icon-btn .icon-sun { display: block; }
+
+  @media (max-width: 480px) {
+    .header-links { gap: 0; }
+    .header-links a { padding: .55rem .8rem; }
+  }
+
+  /* Hero illustration: the Moko Jumbie artwork runs full-bleed as a band
+     above the hero text — never behind/under it. A watercolor scene this
+     busy can't guarantee reliable text contrast at every crop (background-
+     size: cover crops differently per viewport), so text stays on solid
+     ground below it rather than layered on top. background-attachment:
+     fixed gives it a subtle parallax drift as you scroll past; iOS Safari
+     doesn't support that and just renders it static, which is a fine
+     fallback. Light theme only — the artwork is pastel/light and would
+     fight the dark palette, so dark mode keeps the existing ambient glow
+     instead. */
+  .hero-banner {
+    position: relative;
+    height: clamp(160px, 20vw, 320px);
+    overflow: hidden;
+  }
+  .hero-banner::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url('./assets/screenshots/DesktopBG.jpg');
+    background-size: cover;
+    background-position: center 35%;
+    background-attachment: fixed;
+  }
+  .hero-banner::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 55%, var(--bg-main) 100%);
+  }
+  :root[data-theme="dark"] .hero-banner { display: none; }
+
+  .hero { padding: 3rem 0 4rem; text-align: center; }
+  .hero .eyebrow {
+    color: var(--accent-teal-strong); font-weight: 800; text-transform: uppercase;
+    letter-spacing: .35em; font-size: .7rem; display: block; margin-bottom: 1.25rem;
+  }
+  .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 0.95; margin: 0 0 1.5rem; font-weight: 700; }
+  .hero h1 em { font-style: italic; color: var(--accent-teal); }
+  .hero p { max-width: 640px; margin: 0 auto; color: var(--text-secondary); font-size: 1.15rem; font-weight: 500; }
+
+  .paths { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 1rem 0 5rem; }
+  @media (max-width: 800px) { .paths { grid-template-columns: 1fr; } }
+
+  .path-card {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-card);
+    border-radius: 2rem;
+    box-shadow: var(--shadow-card);
+    padding: 2.5rem;
+    display: flex; flex-direction: column;
+    transition: transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s cubic-bezier(.34,1.56,.64,1);
+  }
+  .path-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card-hover); }
+
+  /* Cursor spotlight: a soft glow that tracks the pointer inside the card.
+     --mx/--my are set by JS on pointermove; default to the card's center so
+     it still looks intentional before any movement. Purely a glow (color/
+     opacity), not a translating element, and JS skips wiring it up entirely
+     under prefers-reduced-motion. */
+  .path-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 40%), rgba(13, 148, 136, 0.10), transparent 65%);
+    opacity: 0;
+    transition: opacity .35s ease;
+    pointer-events: none;
+  }
+  .path-card:hover::before,
+  .path-card:focus-within::before { opacity: 1; }
+  .path-card > * { position: relative; z-index: 1; }
+
+  .path-card .icon-row { display: flex; align-items: center; gap: .75rem; margin-bottom: 1.25rem; }
+  .path-card .icon-row img { width: 44px; height: 44px; border-radius: 12px; }
+  .path-card h2 { font-size: 1.6rem; margin: 0; }
+  .path-card p.lede { color: var(--text-secondary); font-weight: 500; margin: 0 0 1.5rem; }
+
+  .shot-img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 1.25rem;
+    border: 1px solid var(--border-subtle);
+    margin-bottom: 1.5rem;
+    background: var(--bg-subtle);
+  }
+
+  .feature-list { list-style: none; margin: 0 0 1.75rem; padding: 0; display: grid; gap: .6rem; }
+  .feature-list li { display: flex; gap: .6rem; font-size: .92rem; color: var(--text-secondary); font-weight: 600; }
+  .feature-list li::before { content: "✓"; color: var(--accent-teal-strong); font-weight: 800; }
+
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+    padding: .9rem 1.6rem; border-radius: 999px; font-weight: 700; font-size: .95rem;
+    text-decoration: none; border: none; cursor: pointer; margin-top: auto;
+  }
+  .btn-primary {
+    background: var(--brand-orange);
+    color: #ffffff;
+    transition: background-color .25s ease, transform .15s ease;
+  }
+  .btn-primary:hover { background: var(--brand-orange-hover); }
+  .btn-primary:active { transform: scale(.97); }
+
+  .install-note {
+    font-size: .82rem; color: var(--text-tertiary); margin-top: .9rem; line-height: 1.5;
+  }
+
+  .badges { display: flex; gap: .75rem; margin-top: auto; flex-wrap: wrap; }
+  .badge {
+    display: flex; align-items: center; gap: .55rem;
+    border: 1.5px solid var(--border-subtle); border-radius: 999px;
+    padding: .65rem 1.1rem; font-size: .85rem; font-weight: 700; color: var(--text-secondary);
+    background: var(--bg-subtle); cursor: default;
+  }
+  .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-warm); }
+  .badge svg { width: 18px; height: 18px; }
+
+  footer.site-footer { border-top: 1px solid var(--border-subtle); padding: 3rem 0; }
+  .site-footer .wrap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+  .site-footer .foot-links { display: flex; gap: 1.5rem; font-weight: 600; font-size: .9rem; }
+  .site-footer .foot-links a { text-decoration: none; color: var(--text-secondary); }
+  .site-footer .foot-links a:hover { color: var(--text-primary); }
+  .site-footer .copyright { color: var(--text-tertiary); font-size: .85rem; }
+</style>
+</head>
+<body>
+
+<div class="ambient" aria-hidden="true"></div>
+
+<a href="#main-content" class="skip-link">Skip to content</a>
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="#main-content" class="logo">
+      <img src="./webapp/icons/icon-192.png" alt="" width="36" height="36">
+      <span>Crucian Heritage Archive</span>
+    </a>
+    <div class="header-right">
+      <nav class="header-links" aria-label="Primary">
+        <a href="#webapp" data-nav="webapp">Web App</a>
+        <a href="#extension" data-nav="extension">Extension</a>
+      </nav>
+      <button type="button" id="theme-toggle" class="icon-btn" aria-label="Switch to dark mode">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main-content">
+  <div class="hero-banner" aria-hidden="true"></div>
+
+  <section class="hero">
+    <div class="wrap hero-content">
+      <span class="eyebrow">Dialect Discovery</span>
+      <h1 class="serif">A language <br>for <em>Allawe</em></h1>
+      <p>Crucian is the Virgin Islands Creole dialect of St. Croix — an English-based creole born from enslaved West Africans, Danish colonial rule, and centuries of Caribbean contact. Explore its dictionary, grammar, and proverbs two ways.</p>
+    </div>
+  </section>
+
+  <section class="paths wrap">
+    <article class="path-card" id="webapp" aria-labelledby="webapp-heading">
+      <div class="icon-row">
+        <img src="./webapp/icons/icon-192.png" alt="" width="44" height="44">
+        <h2 id="webapp-heading" class="serif">The Web App</h2>
+      </div>
+      <p class="lede">The full archive: 216 dictionary terms, 78 proverbs, grammar notes, and the heritage story behind the language. Works offline once installed.</p>
+
+      <img class="shot-img" src="./assets/screenshots/webapp-home.png" width="464" height="290" loading="lazy"
+        alt="Crucian Heritage Archive home screen, showing the Word of the Day panel and quick-fact cards on dialect syntax, etymology, and reduplication.">
+
+      <ul class="feature-list">
+        <li>Searchable dictionary &amp; glossary</li>
+        <li>Proverbs, grammar, and heritage timeline</li>
+        <li>Installable, works offline, light + dark themes</li>
+      </ul>
+
+      <a class="btn btn-primary" id="cta-open-archive" href="./webapp/">Open the Archive →</a>
+      <p class="install-note">To install: open the app, then use the <strong>Install</strong> button in its header (desktop/Android), or Safari's <strong>Add to Home Screen</strong> (iOS).</p>
+    </article>
+
+    <article class="path-card" id="extension" aria-labelledby="extension-heading">
+      <div class="icon-row">
+        <img src="./extension/src/icons/icon-128.png" alt="" width="44" height="44">
+        <h2 id="extension-heading" class="serif">The Extension</h2>
+      </div>
+      <p class="lede">A companion for Chrome and Firefox: word of the day, quick lookup, and right-click search — the dictionary a click away without leaving your page.</p>
+
+      <img class="shot-img" src="./assets/screenshots/extension-popup.png" width="464" height="290" loading="lazy"
+        alt="Crucian Word Lookup extension popup, showing a search for the word 'ayo' with its definition and related entries.">
+
+      <ul class="feature-list">
+        <li>Word of the day on every new tab</li>
+        <li>Right-click any word to look it up</li>
+        <li>Same dictionary data as the web app</li>
+      </ul>
+
+      <div class="badges" aria-label="Browser availability">
+        <span class="badge"><span class="dot" aria-hidden="true"></span>Chrome — coming soon</span>
+        <span class="badge"><span class="dot" aria-hidden="true"></span>Firefox — coming soon</span>
+      </div>
+      <p class="install-note">Currently in store review. Check back here, or watch <a href="https://ko-fi.com/designlady">Ko-fi</a> for the release announcement.</p>
+    </article>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p class="copyright">© 2026 Design Lady LLC. Crucian Heritage Archive.</p>
+    <nav class="foot-links" aria-label="Footer">
+      <a href="https://designlady.com">Design Lady</a>
+      <a href="https://www.linkedin.com/in/jerlyn/">LinkedIn</a>
+      <a href="https://ko-fi.com/designlady">Ko-fi</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  // Analytics (GA4) — same safe-no-op wrapper as webapp/js/app.js, so it
+  // doesn't throw if gtag failed to load (ad blockers, etc.).
+  function track(name, params) {
+    if (typeof gtag === 'function') gtag('event', name, params || {});
+  }
+
+  // Theme: same "crucian-theme" localStorage key and data-theme attribute
+  // the webapp uses (webapp/js/app.js). Same origin, so a choice made on
+  // either page is honored on the other.
+  (function () {
+    var stored = localStorage.getItem('crucian-theme');
+    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    applyTheme(stored || (prefersDark ? 'dark' : 'light'));
+
+    var btn = document.getElementById('theme-toggle');
+    btn.addEventListener('click', function () {
+      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      track('theme_toggle', { theme: next }); // only on user-initiated toggles, not initial load — matches webapp
+    });
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('crucian-theme', theme);
+      var b = document.getElementById('theme-toggle');
+      if (b) b.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    }
+  })();
+
+  // CTA + outbound-link tracking. donate_click reuses the webapp's exact
+  // event name (webapp/js/app.js) so both surfaces roll up together in
+  // reports; open_webapp_click is new and deliberately distinct from the
+  // webapp's own install_click (that one fires the actual PWA install
+  // prompt — this is just a landing-page nav click, a different action).
+  (function () {
+    var openArchive = document.getElementById('cta-open-archive');
+    if (openArchive) {
+      openArchive.addEventListener('click', function () {
+        track('open_webapp_click', { source: 'landing' });
+      });
+    }
+    document.querySelectorAll('a[href*="ko-fi.com"]').forEach(function (link) {
+      link.addEventListener('click', function () {
+        track('donate_click', { destination: 'ko-fi', source: 'landing' });
+      });
+    });
+  })();
+
+  // Active nav highlight, driven by the URL hash rather than scroll
+  // position: Web App and Extension are side-by-side cards in the same grid
+  // row, not stacked sections, so a vertical scroll-spy can't tell which one
+  // the visitor meant — both cross the viewport threshold at once. Hash-based
+  // activation is deterministic and matches the link that was actually clicked.
+  (function () {
+    var links = document.querySelectorAll('.header-links a');
+    function setActiveFromHash() {
+      var current = location.hash.replace('#', '');
+      links.forEach(function (link) {
+        link.classList.toggle('nav-active', link.dataset.nav === current);
+      });
+    }
+    window.addEventListener('hashchange', setActiveFromHash);
+    setActiveFromHash();
+  })();
+
+  // Cursor spotlight on the path cards — skipped entirely when the visitor
+  // has asked for reduced motion, since it's a continuous pointer-driven
+  // visual change even though nothing translates or animates on a timer.
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll('.path-card').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var rect = card.getBoundingClientRect();
+        var x = ((e.clientX - rect.left) / rect.width) * 100;
+        var y = ((e.clientY - rect.top) / rect.height) * 100;
+        card.style.setProperty('--mx', x + '%');
+        card.style.setProperty('--my', y + '%');
+      });
+    });
+  }
+</script>
+
+</body>
+</html>

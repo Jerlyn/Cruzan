@@ -123,8 +123,22 @@ async function init() {
   preloadShareFonts();
   initScrollReveal();
 
+  // ?word= is the deep-link the companion browser extension uses (context-menu
+  // "look up selection" and the popup's search/footer links) — added 2026-08-06.
+  // Forces the Dictionary tab open and pre-runs the existing search rather than
+  // introducing a second search path, so extension and on-site search can't drift.
   const params = new URLSearchParams(location.search);
-  navTo(params.get("view") || "home");
+  const deepLinkWord = params.get("word");
+  navTo(deepLinkWord ? "dictionary" : params.get("view") || "home");
+
+  if (deepLinkWord) {
+    const searchEl = document.getElementById("main-search");
+    if (searchEl) {
+      searchEl.value = deepLinkWord;
+      handleSearch();
+      searchEl.focus();
+    }
+  }
 
   initTheme();
   initInstallPrompt();

@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Crucian Word Lookup",
+  "short_name": "Crucian Lookup",
+  "version": "1.0.0",
+  "description": "Daily word, quick lookup, and right-click search for Crucian dialect — companion to the Crucian Heritage Archive.",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Crucian Word Lookup",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js",
+    "scripts": ["shared/config.js", "background.js"]
+  },
+  "permissions": ["contextMenus", "storage"],
+  "host_permissions": []
+}

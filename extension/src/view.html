@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Crucian Word Lookup — Full View</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&family=Fraunces:ital,wght@0,600;1,600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="shared/tokens.css" />
+<link rel="stylesheet" href="view.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<header class="view-header">
+  <h1 class="serif">Crucian Word Lookup</h1>
+  <button id="theme-toggle" class="icon-btn" type="button" aria-label="Switch to dark mode">
+    <svg id="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path></svg>
+    <svg id="icon-sun" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+  </button>
+</header>
+
+<main id="main-content">
+
+  <section id="lookup-result" class="card lookup-card" tabindex="-1" hidden></section>
+
+  <section class="wotd-card card" aria-labelledby="wotd-heading-full">
+    <div class="wotd-top">
+      <span id="wotd-heading-full" class="eyebrow">Word of the Day</span>
+      <div class="wotd-actions">
+        <button id="wotd-save" class="icon-btn save-btn" type="button" data-save-type="dictionary" data-save-id="" aria-pressed="false" aria-label="Save this word">
+          <svg class="icon-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 10-7.8 7.8l1 1L12 21l7.8-7.8 1-1a5.5 5.5 0 000-7.8z"></path></svg>
+        </button>
+        <button id="wotd-copy" class="icon-btn copy-btn" type="button" data-copy-text="" aria-label="Copy word and definition">
+          <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"></rect><path d="M5 15V5a2 2 0 012-2h10"></path></svg>
+          <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg>
+        </button>
+      </div>
+    </div>
+    <p id="wotd-word" class="serif wotd-word">Loading…</p>
+    <p id="wotd-def" class="wotd-def"></p>
+    <p id="wotd-pron" class="wotd-pron"></p>
+  </section>
+
+  <p id="streak-line" class="streak-line" aria-live="polite"></p>
+
+  <section class="search-section-full" aria-label="Search the glossary">
+    <label for="search-input">Search the glossary</label>
+    <input id="search-input" type="search" autocomplete="off" placeholder="Crucian or English word…" />
+    <p id="search-status" class="sr-only" role="status" aria-live="polite"></p>
+    <ul id="search-results" class="search-results-full"></ul>
+  </section>
+
+  <section class="saved-section" aria-labelledby="saved-heading">
+    <h2 id="saved-heading">Saved words</h2>
+    <p id="saved-empty" class="empty-note">Nothing saved yet — the heart icon on any word saves it here, synced across your signed-in browsers.</p>
+    <ul id="saved-list" class="saved-list"></ul>
+  </section>
+
+</main>
+
+<footer class="view-footer">
+  <p>Data from the Crucian Heritage Archive glossary (216 terms, 78 proverbs). This extension's saved-words list is separate from the archive website's saved bookmarks — the two don't sync with each other.</p>
+</footer>
+
+<script src="shared/dictionary.js"></script>
+<script src="shared/wotd.js"></script>
+<script src="shared/storage.js"></script>
+<script src="view.js"></script>
+</body>
+</html>
