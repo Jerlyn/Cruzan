@@ -143,7 +143,7 @@
     font-weight: 700; font-size: 11px; letter-spacing: .2em;
   }
   .header-links a {
-    text-decoration: none; color: var(--text-secondary);
+    text-decoration: none; color: var(--text-secondary); white-space: nowrap;
     padding: .55rem 1.1rem; border-radius: 999px;
     transition: background-color .25s ease, color .25s ease, box-shadow .25s ease;
   }
@@ -179,14 +179,12 @@
      busy can't guarantee reliable text contrast at every crop (background-
      size: cover crops differently per viewport), so text stays on solid
      ground below it rather than layered on top. background-attachment:
-     fixed gives it a subtle parallax drift as you scroll past; iOS Safari
-     doesn't support that and just renders it static, which is a fine
-     fallback. Light theme only — the artwork is pastel/light and would
-     fight the dark palette, so dark mode keeps the existing ambient glow
-     instead. */
+     fixed gives it a subtle parallax drift as you scroll past on desktop.
+     Light theme only — the artwork is pastel/light and would fight the
+     dark palette, so dark mode keeps the existing ambient glow instead. */
   .hero-banner {
     position: relative;
-    height: clamp(160px, 20vw, 320px);
+    height: clamp(140px, 20vw, 320px);
     overflow: hidden;
   }
   .hero-banner::before {
@@ -198,15 +196,45 @@
     background-position: center 35%;
     background-attachment: fixed;
   }
+  /* The fade resolves to var(--bg-main) — the exact same variable the body
+     and hero text sit on, not a hardcoded white. (An earlier pass also
+     layered the page's ambient glow blobs into this fade for an even
+     tighter color match, but those blobs are sized in absolute px — 720px/
+     640px radius — against .ambient's full-viewport box. Squeezed into the
+     much shorter hero-banner box instead, only a sliver of each circle's
+     falloff curve fell inside the visible area, reading as a hard, uneven
+     edge rather than a smooth wash. Reverted — the plain fade was already
+     correct and looked clean.) */
   .hero-banner::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom, transparent 55%, var(--bg-main) 100%);
+    background: linear-gradient(to bottom, transparent 30%, var(--bg-main) 68%);
+  }
+  /* Mobile: background-attachment: fixed on a non-<body> element is
+     unreliable on iOS Safari — it can fail to paint at all rather than
+     gracefully falling back to a static image, which is what was making
+     the banner disappear entirely on phones. Switching to `scroll` below
+     the tablet breakpoint fixes that (and sidesteps the janky scroll
+     performance fixed backgrounds have on mobile generally). Banner is a
+     bit taller here now, and the fade resolves to solid earlier (55% vs.
+     68%) to keep pace with the hero text sitting 120px higher into it. */
+  @media (max-width: 800px) {
+    .hero-banner { height: clamp(165px, 44vw, 240px); }
+    .hero-banner::before { background-attachment: scroll; background-position: center 42%; }
+    .hero-banner::after { background: linear-gradient(to bottom, transparent 20%, var(--bg-main) 55%); }
   }
   :root[data-theme="dark"] .hero-banner { display: none; }
 
-  .hero { padding: 3rem 0 4rem; text-align: center; }
+  /* Pulled up to overlap the banner's fade zone rather than sitting flush
+     below it — the gradient stop above was moved earlier (68%/65% instead
+     of 100%) specifically so the eyebrow label lands on already-solid
+     ground at this overlap depth rather than on live image color. */
+  .hero { position: relative; margin-top: -110px; padding: 3rem 0 4rem; text-align: center; }
+  @media (max-width: 800px) {
+    .hero { margin-top: -120px; }
+  }
+  :root[data-theme="dark"] .hero { margin-top: 0; }
   .hero .eyebrow {
     color: var(--accent-teal-strong); font-weight: 800; text-transform: uppercase;
     letter-spacing: .35em; font-size: .7rem; display: block; margin-bottom: 1.25rem;
@@ -282,6 +310,36 @@
   }
   .btn-primary:hover { background: var(--brand-orange-hover); }
   .btn-primary:active { transform: scale(.97); }
+
+  /* Support card: fixed dark gradient + orange donate button, same as the
+     webapp's "Support the Project" section (webapp/index.html) — theme-
+     independent by design, like the brand-orange button, so it reads as
+     one consistent moment regardless of the page's light/dark toggle. */
+  .support-card {
+    background: linear-gradient(135deg, #1c1917, #292524);
+    border-radius: 2.5rem;
+    padding: clamp(2.5rem, 5vw, 3.5rem) 2rem;
+    margin: 1.5rem 0 4rem;
+    text-align: center;
+    color: #ffffff;
+  }
+  .support-card h3 {
+    font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 700; margin: 0 0 1rem; color: #ffffff;
+  }
+  .support-card p {
+    max-width: 42rem; margin: 0 auto 2rem; color: #e7e5e4; font-size: 1.05rem; line-height: 1.7;
+  }
+  .btn-donate {
+    background: var(--brand-orange);
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: .78rem;
+    letter-spacing: .12em;
+    padding: 1rem 2rem;
+    transition: background-color .25s ease, transform .15s ease;
+  }
+  .btn-donate:hover { background: var(--brand-orange-hover); }
+  .btn-donate:active { transform: scale(.97); }
 
   .install-note {
     font-size: .82rem; color: var(--text-tertiary); margin-top: .9rem; line-height: 1.5;
@@ -384,6 +442,14 @@
       </div>
       <p class="install-note">Currently in store review. Check back here, or watch <a href="https://ko-fi.com/designlady">Ko-fi</a> for the release announcement.</p>
     </article>
+  </section>
+
+  <section class="wrap">
+    <div class="support-card">
+      <h3 class="serif">Support the Project</h3>
+      <p>Crucian Heritage Archive is a free, independent effort to preserve a living dialect. If it's meaningful to you, consider supporting the work.</p>
+      <a href="https://ko-fi.com/designlady" target="_blank" rel="noopener" class="btn btn-donate">Donate via Ko-fi</a>
+    </div>
   </section>
 </main>
 
