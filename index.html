@@ -355,6 +355,18 @@
   .badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-warm); }
   .badge svg { width: 18px; height: 18px; }
 
+  /* Live/linked variant — teal dot instead of the "coming soon" warm one,
+     an actual pointer + hover, and a stronger border so it visually reads
+     as available rather than pending. */
+  .badge-live {
+    cursor: pointer; text-decoration: none; color: var(--text-primary);
+    border-color: var(--accent-teal-strong);
+    transition: background-color .2s ease, transform .15s ease;
+  }
+  .badge-live .dot { background: var(--accent-teal-strong); }
+  .badge-live:hover { background: var(--border-subtle); }
+  .badge-live:active { transform: scale(.96); }
+
   footer.site-footer { border-top: 1px solid var(--border-subtle); padding: 3rem 0; }
   .site-footer .wrap { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
   .site-footer .foot-links { display: flex; gap: 1.5rem; font-weight: 600; font-size: .9rem; }
@@ -437,15 +449,18 @@
       </ul>
 
       <div class="badges" aria-label="Browser availability">
-        <span class="badge"><span class="dot" aria-hidden="true"></span>Chrome — coming soon</span>
+        <a href="https://chromewebstore.google.com/detail/crucian-word-lookup/edmhhpjklfciahnfhfnnjgedgglihfgd"
+           target="_blank" rel="noopener" class="badge badge-live" id="cta-chrome-store">
+          <span class="dot" aria-hidden="true"></span>Chrome — Install
+        </a>
         <!-- Firefox listing exists but isn't approved/live yet:
              https://addons.mozilla.org/en-US/firefox/addon/crucian-word-lookup/
-             Swap the span below for `<a href="[url above]" class="badge">...</a>`
-             once it's published — until then it'd 404, so it stays a plain
-             non-link badge like Chrome's. -->
+             Swap the span below for a class="badge badge-live" link (same
+             pattern as Chrome above) once it's published — until then it'd
+             404, so it stays a plain non-link badge. -->
         <span class="badge"><span class="dot" aria-hidden="true"></span>Firefox — coming soon</span>
       </div>
-      <p class="install-note">Currently in store review. Check back here, or watch <a href="https://ko-fi.com/designlady">Ko-fi</a> for the release announcement.</p>
+      <p class="install-note">Chrome is live now. Firefox is still in store review — check back here, or watch <a href="https://ko-fi.com/designlady">Ko-fi</a>, for the release announcement.</p>
     </article>
   </section>
 
@@ -509,6 +524,12 @@
     if (openArchive) {
       openArchive.addEventListener('click', function () {
         track('open_webapp_click', { source: 'landing' });
+      });
+    }
+    var chromeStore = document.getElementById('cta-chrome-store');
+    if (chromeStore) {
+      chromeStore.addEventListener('click', function () {
+        track('extension_store_click', { browser: 'chrome', source: 'landing' });
       });
     }
     document.querySelectorAll('a[href*="ko-fi.com"]').forEach(function (link) {
